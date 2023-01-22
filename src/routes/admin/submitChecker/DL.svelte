@@ -4,21 +4,15 @@
     import { userdata } from '../../stores'
     const supabase = createClient(import.meta.env.VITE_DATABASE_API_URL, import.meta.env.VITE_DATABASE_API_KEY);
     var submissions = [];
-    async function getData(){
-        if($userdata.data.country){
-            var { data, error } = await supabase
-                .from('records')
-                .select('*, levels!inner(name, dlTop, minProgress), players!inner(name, uid, country)')
-                .not('levels.dlTop', 'is', 'null')
-                .eq('players.country', $userdata.data.country)
-                .eq('isChecked', false)
-                .order('timestamp', {ascending: true})
-            submissions = data
-        }
-        else{
-            setTimeout(getData, 50)
-        }
-    }
+	async function getData() {
+		var { data, error } = await supabase
+			.from("records")
+			.select("*, levels!inner(name, dlTop, minProgress), players!inner(name, uid)")
+			.not("levels.dlTop", "is", "null")
+			.eq("isChecked", false)
+			.order("timestamp", { ascending: true });
+		submissions = data;
+	}
     getData()
     async function reject(item, index){
         submissions.splice(index, 1)
