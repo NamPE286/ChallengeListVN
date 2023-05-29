@@ -120,6 +120,7 @@
         padding-inline: 30px;
         position: fixed;
         width: calc(100% - 60px);
+        z-index: 10;
     }
     .filler {
         height: 90px;

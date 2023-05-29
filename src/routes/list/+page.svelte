@@ -4,4 +4,14 @@
 </script>
 
 <Title value='Main List'/>
-<Level/>
+<main>
+    {#each Array(20) as item, index}
+        <Level/>
+    {/each}
+</main>
+
+<style lang='scss'>
+    main{
+        padding-inline: 80px;
+    }
+</style>
