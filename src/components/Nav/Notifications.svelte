@@ -29,6 +29,7 @@
         border-radius: 15px;
         border: 1px solid var(--line);
         box-sizing: border-box;
+        z-index: 11;
     }
     h4 {
         margin-left: 20px;
