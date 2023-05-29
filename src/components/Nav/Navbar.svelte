@@ -122,6 +122,7 @@
     h3 {
         padding: 0;
         margin: 0;
+        margin-left: 10px;
     }
     img {
         height: 40px;
@@ -134,7 +135,6 @@
     }
     .link {
         padding-inline: 10px;
-        margin-inline: 10px;
         padding-top: 8px;
         padding-bottom: 8px;
         border-radius: 10px;
