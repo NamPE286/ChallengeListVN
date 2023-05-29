@@ -1,4 +1,8 @@
-<div class="wrapper">
+<script>
+    import { fly } from 'svelte/transition'
+</script>
+
+<div class="wrapper" transition:fly={{ y: -20, duration: 300 }}>
     <h4>Notifications</h4>
     <hr class="bottom" />
     <div class="notif">

@@ -1,8 +1,9 @@
 <script>
+    import { fly } from 'svelte/transition'
     var value = ''
 </script>
 
-<div class="wrapper">
+<div class="wrapper" transition:fly={{ y: -20, duration: 300 }}>
     <input placeholder="Type to search" bind:value>
     {#if value}
         <div class="result">
