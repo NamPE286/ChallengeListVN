@@ -31,7 +31,7 @@
     }
     input{
         background-color: black;
-        border: 1px solid gray;
+        border: 1px solid var(--line);
         height: 55px;
         width: 100%;
         border-radius: 10px;
@@ -42,7 +42,7 @@
     }
     .result{
         background-color: black;
-        border: 1px solid gray;
+        border: 1px solid var(--line);
         height: fit-content;
         max-height: 300px;
         margin-top: 15px;

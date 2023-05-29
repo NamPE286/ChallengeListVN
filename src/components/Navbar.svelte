@@ -100,7 +100,7 @@
 <style lang="scss">
     .wrapper {
         background-color: black;
-        border-bottom: 1px solid gray;
+        border-bottom: 1px solid var(--line);
         padding: 5px;
         padding-inline: 30px;
     }

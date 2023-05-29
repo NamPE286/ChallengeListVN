@@ -23,14 +23,14 @@
         top: 60px;
         right: 10px;
         border-radius: 15px;
-        border: 1px solid gray;
+        border: 1px solid var(--line);
         box-sizing: border-box;
     }
     h4 {
         margin-left: 20px;
     }
     hr {
-        border: 1px solid gray;
+        border: 1px solid var(--line);
         margin: 0;
     }
     .bottom {
