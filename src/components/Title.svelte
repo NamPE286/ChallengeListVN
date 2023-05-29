@@ -13,6 +13,7 @@
         display: flex;
         align-items: center;
         border-bottom: 1px solid var(--line);
+        margin-bottom: 30px;
     }
     h1{
         margin-left: 80px;

@@ -90,6 +90,7 @@
         </div>
     </div>
 </div>
+<div class='filler'/>
 {#if isNotificationOn}
     <Notifications />
 {/if}
@@ -103,6 +104,11 @@
         border-bottom: 1px solid var(--line);
         padding: 5px;
         padding-inline: 30px;
+        position: fixed;
+        width: calc(100% - 60px);
+    }
+    .filler{
+        height: 90px;
     }
     .upper {
         display: flex;
@@ -132,6 +138,7 @@
         display: flex;
         align-items: center;
         height: 30px;
+        position: sticky;
     }
     .link {
         padding-inline: 10px;
