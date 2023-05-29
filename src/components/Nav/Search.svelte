@@ -24,11 +24,12 @@
 
 <style lang="scss">
     .wrapper{
-        position: absolute;
+        position: fixed;
         margin-top: 15px;
         left: 50%;
         transform: translateX(-50%);
         width: 800px;
+        z-index: 11;
     }
     input{
         background-color: black;

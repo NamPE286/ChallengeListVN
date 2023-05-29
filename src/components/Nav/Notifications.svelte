@@ -23,13 +23,13 @@
         max-height: 350px;
         width: 400px;
         background-color: black;
-        position: absolute;
+        position: fixed;
         top: 60px;
         right: 10px;
         border-radius: 15px;
         border: 1px solid var(--line);
         box-sizing: border-box;
-        z-index: 11;
+        z-index: 12;
     }
     h4 {
         margin-left: 20px;
