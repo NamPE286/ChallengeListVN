@@ -1,16 +1,19 @@
 <script>
     import Notifications from "./Notifications.svelte";
-    var isNotificationOn = true
+    import Search from "./Search.svelte";
+    var isNotificationOn = false;
+    var isSearchOn = false;
 </script>
 
 <div class="wrapper">
     <div class="upper">
         <h3>Challenge List VN</h3>
         <div class="right">
-            <a href='#!' class="submitBtn">Submit</a>
-            <svg class="clickable"
+            <a href="#!" class="submitBtn">Submit</a>
+            <svg
+                class="clickable"
                 on:click={() => {
-                    isNotificationOn = !isNotificationOn
+                    isNotificationOn = !isNotificationOn;
                 }}
                 data-testid="geist-icon"
                 fill="none"
@@ -38,34 +41,37 @@
             <div class="selected">
                 Dashboard
                 <section />
-            </div>    
+            </div>
         </a>
         <a href="#!" class="link">
             <div>
                 List
                 <section />
-            </div>    
+            </div>
         </a>
         <a href="#!" class="link">
             <div>
                 Leaderboard
                 <section />
-            </div>    
+            </div>
         </a>
         <a href="#!" class="link">
             <div>
                 Rules
                 <section />
-            </div>    
+            </div>
         </a>
         <a href="#!" class="link">
             <div>
                 Settings
                 <section />
-            </div>    
+            </div>
         </a>
         <div class="searchIcon clickable">
             <svg
+                on:click={() => {
+                    isSearchOn = !isSearchOn;
+                }}
                 data-testid="geist-icon"
                 fill="none"
                 height="24"
@@ -82,11 +88,13 @@
                 /><path d="M16 16l4.5 4.5" /></svg
             >
         </div>
-
     </div>
 </div>
 {#if isNotificationOn}
-    <Notifications/>
+    <Notifications />
+{/if}
+{#if isSearchOn}
+    <Search />
 {/if}
 
 <style lang="scss">
@@ -133,7 +141,7 @@
         transition: all 0.2s;
         color: gray;
     }
-    .link:hover{
+    .link:hover {
         background-color: #333333;
         color: white;
     }
@@ -150,7 +158,7 @@
             pointer-events: none;
         }
     }
-    .searchIcon{
+    .searchIcon {
         svg {
             stroke: gray;
         }
@@ -159,17 +167,17 @@
         border-radius: 10px;
         transition: all 0.2s;
     }
-    .searchIcon:hover{
+    .searchIcon:hover {
         background-color: #333333;
-        svg{
+        svg {
             stroke: white;
         }
     }
-    .submitBtn{
-        background-color: #00285B;
+    .submitBtn {
+        background-color: #00285b;
         padding: 8px;
         padding-inline: 15px;
-        color: #00B1FF;
+        color: #00b1ff;
         border-radius: 10px;
     }
 </style>
