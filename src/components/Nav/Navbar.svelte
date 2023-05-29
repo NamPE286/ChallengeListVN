@@ -1,6 +1,6 @@
 <script>
-    import Notifications from "./Notifications.svelte";
-    import Search from "./Search.svelte";
+    import Notifications from "../Notifications.svelte";
+    import Search from "../Search.svelte";
     var isNotificationOn = false;
     var isSearchOn = false;
 </script>
