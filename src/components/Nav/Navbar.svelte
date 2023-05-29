@@ -10,7 +10,6 @@
         var a = s.split("/");
         if (a.length > 0) firstPath = a[1];
         else firstPath = "";
-        console.log(firstPath);
     }
     $: $page.url.pathname && getFirstPath();
 </script>
@@ -153,7 +152,7 @@
         display: flex;
         align-items: center;
         height: 30px;
-        position: sticky;
+        position: relative;
     }
     .link {
         padding-inline: 10px;

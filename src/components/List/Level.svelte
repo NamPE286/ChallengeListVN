@@ -1,21 +1,21 @@
-<div class='wrapper'>
-    <img src="https://i.ytimg.com/vi/4cWokwztucQ/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAQQiKl5dTCjFnxpUsPFsIUxYOS3g" alt="">
-    <div class='info'>
-        <a href='#!'>
+<a href="#!">
+    <div class="wrapper">
+        <img
+            src="https://i.ytimg.com/vi/4cWokwztucQ/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAQQiKl5dTCjFnxpUsPFsIUxYOS3g"
+            alt=""
+        />
+        <div class="info">
             <h2>Level's name</h2>
-            <span>by Creator</span>    
-        </a>
-        <div id='ID'>ID: 12345678</div>  
+            <span>by Creator</span>
+            <div id="ID">ID: 12345678</div>
+        </div>
+        <div class="top">#1</div>
+        <div class="top pt">100pt</div>
     </div>
-    <div class='top'>
-        #1
-    </div>
-    <div class='top pt'>
-        100pt
-    </div>
-</div>
+</a>
+
 <style lang="scss">
-    .wrapper{
+    .wrapper {
         position: relative;
         display: flex;
         height: 140px;
@@ -25,27 +25,27 @@
         border-radius: 15px;
         padding: 15px;
         margin-bottom: 20px;
-        img{
+        img {
             height: 100%;
             border-radius: 15px;
             margin-right: 20px;
         }
-        .info{
+        .info {
             display: flex;
             flex-direction: column;
-            h2{
+            h2 {
                 margin-bottom: 0;
             }
-            span{
+            span {
                 color: rgb(184, 184, 184);
             }
         }
-        #ID{
+        #ID {
             margin-top: auto;
             margin-bottom: 10px;
             color: rgb(184, 184, 184);
         }
-        .top{
+        .top {
             position: absolute;
             background-color: black;
             height: 30px;
@@ -60,7 +60,7 @@
             margin-left: 5px;
             font-weight: bold;
         }
-        .pt{
+        .pt {
             margin-left: 40px;
             width: fit-content;
             padding-inline: 10px;
