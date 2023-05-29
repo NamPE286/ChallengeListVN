@@ -1,8 +1,18 @@
 <script>
     import Notifications from "./Notifications.svelte";
     import Search from "./Search.svelte";
+    import { page } from "$app/stores";
     var isNotificationOn = false;
     var isSearchOn = false;
+    var firstPath = "";
+    function getFirstPath() {
+        var s = $page.url.pathname;
+        var a = s.split("/");
+        if (a.length > 0) firstPath = a[1];
+        else firstPath = "";
+        console.log(firstPath);
+    }
+    $: $page.url.pathname && getFirstPath();
 </script>
 
 <div class="wrapper">
@@ -10,6 +20,7 @@
         <h3>Challenge List VN</h3>
         <div class="right">
             <a href="#!" class="submitBtn">Submit</a>
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
             <svg
                 class="clickable"
                 on:click={() => {
@@ -37,41 +48,44 @@
         </div>
     </div>
     <div class="lower">
-        <a href="#!" class="link">
-            <div class="selected">
+        <a href="/" class="link">
+            <div class={firstPath == "" ? "selected" : ""}>
                 Dashboard
                 <section />
             </div>
         </a>
-        <a href="#!" class="link">
-            <div>
+        <a href="/list" class="link">
+            <div class={firstPath == "list" ? "selected" : ""}>
                 List
                 <section />
             </div>
         </a>
         <a href="#!" class="link">
-            <div>
+            <div class={firstPath == "leaderboard" ? "selected" : ""}>
                 Leaderboard
                 <section />
             </div>
         </a>
         <a href="#!" class="link">
-            <div>
+            <div class={firstPath == "rules" ? "selected" : ""}>
                 Rules
                 <section />
             </div>
         </a>
         <a href="#!" class="link">
-            <div>
+            <div class={firstPath == "settings" ? "selected" : ""}>
                 Settings
                 <section />
             </div>
         </a>
-        <div class="searchIcon clickable">
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <div
+            class="searchIcon clickable"
+            on:click={() => {
+                isSearchOn = !isSearchOn;
+            }}
+        >
             <svg
-                on:click={() => {
-                    isSearchOn = !isSearchOn;
-                }}
                 data-testid="geist-icon"
                 fill="none"
                 height="24"
@@ -90,7 +104,7 @@
         </div>
     </div>
 </div>
-<div class='filler'/>
+<div class="filler" />
 {#if isNotificationOn}
     <Notifications />
 {/if}
@@ -107,7 +121,7 @@
         position: fixed;
         width: calc(100% - 60px);
     }
-    .filler{
+    .filler {
         height: 90px;
     }
     .upper {
