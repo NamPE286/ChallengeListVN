@@ -117,8 +117,9 @@
         border-bottom: 1px solid var(--line);
         padding: 5px;
         padding-inline: 30px;
+        box-sizing: border-box;
         position: fixed;
-        width: calc(100% - 60px);
+        width: 100%;
         z-index: 10;
     }
     .filler {
@@ -200,5 +201,13 @@
         padding-inline: 15px;
         color: #00b1ff;
         border-radius: 10px;
+    }
+    @media screen and (max-width: 1000px) {
+        .wrapper{
+            padding-inline: 10px;
+        }
+        .lower{
+            overflow-x: scroll;
+        }
     }
 </style>
