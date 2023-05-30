@@ -8,7 +8,7 @@
         <div class="top pt">100pt</div>
     </div>
     <div class="info">
-        <a href='#!'>
+        <a href='/level/12345678'>
             <h2>Level's name</h2>
             <span>by Creator</span>    
         </a>
