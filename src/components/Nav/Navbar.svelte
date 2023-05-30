@@ -155,6 +155,9 @@
         height: 30px;
         position: relative;
     }
+    .lower::-webkit-scrollbar { 
+        display: none;  /* Safari and Chrome */
+    }
     .link {
         padding-inline: 10px;
         padding-top: 8px;
@@ -209,10 +212,10 @@
         .lower{
             overflow-x: auto;
             box-sizing: border-box;
-            height: 60px;
+            height: 45px;
         }
         .filler{
-            height: 120px;
+            height: 125px;
         }
     }
 </style>
