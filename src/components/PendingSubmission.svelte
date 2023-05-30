@@ -1,11 +1,11 @@
-<div class='warpper'>
+<div class='wrapper'>
     <h3>Pending Submission</h3>
     <a href='#!'>Level's name by Creator</a><br>
     <a href='#!'>Level's name by Creator</a><br>
 </div>
 
 <style lang="scss">
-    .warpper{
+    .wrapper{
         height: 300px;
         width: 500px;
         background-color: black;
@@ -19,7 +19,7 @@
         color: rgb(192, 192, 192);
     }
     @media screen and (max-width: 1000px) {
-        .warpper{
+        .wrapper{
             width: 100%;
         }
     }

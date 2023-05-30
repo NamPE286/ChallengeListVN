@@ -14,4 +14,9 @@
     main{
         padding-inline: 80px;
     }
+    @media screen and (max-width: 1000px){
+        main{
+            padding-inline: 20px;
+        }
+    }
 </style>

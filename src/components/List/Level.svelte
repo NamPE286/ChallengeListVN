@@ -67,4 +67,9 @@
             font-weight: bold;
         }
     }
+    @media screen and (max-width: 1000px){
+        .wrapper{
+            
+        }
+    }
 </style>
