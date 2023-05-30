@@ -59,7 +59,7 @@
                 <section />
             </div>
         </a>
-        <a href="#!" class="link">
+        <a href="/leaderboard" class="link">
             <div class={firstPath == "leaderboard" ? "selected" : ""}>
                 Leaderboard
                 <section />
