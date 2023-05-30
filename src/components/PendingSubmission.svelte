@@ -6,13 +6,14 @@
 
 <style lang="scss">
     .wrapper{
-        height: 300px;
+        height: fit-content;
         width: 500px;
         background-color: black;
         border: 1px solid var(--line);
         border-radius: 15px;
         box-sizing: border-box;
         padding-inline: 25px;
+        padding-bottom: 25px;
     }
     a{
         line-height: 20px;
