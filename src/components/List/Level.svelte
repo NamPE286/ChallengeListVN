@@ -1,16 +1,18 @@
 <a href="#!">
     <div class="wrapper">
-        <img
-            src="https://i.ytimg.com/vi/4cWokwztucQ/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAQQiKl5dTCjFnxpUsPFsIUxYOS3g"
-            alt=""
-        />
+        <div class="imgWrapper">
+            <img
+                src="https://i.ytimg.com/vi/4cWokwztucQ/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAQQiKl5dTCjFnxpUsPFsIUxYOS3g"
+                alt=""
+            />
+            <div class="top">#1</div>
+            <div class="top pt">100pt</div>
+        </div>
         <div class="info">
             <h2>Level's name</h2>
             <span>by Creator</span>
             <div id="ID">ID: 12345678</div>
         </div>
-        <div class="top">#1</div>
-        <div class="top pt">100pt</div>
     </div>
 </a>
 
@@ -18,15 +20,16 @@
     .wrapper {
         position: relative;
         display: flex;
-        height: 140px;
+        height: fit-content;
         width: 800px;
         background-color: black;
         border: 1px solid var(--line);
         border-radius: 15px;
         padding: 15px;
         margin-bottom: 20px;
+        box-sizing: border-box;
         img {
-            height: 100%;
+            height: 150px;
             border-radius: 15px;
             margin-right: 20px;
         }
@@ -45,6 +48,9 @@
             margin-bottom: 10px;
             color: rgb(184, 184, 184);
         }
+    }
+    .imgWrapper{
+        position: relative;
         .top {
             position: absolute;
             background-color: black;
@@ -55,10 +61,10 @@
             justify-content: center;
             border-radius: 5px;
             border: 1px solid var(--line);
-            bottom: 0;
-            margin-bottom: 20px;
             margin-left: 5px;
             font-weight: bold;
+            bottom: 0;
+            margin-bottom: 8px;
         }
         .pt {
             margin-left: 40px;
@@ -67,9 +73,15 @@
             font-weight: bold;
         }
     }
-    @media screen and (max-width: 1000px){
-        .wrapper{
-            
+    @media screen and (max-width: 1000px) {
+        .wrapper {
+            flex-direction: column;
+            width: 100%;
+            height: fit-content;
+            img {
+                width: 100%;
+                height: auto;
+            }
         }
     }
 </style>
