@@ -90,6 +90,7 @@
         }
     }
     .record {
+        background-color: black;
         height: 50px;
         width: 700px;
         border: 1px solid var(--line);
