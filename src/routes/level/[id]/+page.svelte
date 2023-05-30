@@ -4,4 +4,8 @@
     console.log($page.params.id)
 </script>
 
+<svelte:head>
+    <title>Level's name - Challenge List VN</title>
+</svelte:head>
+
 <Title value="Level's name"/>

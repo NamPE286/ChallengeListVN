@@ -3,6 +3,10 @@
     import Level from "../../components/List/Level.svelte";
 </script>
 
+<svelte:head>
+    <title>Main List - Challenge List VN</title>
+</svelte:head>
+
 <Title value="Main List" />
 <main>
     <div class="levels">
