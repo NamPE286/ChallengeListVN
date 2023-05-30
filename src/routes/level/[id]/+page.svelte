@@ -151,4 +151,17 @@
         font-size: 12px;
         margin-left: 6px;
     }
+    @media screen and (max-width: 1000px) {
+        .info{
+            width: 100%;
+            flex-direction: column;
+            iframe{
+                min-width: 100%;
+                height: 200px;
+            }
+        }
+        .record{
+            width: 100%;
+        }
+    }
 </style>
