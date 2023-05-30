@@ -3,19 +3,22 @@
     import Level from "../../components/List/Level.svelte";
 </script>
 
-<Title value='Main List'/>
+<Title value="Main List" />
 <main>
-    {#each Array(20) as item, index}
-        <Level/>
-    {/each}
+    <div class="levels">
+        {#each Array(20) as item, index}
+            <Level />
+        {/each}
+    </div>
+    
 </main>
 
-<style lang='scss'>
-    main{
+<style lang="scss">
+    main {
         padding-inline: 80px;
     }
-    @media screen and (max-width: 1000px){
-        main{
+    @media screen and (max-width: 1000px) {
+        main {
             padding-inline: 20px;
         }
     }

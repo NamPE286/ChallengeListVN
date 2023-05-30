@@ -68,4 +68,9 @@
             color: rgb(161, 161, 161);
         }
     }
+    @media screen and (max-width: 1000px) {
+        .wrapper{
+            width: 90%;
+        }
+    }
 </style>
