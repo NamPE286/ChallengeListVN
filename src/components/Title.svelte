@@ -18,4 +18,9 @@
     h1{
         margin-left: 80px;
     }
+    @media screen and (max-width: 1000px) {
+        h1{
+            margin-left: 30px;
+        }
+    }
 </style>

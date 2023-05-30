@@ -12,10 +12,19 @@
 <style lang='scss'>
     iframe{
         border: 1px solid var(--line);
-        margin-left: 50px;
         border-radius: 15px;
     }
     main{
         display: flex;
+        padding-inline: 50px;
+        gap: 30px;
+    }
+    @media screen and (max-width: 1000px) {
+        main{
+            flex-direction: column;
+        }
+        iframe{
+            width: 100%;
+        }
     }
 </style>

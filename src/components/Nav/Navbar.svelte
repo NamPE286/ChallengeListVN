@@ -207,7 +207,12 @@
             padding-inline: 10px;
         }
         .lower{
-            overflow-x: scroll;
+            overflow-x: auto;
+            box-sizing: border-box;
+            height: 60px;
+        }
+        .filler{
+            height: 120px;
         }
     }
 </style>
