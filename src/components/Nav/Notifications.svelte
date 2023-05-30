@@ -61,4 +61,10 @@
             stroke: limegreen;
         }
     }
+    @media screen and (max-width: 1000px){
+        .wrapper{
+            width: calc(100% - 30px);
+            right: 15px;
+        }
+    }
 </style>
