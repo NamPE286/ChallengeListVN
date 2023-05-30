@@ -26,7 +26,6 @@
         border: 1px solid var(--line);
         border-radius: 15px;
         padding: 15px;
-        margin-bottom: 20px;
         box-sizing: border-box;
         img {
             height: 150px;

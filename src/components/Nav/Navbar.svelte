@@ -124,6 +124,7 @@
     }
     .filler {
         height: 90px;
+        background-color: black;
     }
     .upper {
         display: flex;
@@ -204,6 +205,10 @@
         padding-inline: 15px;
         color: #00b1ff;
         border-radius: 10px;
+        transition: background-color 0.2s;
+    }
+    .submitBtn:hover{
+        background-color: rgb(0, 55, 128);
     }
     @media screen and (max-width: 1000px) {
         .wrapper{
@@ -215,7 +220,7 @@
             height: 45px;
         }
         .filler{
-            height: 125px;
+            height: 105px;
         }
     }
 </style>
