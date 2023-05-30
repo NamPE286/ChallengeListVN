@@ -70,4 +70,15 @@
             color: white;
         }
     }
+    @media screen and (max-width: 1000px) {
+        main{
+            flex-direction: column-reverse;
+        }
+        input{
+            width: 100%;
+        }
+        select{
+            width: 100%;
+        }
+    }
 </style>
