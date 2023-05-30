@@ -18,7 +18,7 @@
     <div class="upper">
         <h3>Challenge List VN</h3>
         <div class="right">
-            <a href="#!" class="submitBtn">Submit</a>
+            <a href="/submit" class="submitBtn">Submit</a>
             <!-- svelte-ignore a11y-click-events-have-key-events -->
             <svg
                 class="clickable"
