@@ -33,11 +33,20 @@
         border: 1px solid var(--line);
         border-radius: 7px;
         padding-inline: 15px;
+        box-sizing: border-box;
     }
     #rating {
         margin-left: auto;
     }
     #top {
         margin-right: 7px;
+    }
+    @media screen and (max-width: 1000px) {
+        main {
+            padding-inline: 20px;
+        }
+        .player{
+            width: 100%;
+        }
     }
 </style>

@@ -35,7 +35,6 @@
     main {
         display: flex;
         gap: 20px;
-        padding-inline: 80px;
     }
     .levels {
         display: flex;
