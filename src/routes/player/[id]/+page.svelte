@@ -16,7 +16,7 @@
     {#each Array(10) as item, index}
     <div class="record">
         <div class='pt'>100pt</div>
-        <span><b>Level's name</b> by Creator</span>
+        <span><b>Level's name</b><br>by Creator</span>
         <div class="recordDetail">60hz</div>
         <div class="recordDetail">Mobile</div>
         <section>
@@ -52,7 +52,8 @@
     .header{
         width: 100%;
         box-sizing: border-box;
-        height: 300px;
+        padding: 30px;
+        height: fit-content;
         background-color: black;
         border-bottom: 1px solid var(--line);
         display: flex;
@@ -123,5 +124,22 @@
         border-right: 1px solid var(--line);
         height: 100%;
         font-weight: bold;
+    }
+    br{
+        display: none;
+    }
+    @media screen and (max-width: 1000px) {
+        .header{
+            padding-inline: 30px;
+            img{
+                height: 120px;
+            }
+        }
+        .record{
+            width: 100%; 
+        }
+        br{
+            display: block;
+        }
     }
 </style>
