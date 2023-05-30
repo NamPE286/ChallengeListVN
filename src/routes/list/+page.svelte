@@ -104,7 +104,6 @@
     }
     @media screen and (max-width: 1000px) {
         main {
-            padding-inline: 20px;
             flex-direction: column-reverse;
         }
         .filter{

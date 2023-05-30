@@ -19,7 +19,6 @@
 
 <style lang="scss">
     main {
-        padding-inline: 80px;
         display: flex;
         flex-direction: column;
         gap: 10px;
@@ -42,9 +41,6 @@
         margin-right: 7px;
     }
     @media screen and (max-width: 1000px) {
-        main {
-            padding-inline: 20px;
-        }
         .player{
             width: 100%;
         }

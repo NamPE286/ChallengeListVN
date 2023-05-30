@@ -20,7 +20,6 @@
     }
     main{
         display: flex;
-        padding-inline: 50px;
         gap: 30px;
     }
     @media screen and (max-width: 1000px) {
