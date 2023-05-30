@@ -1,20 +1,20 @@
-<a href="#!">
-    <div class="wrapper">
-        <div class="imgWrapper">
-            <img
-                src="https://i.ytimg.com/vi/4cWokwztucQ/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAQQiKl5dTCjFnxpUsPFsIUxYOS3g"
-                alt=""
-            />
-            <div class="top">#1</div>
-            <div class="top pt">100pt</div>
-        </div>
-        <div class="info">
-            <h2>Level's name</h2>
-            <span>by Creator</span>
-            <div id="ID">ID: 12345678</div>
-        </div>
+<div class="wrapper">
+    <div class="imgWrapper">
+        <img
+            src="https://i.ytimg.com/vi/4cWokwztucQ/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAQQiKl5dTCjFnxpUsPFsIUxYOS3g"
+            alt=""
+        />
+        <div class="top">#1</div>
+        <div class="top pt">100pt</div>
     </div>
-</a>
+    <div class="info">
+        <a href='#!'>
+            <h2>Level's name</h2>
+            <span>by Creator</span>    
+        </a>
+        <div id="ID">ID: 12345678</div>
+    </div>
+</div>
 
 <style lang="scss">
     .wrapper {
@@ -49,7 +49,7 @@
             color: rgb(184, 184, 184);
         }
     }
-    .imgWrapper{
+    .imgWrapper {
         position: relative;
         .top {
             position: absolute;
