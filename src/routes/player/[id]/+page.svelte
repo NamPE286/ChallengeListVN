@@ -16,7 +16,7 @@
     {#each Array(10) as item, index}
     <div class="record">
         <div class='pt'>100pt</div>
-        <span><b>Level's name</b><br>by Creator</span>
+        <span><b>Level's name </b><br>by Creator</span>
         <div class="recordDetail">60hz</div>
         <div class="recordDetail">Mobile</div>
         <section>
