@@ -2,76 +2,83 @@
     import { page } from "$app/stores";
     import Title from "../../../components/Title.svelte";
     import PlayerLink from "../../../components/Player/PlayerLink.svelte";
-    console.log($page.params.id);
+    import { onMount } from "svelte";
+    var level = null;
+    function fetchData() {
+        fetch(`${import.meta.env.VITE_API_URL}/level/${$page.params.id}`).then(
+            (res) =>
+                res.json().then((data) => {
+                    level = data;
+                })
+        );
+    }
+    onMount(() => {
+        fetchData();
+    });
 </script>
-
 <svelte:head>
-    <title>Level's name - Challenge List VN</title>
+    <title>{level ? level.data.name : 'Level\'s info'} - Challenge List VN</title>
 </svelte:head>
+{#if level}
+    <Title value={level.data.name} />
 
-<Title value="Level's name" />
-
-<main class="infoWrapper">
-    <div class="info">
-        <iframe
-            src="https://www.youtube.com/embed/uIws4vESLNQ"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
-        />
-        <div class="detail">
-            <section class="top">
-                <h2>#1</h2>
-                <section class="pt">100pt</section>
-            </section>
-            <p><b>Description</b></p>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse et magna ut lectus scelerisque tincidunt. Etiam
-                semper pharetra varius. Sed congue diam id velit sagittis,
-                mollis tempor dolor ultrices. Maecenas venenatis metus non arcu
-                convallis, in pellentesque lacus molestie. Fusce nec risus
-                ipsum. Ut volutpat, metus in luctus maximus, arcu dolor accumsan
-                mauris, eget venenatis mauris neque sed lorem. Integer pharetra
-                nunc ante, non pellentesque massa tincidunt at. Class aptent
-                taciti sociosqu ad litora torquent per conubia nostra, per
-                inceptos himenaeos. Ut id varius sem.
-            </p>
+    <main class="infoWrapper">
+        <div class="info">
+            <iframe
+                src={`https://www.youtube.com/embed/${level.data.videoID}`}
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+            />
+            <div class="detail">
+                <section class="top">
+                    <h2>#{level.data.rank}</h2>
+                    <section class="pt">{level.data.rating}pt</section>
+                </section>
+                <p><b>Description</b></p>
+                <p>
+                    None
+                </p>
+            </div>
         </div>
-    </div>
-</main>
+    </main>
 
-<main class="records">
-    {#each Array(10) as item, index}
-        <div class="record">
-            <PlayerLink player={{ uid: "abcxyz" }}>Rophisus</PlayerLink>
-            <div class="recordDetail">100%</div>
-            <div class="recordDetail">60hz</div>
-            <div class="recordDetail">Mobile</div>
-            <section>
-                <a href="#!">
-                    <svg
-                        data-testid="geist-icon"
-                        fill="none"
-                        height="24"
-                        shape-rendering="geometricPrecision"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="1.5"
-                        viewBox="0 0 24 24"
-                        width="24"
-                        style="color:var(--geist-foreground)"
-                        ><path
-                            d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"
-                        /><path d="M15 3h6v6" /><path d="M10 14L21 3" /></svg
-                    >
-                </a>
-            </section>
-        </div>
-    {/each}
-</main>
+    <main class="records">
+        {#each level.records as item, index}
+            <div class="record">
+                <PlayerLink player={{ uid: item.players }}>{item.players.name}</PlayerLink>
+                <div class="recordDetail">{item.progress}%</div>
+                <div class="recordDetail">{item.refreshRate}hz</div>
+                {#if item.isMobile}
+                    <div class="recordDetail">Mobile</div>
+                {/if}
+                <section>
+                    <a href={item.videoLink}>
+                        <svg
+                            data-testid="geist-icon"
+                            fill="none"
+                            height="24"
+                            shape-rendering="geometricPrecision"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="1.5"
+                            viewBox="0 0 24 24"
+                            width="24"
+                            style="color:var(--geist-foreground)"
+                            ><path
+                                d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"
+                            /><path d="M15 3h6v6" /><path
+                                d="M10 14L21 3"
+                            /></svg
+                        >
+                    </a>
+                </section>
+            </div>
+        {/each}
+    </main>
+{/if}
 
 <style lang="scss">
     .infoWrapper {
@@ -152,15 +159,15 @@
         margin-left: 6px;
     }
     @media screen and (max-width: 1000px) {
-        .info{
+        .info {
             width: 100%;
             flex-direction: column;
-            iframe{
+            iframe {
                 min-width: 100%;
-                height: 200px;
+                height: 55vw;
             }
         }
-        .record{
+        .record {
             width: 100%;
         }
     }
