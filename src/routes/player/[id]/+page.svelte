@@ -87,12 +87,6 @@
             gap: 20px;
         }
     }
-    #yt{
-        height: 20px;
-        width: fit-content;
-        scale: 1.3;
-        margin-right: 5px;
-    }
     section{
         overflow: auto;
         white-space: nowrap;

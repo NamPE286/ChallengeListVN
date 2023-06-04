@@ -67,13 +67,13 @@
                 <section />
             </div>
         </a>
-        <a href="rules" class="link">
+        <a href="/rules" class="link">
             <div class={firstPath == "rules" ? "selected" : ""}>
                 Rules
                 <section />
             </div>
         </a>
-        <a href="settings" class="link">
+        <a href="/settings" class="link">
             <div class={firstPath == "settings" ? "selected" : ""}>
                 Settings
                 <section />
