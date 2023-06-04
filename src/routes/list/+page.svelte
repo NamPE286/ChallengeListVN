@@ -1,6 +1,37 @@
 <script>
     import Title from "../../components/Title.svelte";
     import Level from "../../components/List/Level.svelte";
+    var levelsData = [];
+    var option = {
+        range: {
+            index: {
+                start: 0,
+                end: 300,
+            },
+            rating: {
+                start: 0,
+                end: 10000,
+            },
+        },
+        filter: {
+            showBeatenLevels: true,
+            userUID: "abcxyz",
+            sortBy: "rating",
+        },
+    };
+    function fetchData() {
+        console.log(option)
+        fetch(
+            `${import.meta.env.VITE_API_URL}/list/${encodeURIComponent(
+                JSON.stringify(option)
+            )}`
+        ).then((res) =>
+            res.json().then((data) => {
+                levelsData = data;
+            })
+        );
+    }
+    fetchData()
 </script>
 
 <svelte:head>
@@ -8,28 +39,34 @@
 </svelte:head>
 
 <Title value="Main List" />
-<main>
-    <div class="levels">
-        {#each Array(20) as item, index}
-            <Level />
-        {/each}
-    </div>
-    <div class="filter">
-        <h3>Filter</h3>
-        <div class="filterOpt">
-            <span>Rating range: </span>
-            <input placeholder="0" /> - <input placeholder="10000" />
+{#if levelsData.length}
+    <main>
+        <div class="levels">
+            {#each levelsData as item, index}
+                <Level data={item} />
+            {/each}
         </div>
-        <div class="filterOptCheck">
-            <input type="checkbox" />
-            <span>Show beaten levels</span>
+        <div class="filter">
+            <h3>Filter</h3>
+            <div class="filterOpt">
+                <span>Top range: </span>
+                <input placeholder="0" bind:value={option.range.index.start} type="number" /> - <input placeholder="10000" bind:value={option.range.index.end} type="number"/>
+            </div>
+            <div class="filterOpt">
+                <span>Rating range: </span>
+                <input placeholder="0" bind:value={option.range.rating.start} type="number" /> - <input placeholder="10000" bind:value={option.range.rating.end} type="number"/>
+            </div>
+            <div class="filterOptCheck">
+                <input type="checkbox" bind:checked={option.filter.showBeatenLevels} />
+                <span>Show beaten levels</span>
+            </div>
+            <div class="left">
+                <button id="blackBtn">Reset</button>
+                <button id="whiteBtn" on:click={fetchData}>Apply</button>
+            </div>
         </div>
-        <div class='left'>
-            <button id='blackBtn'>Reset</button>
-            <button id='whiteBtn'>Apply</button>
-        </div>
-    </div>
-</main>
+    </main>
+{/if}
 
 <style lang="scss">
     main {
@@ -55,12 +92,14 @@
         }
     }
     .filterOpt {
+        margin-bottom: 5px;
         input {
             background-color: black;
             border: 1px solid var(--line);
             width: 50px;
             height: 20px;
             border-radius: 5px;
+            color: white;
         }
     }
     .filterOptCheck {
@@ -69,12 +108,12 @@
             accent-color: black;
         }
     }
-    .left{
+    .left {
         display: flex;
         margin-top: 10px;
         justify-content: end;
         gap: 7px;
-        #whiteBtn{
+        #whiteBtn {
             background-color: white;
             border: 1px solid white;
             height: 30px;
@@ -83,11 +122,11 @@
             transition: all 0.3s;
             cursor: pointer;
         }
-        #whiteBtn:hover{
+        #whiteBtn:hover {
             background-color: black;
             color: white;
         }
-        #blackBtn{
+        #blackBtn {
             background-color: black;
             color: rgb(141, 141, 141);
             border: 1px solid var(--line);
@@ -97,7 +136,7 @@
             transition: all 0.3s;
             cursor: pointer;
         }
-        #blackBtn:hover{
+        #blackBtn:hover {
             border: 1px solid white;
             color: white;
         }
@@ -106,7 +145,7 @@
         main {
             flex-direction: column-reverse;
         }
-        .filter{
+        .filter {
             width: 100%;
         }
     }

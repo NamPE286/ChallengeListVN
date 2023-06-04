@@ -1,18 +1,23 @@
+<script>
+    export var data
+</script>
+
 <div class="wrapper">
     <div class="imgWrapper">
         <img
-            src="https://i.ytimg.com/vi/4cWokwztucQ/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAQQiKl5dTCjFnxpUsPFsIUxYOS3g"
+            src={`https://img.youtube.com/vi/${data.videoID}/0.jpg`}
             alt=""
+            loading="lazy"
         />
-        <div class="top">#1</div>
-        <div class="top pt">100pt</div>
+        <div class="top">#{data.rank}</div>
+        <div class="top pt">{data.rating}pt</div>
     </div>
     <div class="info">
-        <a href='/level/12345678'>
-            <h2>Level's name</h2>
-            <span>by Creator</span>    
+        <a href={`/level/${data.id}`}>
+            <h2>{data.name}</h2>
+            <span>by {data.creator}</span>    
         </a>
-        <div id="ID">ID: 12345678</div>
+        <div id="ID">ID: {data.id}</div>
     </div>
 </div>
 
@@ -28,9 +33,11 @@
         padding: 15px;
         box-sizing: border-box;
         img {
-            height: 150px;
+            height: 168.75px;
+            width: 300px;
             border-radius: 15px;
             margin-right: 20px;
+            object-fit: cover;
         }
         .info {
             display: flex;
@@ -79,7 +86,7 @@
             height: fit-content;
             img {
                 width: 100%;
-                height: auto;
+                height: 55vw;
             }
         }
     }
