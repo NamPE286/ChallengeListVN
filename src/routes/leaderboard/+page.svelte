@@ -1,18 +1,33 @@
 <script>
     import Title from "../../components/Title.svelte";
     import PlayerLink from "../../components/Player/PlayerLink.svelte";
+    import { onMount } from "svelte";
+    var playersData = [];
+    function fetchData() {
+        fetch(
+            `${import.meta.env.VITE_API_URL}/leaderboard`
+        ).then((res) =>
+            res.json().then((data) => {
+                playersData = data;
+                console.log(playersData)
+            })
+        );
+    }
+    onMount(() => {
+        fetchData();
+    })
 </script>
 
 <Title value="Leaderboard" />
 
 <main>
-    {#each Array(20) as item, index}
+    {#each playersData as item, index}
         <div class="player">
-            <h3 id="top">#{index + 1}</h3>
-            <PlayerLink size={10} player={{ uid: "abcxyz" }}
-                >Rophisus</PlayerLink
+            <h3 id="top">#{item.rank}</h3>
+            <PlayerLink size={10} player={item}
+                >{item.name}</PlayerLink
             >
-            <h3 id="rating">1000rt</h3>
+            <h3 id="rating">{item.rating}rt</h3>
         </div>
     {/each}
 </main>
