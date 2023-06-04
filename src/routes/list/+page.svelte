@@ -1,6 +1,7 @@
 <script>
     import Title from "../../components/Title.svelte";
     import Level from "../../components/List/Level.svelte";
+    import { onMount } from "svelte";
     var levelsData = [];
     const defaultOption = {
         range: {
@@ -51,7 +52,9 @@
     function reset(){
         option = defaultOption
     }
-    fetchData();
+    onMount(() => {
+        fetchData();
+    })
 </script>
 
 <svelte:head>
