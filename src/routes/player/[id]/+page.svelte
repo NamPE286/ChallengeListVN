@@ -2,12 +2,18 @@
 </script>
 
 <div class="header">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJuQvezWz6Unw4bgn7B5Y1TDwGnjsa09e-Hg&usqp=CAU" alt="">
+    <img class='avatar' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJuQvezWz6Unw4bgn7B5Y1TDwGnjsa09e-Hg&usqp=CAU" alt="">
     <div class="playerInfo">
         <h1>Rophisus</h1>
         <section>
             <a href='https://www.youtube.com/channel/UCCj7J4fxHF70n5zxccZQDww'>
-                <svg id='yt'xmlns="http://www.w3.org/2000/svg" height="800" width="1200" viewBox="-35.20005 -41.33325 305.0671 247.9995"><path d="M93.333 117.559V47.775l61.334 34.893zm136.43-91.742c-2.699-10.162-10.651-18.165-20.747-20.881C190.716 0 117.333 0 117.333 0S43.951 0 25.651 4.936C15.555 7.652 7.603 15.655 4.904 25.817 0 44.236 0 82.667 0 82.667s0 38.429 4.904 56.849c2.699 10.163 10.65 18.165 20.747 20.883 18.3 4.934 91.682 4.934 91.682 4.934s73.383 0 91.683-4.934c10.096-2.718 18.048-10.72 20.747-20.883 4.904-18.42 4.904-56.85 4.904-56.85s0-38.43-4.904-56.849" fill="#fff"/></svg>
+                <img src='/youtube.svg' alt="">
+            </a>
+            <a href='https://www.youtube.com/channel/UCCj7J4fxHF70n5zxccZQDww'>
+                <img src='/facebook.svg' alt="">
+            </a>
+            <a href='https://www.youtube.com/channel/UCCj7J4fxHF70n5zxccZQDww'>
+                <img src='/discord.svg' alt="">
             </a>
         </section>
     </div>
@@ -60,7 +66,7 @@
         align-items: center;
         padding-inline: 100px;
         margin-bottom: 30px;
-        img{
+        .avatar{
             height: 200px;
             width: 200px;
             object-fit: cover;
@@ -71,6 +77,15 @@
     .playerInfo{
         display: flex;
         flex-direction: column;
+        img{
+            height: 25px;
+            object-fit: cover;
+        }
+        section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
     }
     #yt{
         height: 20px;
