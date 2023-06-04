@@ -43,7 +43,7 @@
                 /></svg
             >
             <img
-                src="https://i.pinimg.com/736x/4d/47/59/4d4759f61e13927c5f5b39a4cc66af70.jpg"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJuQvezWz6Unw4bgn7B5Y1TDwGnjsa09e-Hg&usqp=CAU"
                 alt=""
             />
         </div>
@@ -150,6 +150,8 @@
     }
     img {
         height: 40px;
+        width: 40px;
+        object-fit: cover;
         border-radius: 50%;
     }
     .lower {
