@@ -1,10 +1,18 @@
 <script>
-    import { fly } from 'svelte/transition'
-    var value = ''
+    export var enabled = false;
+    import { fly } from "svelte/transition";
+    var value = "";
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div
+    class="backdrop"
+    on:click={() => {
+        enabled = false;
+    }}
+/>
 <div class="wrapper" transition:fly={{ y: -20, duration: 300 }}>
-    <input placeholder="Type to search" bind:value>
+    <input placeholder="Type to search" bind:value />
     {#if value}
         <div class="result">
             <h4>Level result</h4>
@@ -15,7 +23,10 @@
         <div class="result">
             <h4>Player result</h4>
             <section>
-                <img src="https://avatars.githubusercontent.com/u/42766704?v=4" alt=''>
+                <img
+                    src="https://avatars.githubusercontent.com/u/42766704?v=4"
+                    alt=""
+                />
                 <a href="#!">Zophirux</a>
             </section>
         </div>
@@ -23,15 +34,27 @@
 </div>
 
 <style lang="scss">
-    .wrapper{
+    .backdrop {
+        position: fixed;
+        margin-top: -135px;
+        height: 200%;
+        width: 200%;
+        z-index: 11;
+        opacity: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    .wrapper {
         position: fixed;
         margin-top: 15px;
         left: 50%;
         transform: translateX(-50%);
         width: 800px;
-        z-index: 11;
+        z-index: 12;
     }
-    input{
+    input {
         background-color: black;
         border: 1px solid var(--line);
         height: 55px;
@@ -42,7 +65,7 @@
         padding-inline: 25px;
         color: white;
     }
-    .result{
+    .result {
         background-color: black;
         border: 1px solid var(--line);
         height: fit-content;
@@ -50,26 +73,26 @@
         margin-top: 15px;
         border-radius: 10px;
         padding: 20px;
-        h4{
+        h4 {
             margin: 0;
             padding-bottom: 10px;
         }
-        section{
+        section {
             margin-top: 10px;
             display: flex;
             align-items: center;
-            img{
+            img {
                 border-radius: 50%;
                 height: 25px;
                 margin-right: 10px;
             }
         }
-        a{
+        a {
             color: rgb(161, 161, 161);
         }
     }
     @media screen and (max-width: 1000px) {
-        .wrapper{
+        .wrapper {
             width: 90%;
         }
     }

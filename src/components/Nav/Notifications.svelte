@@ -1,14 +1,36 @@
 <script>
-    import { fly } from 'svelte/transition'
+    export var enabled = false;
+    import { fly } from "svelte/transition";
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div class="backdrop" on:click={() => {
+    enabled = false
+}}/>
 <div class="wrapper" transition:fly={{ y: -20, duration: 300 }}>
     <h4>Notifications</h4>
     <hr class="bottom" />
     <div class="notif">
-        <svg data-testid="geist-icon" fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" style="color:var(--geist-foreground)"><path d="M8 11.857l2.5 2.5L15.857 9M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10z"/></svg>
+        <svg
+            data-testid="geist-icon"
+            fill="none"
+            height="24"
+            shape-rendering="geometricPrecision"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            viewBox="0 0 24 24"
+            width="24"
+            style="color:var(--geist-foreground)"
+            ><path
+                d="M8 11.857l2.5 2.5L15.857 9M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10z"
+            /></svg
+        >
         <p>
-            Your submission of Blablabla has been accepted.<br /><span>1d ago</span>
+            Your submission of Blablabla has been accepted.<br /><span
+                >1d ago</span
+            >
         </p>
     </div>
     <hr />
@@ -18,6 +40,18 @@
 </div>
 
 <style lang="scss">
+    .backdrop {
+		position: fixed;
+		margin-top: -135px;
+		height: 200%;
+		width: 200%;
+		z-index: 12;
+		opacity: 0;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+    }
     .wrapper {
         height: fit-content;
         max-height: 350px;
@@ -29,7 +63,7 @@
         border-radius: 15px;
         border: 1px solid var(--line);
         box-sizing: border-box;
-        z-index: 12;
+        z-index: 13;
     }
     h4 {
         margin-left: 20px;
@@ -52,17 +86,17 @@
         align-items: center;
         height: 40px;
     }
-    .notif{
+    .notif {
         display: flex;
         align-items: center;
-        svg{
+        svg {
             margin-inline: 20px;
             scale: 1.4;
             stroke: limegreen;
         }
     }
-    @media screen and (max-width: 1000px){
-        .wrapper{
+    @media screen and (max-width: 1000px) {
+        .wrapper {
             width: calc(100% - 30px);
             right: 15px;
         }

@@ -107,10 +107,10 @@
 </div>
 <div class="filler" />
 {#if isNotificationOn}
-    <Notifications />
+    <Notifications bind:enabled={isNotificationOn}/>
 {/if}
 {#if isSearchOn}
-    <Search />
+    <Search bind:enabled={isSearchOn} />
 {/if}
 
 <style lang="scss">
