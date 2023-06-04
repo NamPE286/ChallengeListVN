@@ -2,6 +2,23 @@
     import Title from "../../components/Title.svelte";
     import Level from "../../components/List/Level.svelte";
     var levelsData = [];
+    const defaultOption = {
+        range: {
+            index: {
+                start: 0,
+                end: 300,
+            },
+            rating: {
+                start: 0,
+                end: 10000,
+            },
+        },
+        filter: {
+            showBeatenLevels: true,
+            userUID: "abcxyz",
+            sortBy: "rating",
+        },
+    };
     var option = {
         range: {
             index: {
@@ -20,7 +37,7 @@
         },
     };
     function fetchData() {
-        console.log(option)
+        console.log(option);
         fetch(
             `${import.meta.env.VITE_API_URL}/list/${encodeURIComponent(
                 JSON.stringify(option)
@@ -31,7 +48,10 @@
             })
         );
     }
-    fetchData()
+    function reset(){
+        option = defaultOption
+    }
+    fetchData();
 </script>
 
 <svelte:head>
@@ -50,18 +70,41 @@
             <h3>Filter</h3>
             <div class="filterOpt">
                 <span>Top range: </span>
-                <input placeholder="0" bind:value={option.range.index.start} type="number" /> - <input placeholder="10000" bind:value={option.range.index.end} type="number"/>
+                <input
+                    placeholder="0"
+                    bind:value={option.range.index.start}
+                    type="number"
+                />
+                -
+                <input
+                    placeholder="10000"
+                    bind:value={option.range.index.end}
+                    type="number"
+                />
             </div>
             <div class="filterOpt">
                 <span>Rating range: </span>
-                <input placeholder="0" bind:value={option.range.rating.start} type="number" /> - <input placeholder="10000" bind:value={option.range.rating.end} type="number"/>
-            </div>
+                <input
+                    placeholder="0"
+                    bind:value={option.range.rating.start}
+                    type="number"
+                />
+                -
+                <input
+                    placeholder="10000"
+                    bind:value={option.range.rating.end}
+                    type="number"
+                />
+            </div>  
             <div class="filterOptCheck">
-                <input type="checkbox" bind:checked={option.filter.showBeatenLevels} />
+                <input
+                    type="checkbox"
+                    bind:checked={option.filter.showBeatenLevels}
+                />
                 <span>Show beaten levels</span>
             </div>
             <div class="left">
-                <button id="blackBtn">Reset</button>
+                <button id="blackBtn" on:click={reset}>Reset</button>
                 <button id="whiteBtn" on:click={fetchData}>Apply</button>
             </div>
         </div>
