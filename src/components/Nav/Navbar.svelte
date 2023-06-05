@@ -1,17 +1,39 @@
 <script>
     import Notifications from "./Notifications.svelte";
     import Search from "./Search.svelte";
+    import { supabase } from "../../db";
     import { page } from "$app/stores";
+    import { onMount } from "svelte";
     var isNotificationOn = false;
     var isSearchOn = false;
     var firstPath = "";
+    var user = null;
     function getFirstPath() {
         var s = $page.url.pathname;
         var a = s.split("/");
         if (a.length > 0) firstPath = a[1];
         else firstPath = "";
     }
+    async function signIn() {
+        const { user, session, error } = await supabase.auth.signInWithOAuth({
+            provider: "google",
+        });
+    }
     $: $page.url.pathname && getFirstPath();
+    onMount(() => {
+        supabase.auth.onAuthStateChange((_, session) => {
+            fetch(`${import.meta.env.VITE_API_URL}/auth/getUser`, {
+                method: "POST",
+                headers: {
+                    authorization: `Bearer ${session.access_token}`,
+                },
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    user = data
+                });
+        });
+    });
 </script>
 
 <div class="wrapper">
@@ -20,32 +42,41 @@
             <h3>Challenge List VN</h3>
         </a>
         <div class="right">
-            <a href="/submit" class="submitBtn">Submit</a>
-            <!-- svelte-ignore a11y-click-events-have-key-events -->
-            <svg
-                class="clickable"
-                on:click={() => {
-                    isNotificationOn = !isNotificationOn;
-                }}
-                data-testid="geist-icon"
-                fill="none"
-                height="24"
-                shape-rendering="geometricPrecision"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.5"
-                viewBox="0 0 24 24"
-                width="24"
-                style="color:var(--geist-foreground)"
-                ><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" /><path
-                    d="M13.73 21a2 2 0 01-3.46 0"
-                /></svg
-            >
-            <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJuQvezWz6Unw4bgn7B5Y1TDwGnjsa09e-Hg&usqp=CAU"
-                alt=""
-            />
+            {#if !user}
+                <button
+                    href="/submit"
+                    class="blueBtn clickable"
+                    on:click={signIn}>Sign In</button
+                >
+            {/if}
+            {#if user}
+                <a href="/submit" class="blueBtn">Submit</a>
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <svg
+                    class="clickable"
+                    on:click={() => {
+                        isNotificationOn = !isNotificationOn;
+                    }}
+                    data-testid="geist-icon"
+                    fill="none"
+                    height="24"
+                    shape-rendering="geometricPrecision"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    style="color:var(--geist-foreground)"
+                    ><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" /><path
+                        d="M13.73 21a2 2 0 01-3.46 0"
+                    /></svg
+                >
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJuQvezWz6Unw4bgn7B5Y1TDwGnjsa09e-Hg&usqp=CAU"
+                    alt=""
+                />
+            {/if}
         </div>
     </div>
     <div class="lower">
@@ -107,7 +138,7 @@
 </div>
 <div class="filler" />
 {#if isNotificationOn}
-    <Notifications bind:enabled={isNotificationOn}/>
+    <Notifications bind:enabled={isNotificationOn} />
 {/if}
 {#if isSearchOn}
     <Search bind:enabled={isSearchOn} />
@@ -160,8 +191,8 @@
         height: 30px;
         position: relative;
     }
-    .lower::-webkit-scrollbar { 
-        display: none;  /* Safari and Chrome */
+    .lower::-webkit-scrollbar {
+        display: none; /* Safari and Chrome */
     }
     .link {
         padding-inline: 10px;
@@ -203,7 +234,8 @@
             stroke: white;
         }
     }
-    .submitBtn {
+    .blueBtn {
+        border: none;
         background-color: #00285b;
         padding: 8px;
         padding-inline: 15px;
@@ -211,19 +243,19 @@
         border-radius: 10px;
         transition: background-color 0.2s;
     }
-    .submitBtn:hover{
+    .blueBtn:hover {
         background-color: rgb(0, 55, 128);
     }
     @media screen and (max-width: 1000px) {
-        .wrapper{
+        .wrapper {
             padding-inline: 10px;
         }
-        .lower{
+        .lower {
             overflow-x: auto;
             box-sizing: border-box;
             height: 45px;
         }
-        .filler{
+        .filler {
             height: 105px;
         }
     }
