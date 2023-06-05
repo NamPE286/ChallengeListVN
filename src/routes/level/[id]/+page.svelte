@@ -6,7 +6,7 @@
     import Loading from "../../../Loading.svelte";
     var level = null;
     function fetchData() {
-        level = null
+        level = null;
         fetch(`${import.meta.env.VITE_API_URL}/level/${$page.params.id}`).then(
             (res) =>
                 res.json().then((data) => {
@@ -14,19 +14,22 @@
                 })
         );
     }
-    $: $page.params.id && fetchData()
+    $: $page.params.id && fetchData();
     onMount(() => {
         fetchData();
     });
 </script>
 
 <svelte:head>
-    <title>{level ? `${level.data.name} by ${level.data.creator}` : "Level's info"} - Challenge List VN</title
+    <title
+        >{level
+            ? `${level.data.name} by ${level.data.players.name}`
+            : "Level's info"} - Challenge List VN</title
     >
 </svelte:head>
 <Loading bind:disabled={level} />
 {#if level}
-    <Title value={`${level.data.name} by ${level.data.creator}`} />
+    <Title value={`${level.data.name} by ${level.data.players.name}`} />
 
     <main class="infoWrapper">
         <div class="info">
@@ -43,7 +46,7 @@
                     <section class="pt">{level.data.rating}pt</section>
                 </section>
                 <p><b>Description</b></p>
-                <p>None</p>
+                <p>{level.data.description}</p>
             </div>
         </div>
     </main>

@@ -1,5 +1,6 @@
 <script>
     export var data
+    console.log(data)
 </script>
 
 <div class="wrapper">
@@ -15,7 +16,7 @@
     <div class="info">
         <a href={`/level/${data.id}`}>
             <h2>{data.name}</h2>
-            <span>by {data.creator}</span>    
+            <span>by {data.players.name}</span>    
         </a>
         <div id="ID">ID: {data.id}</div>
     </div>
