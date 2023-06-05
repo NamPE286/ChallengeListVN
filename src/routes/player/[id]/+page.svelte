@@ -54,7 +54,7 @@
         {#each player.records as item, index}
             <div class="record">
                 <div class="pt">{item.levels.rating}pt</div>
-                <a href={`/level/${item.levels.id}`}><b>{item.levels.name} </b><br />by {item.levels.creator}</a>
+                <a href={`/level/${item.levels.id}`}><b>{item.levels.name} </b><br />by {item.levels.players.name}</a>
                 <div class="recordDetail">{item.refreshRate}hz</div>
                 {#if item.isMobile}
                     <div class="recordDetail">Mobile</div>
