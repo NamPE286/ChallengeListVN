@@ -1,13 +1,13 @@
 <script>
     import Notifications from "./Notifications.svelte";
     import Search from "./Search.svelte";
+    import { user } from '../../stores'
     import { supabase } from "../../db";
     import { page } from "$app/stores";
     import { onMount } from "svelte";
     var isNotificationOn = false;
     var isSearchOn = false;
     var firstPath = "";
-    var user = null;
     function getFirstPath() {
         var s = $page.url.pathname;
         var a = s.split("/");
@@ -30,7 +30,7 @@
             })
                 .then((res) => res.json())
                 .then((data) => {
-                    user = data
+                    $user = data
                 });
         });
     });
@@ -42,14 +42,14 @@
             <h3>Challenge List VN</h3>
         </a>
         <div class="right">
-            {#if !user}
+            {#if !$user}
                 <button
                     href="/submit"
                     class="blueBtn clickable"
                     on:click={signIn}>Sign In</button
                 >
             {/if}
-            {#if user}
+            {#if $user}
                 <a href="/submit" class="blueBtn">Submit</a>
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <svg
