@@ -52,13 +52,13 @@
         {#each player.records as item, index}
             <div class="record">
                 <div class="pt">{item.levels.rating}pt</div>
-                <span><b>{item.levels.name} </b><br />by {item.levels.creator}</span>
+                <a href={`/level/${item.levels.id}`}><b>{item.levels.name} </b><br />by {item.levels.creator}</a>
                 <div class="recordDetail">{item.refreshRate}hz</div>
                 {#if item.isMobile}
                     <div class="recordDetail">Mobile</div>
                 {/if}
                 <section>
-                    <a href="#!">
+                    <a href={item.videoLink}>
                         <svg
                             data-testid="geist-icon"
                             fill="none"

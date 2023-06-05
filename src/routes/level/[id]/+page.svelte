@@ -17,8 +17,10 @@
         fetchData();
     });
 </script>
+
 <svelte:head>
-    <title>{level ? level.data.name : 'Level\'s info'} - Challenge List VN</title>
+    <title>{level ? level.data.name : "Level's info"} - Challenge List VN</title
+    >
 </svelte:head>
 <Loading bind:disabled={level} />
 {#if level}
@@ -39,9 +41,7 @@
                     <section class="pt">{level.data.rating}pt</section>
                 </section>
                 <p><b>Description</b></p>
-                <p>
-                    None
-                </p>
+                <p>None</p>
             </div>
         </div>
     </main>
@@ -49,7 +49,9 @@
     <main class="records">
         {#each level.records as item, index}
             <div class="record">
-                <PlayerLink player={{ uid: item.players }}>{item.players.name}</PlayerLink>
+                <PlayerLink player={item.players}
+                    >{item.players.name}</PlayerLink
+                >
                 <div class="recordDetail">{item.progress}%</div>
                 <div class="recordDetail">{item.refreshRate}hz</div>
                 {#if item.isMobile}
