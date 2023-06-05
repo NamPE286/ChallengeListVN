@@ -45,6 +45,7 @@
                     <h2>#{level.data.rank}</h2>
                     <section class="pt">{level.data.rating}pt</section>
                 </section>
+                <p><b>ID:</b> {level.data.id}</p>
                 <p><b>Description</b></p>
                 <p>{level.data.description}</p>
             </div>
