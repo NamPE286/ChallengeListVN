@@ -22,6 +22,10 @@
     $: $page.url.pathname && getFirstPath();
     onMount(() => {
         supabase.auth.onAuthStateChange((_, session) => {
+            if(!session) {
+                $user = null
+                return
+            }
             fetch(`${import.meta.env.VITE_API_URL}/auth/getUser`, {
                 method: "POST",
                 headers: {
