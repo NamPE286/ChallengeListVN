@@ -54,7 +54,6 @@
                 <PlayerLink player={item.players}
                     >{item.players.name}</PlayerLink
                 >
-                <div class="recordDetail">{item.progress}%</div>
                 <div class="recordDetail">{item.refreshRate}hz</div>
                 {#if item.isMobile}
                     <div class="recordDetail">Mobile</div>

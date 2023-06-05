@@ -2,6 +2,8 @@
     import Title from "../../components/Title.svelte";
 </script>
 
-<Title value='Rules'>
+<Title value='Rules' />
+
+<main>
     
-</Title>
+</main>
