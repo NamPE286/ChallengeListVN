@@ -185,8 +185,9 @@
     @media screen and (max-width: 1000px) {
         .header {
             padding-inline: 30px;
-            img {
+            .avatar {
                 height: 120px;
+                width: 120px;
             }
         }
         .record {
