@@ -19,12 +19,12 @@
 </script>
 
 <svelte:head>
-    <title>{level ? level.data.name : "Level's info"} - Challenge List VN</title
+    <title>{level ? `${level.data.name} by ${level.data.creator}` : "Level's info"} - Challenge List VN</title
     >
 </svelte:head>
 <Loading bind:disabled={level} />
 {#if level}
-    <Title value={level.data.name} />
+    <Title value={`${level.data.name} by ${level.data.creator}`} />
 
     <main class="infoWrapper">
         <div class="info">
