@@ -5,6 +5,7 @@
 
     var player = null;
     function fetchData() {
+        player = null
         fetch(`${import.meta.env.VITE_API_URL}/player/${$page.params.id}`).then(
             (res) =>
                 res.json().then((data) => {
@@ -12,6 +13,7 @@
                 })
         );
     }
+    $: $page.params.id && fetchData()
     onMount(() => {
         fetchData();
     });

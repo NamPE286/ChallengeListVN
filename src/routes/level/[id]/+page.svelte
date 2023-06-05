@@ -6,6 +6,7 @@
     import Loading from "../../../Loading.svelte";
     var level = null;
     function fetchData() {
+        level = null
         fetch(`${import.meta.env.VITE_API_URL}/level/${$page.params.id}`).then(
             (res) =>
                 res.json().then((data) => {
@@ -13,6 +14,7 @@
                 })
         );
     }
+    $: $page.params.id && fetchData()
     onMount(() => {
         fetchData();
     });
