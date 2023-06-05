@@ -1,7 +1,23 @@
 <script>
     export var enabled = false;
     import { fly } from "svelte/transition";
+    import Loading from "../../Loading.svelte";
     var value = "";
+    var result = null;
+    var pending = null;
+    function fetchData() {
+        result = null;
+        fetch(`${import.meta.env.VITE_API_URL}/search/${value}`).then((res) =>
+            res.json().then((data) => {
+                result = data;
+                console.log(result);
+            })
+        );
+    }
+    function typingAction() {
+        clearTimeout(pending);
+        pending = setTimeout(fetchData, 800);
+    }
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -12,24 +28,40 @@
     }}
 />
 <div class="wrapper" transition:fly={{ y: -20, duration: 300 }}>
-    <input placeholder="Type to search" bind:value />
+    <input placeholder="Type to search" bind:value on:input={typingAction} />
     {#if value}
-        <div class="result">
-            <h4>Level result</h4>
-            <section>
-                <a href="#!">Level's name by Creator - 12345678</a>
-            </section>
-        </div>
-        <div class="result">
-            <h4>Player result</h4>
-            <section>
-                <img
-                    src="https://avatars.githubusercontent.com/u/42766704?v=4"
-                    alt=""
-                />
-                <a href="#!">Zophirux</a>
-            </section>
-        </div>
+        {#if !result}
+            <div class="result">
+                <Loading />
+            </div>
+        {/if}
+        {#if result}
+            <div class="result">
+                <h4>Level result</h4>
+                {#each result.levels as item, index}
+                    <a href={`/level/${item.id}`}>
+                        <section>
+                            {item.name} by {item.creator} - {item.id}
+                        </section>
+                    </a>
+                {/each}
+            </div>
+            <div class="result">
+                <h4>Player result</h4>
+
+                {#each result.players as item, index}
+                    <a href="#!">
+                        <section>
+                            <img
+                                src="https://avatars.githubusercontent.com/u/42766704?v=4"
+                                alt=""
+                            />
+                            {item.name}
+                        </section>
+                    </a>
+                {/each}
+            </div>
+        {/if}
     {/if}
 </div>
 
@@ -69,7 +101,6 @@
         background-color: black;
         border: 1px solid var(--line);
         height: fit-content;
-        max-height: 300px;
         margin-top: 15px;
         border-radius: 10px;
         padding: 20px;
@@ -86,6 +117,13 @@
                 height: 25px;
                 margin-right: 10px;
             }
+            a {
+                width: 100%;
+            }
+            transition: all 0.2s;
+        }
+        section:hover {
+            color: white;
         }
         a {
             color: rgb(161, 161, 161);
