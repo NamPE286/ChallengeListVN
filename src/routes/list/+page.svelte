@@ -39,7 +39,6 @@
         },
     };
     function fetchData() {
-        console.log(option);
         fetch(
             `${import.meta.env.VITE_API_URL}/list/${encodeURIComponent(
                 JSON.stringify(option)

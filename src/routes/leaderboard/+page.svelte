@@ -10,7 +10,6 @@
         ).then((res) =>
             res.json().then((data) => {
                 playersData = data;
-                console.log(playersData)
             })
         );
     }

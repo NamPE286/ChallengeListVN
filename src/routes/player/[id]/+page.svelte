@@ -1,61 +1,101 @@
 <script>
+    import { page } from "$app/stores";
+    import { onMount } from "svelte";
+    import Loading from "../../../Loading.svelte";
+
+    var player = null;
+    function fetchData() {
+        fetch(`${import.meta.env.VITE_API_URL}/player/${$page.params.id}`).then(
+            (res) =>
+                res.json().then((data) => {
+                    player = data;
+                })
+        );
+    }
+    onMount(() => {
+        fetchData();
+    });
 </script>
 
-<div class="header">
-    <img class='avatar' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJuQvezWz6Unw4bgn7B5Y1TDwGnjsa09e-Hg&usqp=CAU" alt="">
-    <div class="playerInfo">
-        <h1>Rophisus</h1>
-        <section>
-            <a href='https://www.youtube.com/channel/UCCj7J4fxHF70n5zxccZQDww'>
-                <img src='/youtube.svg' alt="">
-            </a>
-            <a href='https://www.youtube.com/channel/UCCj7J4fxHF70n5zxccZQDww'>
-                <img src='/facebook.svg' alt="">
-            </a>
-            <a href='https://www.youtube.com/channel/UCCj7J4fxHF70n5zxccZQDww'>
-                <img src='/discord.svg' alt="">
-            </a>
-        </section>
+<Loading bind:disabled={player} />
+
+{#if player}
+    <div class="header">
+        <img
+            class="avatar"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJuQvezWz6Unw4bgn7B5Y1TDwGnjsa09e-Hg&usqp=CAU"
+            alt=""
+        />
+        <div class="playerInfo">
+            <h1>{player.data.name}</h1>
+            <span id='rating'>Rating: {player.data.rating} (#{player.data.rank})</span>
+            <section>
+                {#if player.data.youtube}
+                    <a href={player.data.youtube}>
+                        <img id="social" src="/youtube.svg" alt="" />
+                    </a>
+                {/if}
+                {#if player.data.facebook}
+                    <a href={player.data.facebook}>
+                        <img id="social" src="/facebook.svg" alt="" />
+                    </a>
+                {/if}
+                {#if player.data.discord}
+                    <a href={player.data.discord}>
+                        <img id="social" src="/discord.svg" alt="" />
+                    </a>
+                {/if}
+            </section>
+        </div>
     </div>
-</div>
-<main>
-    {#each Array(10) as item, index}
-    <div class="record">
-        <div class='pt'>100pt</div>
-        <span><b>Level's name </b><br>by Creator</span>
-        <div class="recordDetail">60hz</div>
-        <div class="recordDetail">Mobile</div>
-        <section>
-            <a href="#!">
-                <svg
-                    data-testid="geist-icon"
-                    fill="none"
-                    height="24"
-                    shape-rendering="geometricPrecision"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                    viewBox="0 0 24 24"
-                    width="24"
-                    style="color:var(--geist-foreground)"
-                    ><path
-                        d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"
-                    /><path d="M15 3h6v6" /><path d="M10 14L21 3" /></svg
-                >
-            </a>
-        </section>
-    </div>
-{/each}
-</main>
+    <main>
+        {#each player.records as item, index}
+            <div class="record">
+                <div class="pt">{item.levels.rating}pt</div>
+                <span><b>{item.levels.name} </b><br />by {item.levels.creator}</span>
+                <div class="recordDetail">{item.refreshRate}hz</div>
+                {#if item.isMobile}
+                    <div class="recordDetail">Mobile</div>
+                {/if}
+                <section>
+                    <a href="#!">
+                        <svg
+                            data-testid="geist-icon"
+                            fill="none"
+                            height="24"
+                            shape-rendering="geometricPrecision"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="1.5"
+                            viewBox="0 0 24 24"
+                            width="24"
+                            style="color:var(--geist-foreground)"
+                            ><path
+                                d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"
+                            /><path d="M15 3h6v6" /><path
+                                d="M10 14L21 3"
+                            /></svg
+                        >
+                    </a>
+                </section>
+            </div>
+        {/each}
+    </main>
+{/if}
+
 <style lang="scss">
-    main{
+    #rating{
+        margin-bottom: 21px;
+        margin-top: -12px;
+    }
+    main {
         display: flex;
         flex-direction: column;
         gap: 10px;
         align-items: center;
     }
-    .header{
+    .header {
         width: 100%;
         box-sizing: border-box;
         padding: 30px;
@@ -66,7 +106,7 @@
         align-items: center;
         padding-inline: 100px;
         margin-bottom: 30px;
-        .avatar{
+        .avatar {
             height: 200px;
             width: 200px;
             object-fit: cover;
@@ -74,11 +114,11 @@
             margin-right: 40px;
         }
     }
-    .playerInfo{
+    .playerInfo {
         display: flex;
         flex-direction: column;
-        img{
-            height: 25px;
+        #social {
+            height: 21px;
             object-fit: cover;
         }
         section {
@@ -87,16 +127,16 @@
             gap: 20px;
         }
     }
-    section{
+    section {
         overflow: auto;
         white-space: nowrap;
         display: flex;
         align-items: center;
         text-overflow: ellipsis;
-        a{
+        a {
             color: gray;
         }
-        a:hover{
+        a:hover {
             text-decoration: underline;
         }
     }
@@ -127,7 +167,7 @@
         font-size: 12px;
         margin-left: 6px;
     }
-    .pt{
+    .pt {
         width: 80px;
         display: flex;
         justify-content: center;
@@ -137,20 +177,20 @@
         height: 100%;
         font-weight: bold;
     }
-    br{
+    br {
         display: none;
     }
     @media screen and (max-width: 1000px) {
-        .header{
+        .header {
             padding-inline: 30px;
-            img{
+            img {
                 height: 120px;
             }
         }
-        .record{
-            width: 100%; 
+        .record {
+            width: 100%;
         }
-        br{
+        br {
             display: block;
         }
     }
