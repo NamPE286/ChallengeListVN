@@ -3,6 +3,7 @@
     import Title from "../../../components/Title.svelte";
     import PlayerLink from "../../../components/Player/PlayerLink.svelte";
     import { onMount } from "svelte";
+    import Loading from "../../../Loading.svelte";
     var level = null;
     function fetchData() {
         fetch(`${import.meta.env.VITE_API_URL}/level/${$page.params.id}`).then(
@@ -19,6 +20,7 @@
 <svelte:head>
     <title>{level ? level.data.name : 'Level\'s info'} - Challenge List VN</title>
 </svelte:head>
+<Loading bind:disabled={level} />
 {#if level}
     <Title value={level.data.name} />
 

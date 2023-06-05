@@ -2,6 +2,7 @@
     import Title from "../../components/Title.svelte";
     import PlayerLink from "../../components/Player/PlayerLink.svelte";
     import { onMount } from "svelte";
+    import Loading from "../../Loading.svelte";
     var playersData = [];
     function fetchData() {
         fetch(
@@ -19,7 +20,7 @@
 </script>
 
 <Title value="Leaderboard" />
-
+<Loading bind:disabled={playersData.length} />
 <main>
     {#each playersData as item, index}
         <div class="player">
