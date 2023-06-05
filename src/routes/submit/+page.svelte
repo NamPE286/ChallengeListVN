@@ -2,6 +2,8 @@
     import Title from "../../components/Title.svelte";
     import PendingSubmission from "../../components/PendingSubmission.svelte";
     import { user } from "../../stores";
+    import Loading from "../../Loading.svelte";
+    var state = 0;
     var type = "";
     var submission = {
         record: {
@@ -21,21 +23,20 @@
         },
     };
     function submit() {
-        submission.record.userUID = $user.uid
-        submission.level.creatorUID = $user.uid
-        console.log(JSON.stringify(submission[type]), type)
+        state = 1;
+        submission.record.userUID = $user.uid;
+        submission.level.creatorUID = $user.uid;
         fetch(`${import.meta.env.VITE_API_URL}/submit/${type}`, {
             method: "POST",
             headers: {
                 authorization: `Bearer ${$user.session.access_token}`,
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json",
             },
-            body: JSON.stringify(submission[type])
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data)
-            });
+            body: JSON.stringify(submission[type]),
+        }).then((res) => {
+            if (res.ok) state = 2;
+            else state = 3;
+        });
     }
 </script>
 
@@ -96,6 +97,17 @@
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <div class="right" on:click={submit}>
                     <button id="whiteBtn">Submit</button>
+                    {#if state == 1}
+                        <div class="loading">
+                            <Loading />
+                        </div>
+                    {/if}
+                    {#if state == 2}
+                        <svg id='icon' class="with-icon_icon__aLCKg" data-testid="geist-icon" fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" style="color:var(--geist-foreground);width:24px;height:24px"><path d="M20 6L9 17l-5-5"/></svg>
+                    {/if}
+                    {#if state == 3}
+                        <svg id='icon' class="with-icon_icon__aLCKg" data-testid="geist-icon" fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" style="color:var(--geist-foreground);width:24px;height:24px"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+                    {/if}
                 </div>
             {/if}
         </div>
@@ -104,6 +116,15 @@
 {/if}
 
 <style lang="scss">
+    .loading {
+        margin-top: -38px;
+        margin-left: -23px;
+        max-height: 35px;
+        scale: 0.9;
+    }
+    #icon{
+        margin-left: 5px;
+    }
     main {
         display: flex;
         gap: 20px;
@@ -135,6 +156,7 @@
     }
     .right {
         display: flex;
+        align-items: center;
         margin-top: 10px;
         gap: 7px;
         #whiteBtn {
