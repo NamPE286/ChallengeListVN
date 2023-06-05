@@ -1,7 +1,7 @@
 <script>
     import Notifications from "./Notifications.svelte";
     import Search from "./Search.svelte";
-    import { user } from '../../stores'
+    import { user } from "../../stores";
     import { supabase } from "../../db";
     import { page } from "$app/stores";
     import { onMount } from "svelte";
@@ -22,9 +22,9 @@
     $: $page.url.pathname && getFirstPath();
     onMount(() => {
         supabase.auth.onAuthStateChange((_, session) => {
-            if(!session) {
-                $user = null
-                return
+            if (!session) {
+                $user = null;
+                return;
             }
             fetch(`${import.meta.env.VITE_API_URL}/auth/getUser`, {
                 method: "POST",
@@ -34,7 +34,7 @@
             })
                 .then((res) => res.json())
                 .then((data) => {
-                    $user = data
+                    $user = data;
                 });
         });
     });
@@ -76,10 +76,12 @@
                         d="M13.73 21a2 2 0 01-3.46 0"
                     /></svg
                 >
-                <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJuQvezWz6Unw4bgn7B5Y1TDwGnjsa09e-Hg&usqp=CAU"
-                    alt=""
-                />
+                <a href={`/player/${$user.uid}`}>
+                    <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJuQvezWz6Unw4bgn7B5Y1TDwGnjsa09e-Hg&usqp=CAU"
+                        alt=""
+                    />
+                </a>
             {/if}
         </div>
     </div>
