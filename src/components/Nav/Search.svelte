@@ -2,6 +2,7 @@
     export var enabled = false;
     import { fly } from "svelte/transition";
     import Loading from "../../Loading.svelte";
+    import { page } from "$app/stores";
     var value = "";
     var result = null;
     var pending = null;
@@ -29,40 +30,45 @@
 />
 <div class="wrapper" transition:fly={{ y: -20, duration: 300 }}>
     <input placeholder="Type to search" bind:value on:input={typingAction} />
-    {#if value}
-        {#if !result}
-            <div class="result">
-                <Loading />
-            </div>
-        {/if}
-        {#if result}
-            <div class="result">
-                <h4>Level result</h4>
-                {#each result.levels as item, index}
-                    <a href={`/level/${item.id}`}>
-                        <section>
-                            {item.name} by {item.creator} - {item.id}
-                        </section>
-                    </a>
-                {/each}
-            </div>
-            <div class="result">
-                <h4>Player result</h4>
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <div on:click={() => {
+        enabled = false
+    }}>
+        {#if value}
+            {#if !result}
+                <div class="result">
+                    <Loading />
+                </div>
+            {/if}
+            {#if result}
+                <div class="result">
+                    <h4>Level result</h4>
+                    {#each result.levels as item, index}
+                        <a href={`/level/${item.id}`}>
+                            <section>
+                                {item.name} by {item.creator} - {item.id}
+                            </section>
+                        </a>
+                    {/each}
+                </div>
+                <div class="result">
+                    <h4>Player result</h4>
 
-                {#each result.players as item, index}
-                    <a href="#!">
-                        <section>
-                            <img
-                                src="https://avatars.githubusercontent.com/u/42766704?v=4"
-                                alt=""
-                            />
-                            {item.name}
-                        </section>
-                    </a>
-                {/each}
-            </div>
+                    {#each result.players as item, index}
+                        <a href={`/player/${item.uid}`}>
+                            <section>
+                                <img
+                                    src="https://avatars.githubusercontent.com/u/42766704?v=4"
+                                    alt=""
+                                />
+                                {item.name}
+                            </section>
+                        </a>
+                    {/each}
+                </div>
+            {/if}
         {/if}
-    {/if}
+    </div>
 </div>
 
 <style lang="scss">
