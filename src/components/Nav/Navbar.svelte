@@ -34,6 +34,7 @@
             })
                 .then((res) => res.json())
                 .then((data) => {
+                    data['session'] = session
                     $user = data;
                 });
         });

@@ -1,22 +1,24 @@
 <script>
-    export var data
-    console.log(data)
+    export var data;
+    console.log(data);
 </script>
 
 <div class="wrapper">
     <div class="imgWrapper">
-        <img
-            src={`https://img.youtube.com/vi/${data.videoID}/0.jpg`}
-            alt=""
-            loading="lazy"
-        />
-        <div class="top">#{data.rank}</div>
-        <div class="top pt">{data.rating}pt</div>
+        <a href={`/level/${data.id}`}>
+            <img
+                src={`https://img.youtube.com/vi/${data.videoID}/0.jpg`}
+                alt=""
+                loading="lazy"
+            />
+            <div class="top">#{data.rank}</div>
+            <div class="top pt">{data.rating}pt</div>
+        </a>
     </div>
     <div class="info">
         <a href={`/level/${data.id}`}>
             <h2>{data.name}</h2>
-            <span>by {data.players.name}</span>    
+            <span>by {data.players.name}</span>
         </a>
         <div id="ID">ID: {data.id}</div>
     </div>

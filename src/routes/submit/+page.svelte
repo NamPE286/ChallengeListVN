@@ -5,21 +5,38 @@
     var type = "";
     var submission = {
         record: {
-            userUID: $user.uid,
+            userUID: null,
             levelID: null,
-            videoLink: '',
+            videoLink: "",
             refreshRate: null,
-            comment: '',
-            isMobile: null
+            comment: "",
+            isMobile: null,
         },
         level: {
             id: null,
-            name: '',
-            creator: '',
-            videoID: '',
-            description: ''
+            name: "",
+            creatorUID: "",
+            videoID: "",
+            description: "",
         },
     };
+    function submit() {
+        submission.record.userUID = $user.uid
+        submission.level.creatorUID = $user.uid
+        console.log(JSON.stringify(submission[type]), type)
+        fetch(`${import.meta.env.VITE_API_URL}/submit/${type}`, {
+            method: "POST",
+            headers: {
+                authorization: `Bearer ${$user.session.access_token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(submission[type])
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data)
+            });
+    }
 </script>
 
 <Title value="Submit" />
@@ -32,25 +49,52 @@
                 <option value="level">Level</option>
             </select>
             {#if type == "record"}
-                <input placeholder="Level's ID" type="number" bind:value={submission.record.levelID}/>
-                <input placeholder="FPS" bind:value={submission.record.refreshRate} />
+                <input
+                    placeholder="Level's ID"
+                    type="number"
+                    bind:value={submission.record.levelID}
+                />
+                <input
+                    placeholder="FPS"
+                    bind:value={submission.record.refreshRate}
+                />
                 <select name="platform" bind:value={submission.record.isMobile}>
                     <option value={null} disabled selected>Platform</option>
                     <option value={false}>Desktop</option>
                     <option value={true}>Mobile</option>
                 </select>
-                <input placeholder="Video's link" bind:value={submission.record.videoLink}/>
-                <input placeholder="Comment (optional)" bind:value={submission.record.comment} />
+                <input
+                    placeholder="Video's link"
+                    bind:value={submission.record.videoLink}
+                />
+                <input
+                    placeholder="Comment (optional)"
+                    bind:value={submission.record.comment}
+                />
             {/if}
             {#if type == "level"}
-                <input placeholder="Level's ID" type="number" bind:value={submission.level.id}/>
-                <input placeholder="Level's name" bind:value={submission.level.name}/>
-                <input value={`by ${$user.name}`} readonly/>
-                <input placeholder="Desciption" bind:value={submission.level.description}/>
-                <input placeholder="Video's ID (youtube.com/watch?v=<VIDEO's ID HERE>)" bind:value={submission.level.videoID}/>
+                <input
+                    placeholder="Level's ID"
+                    type="number"
+                    bind:value={submission.level.id}
+                />
+                <input
+                    placeholder="Level's name"
+                    bind:value={submission.level.name}
+                />
+                <input value={`by ${$user.name}`} readonly />
+                <input
+                    placeholder="Desciption"
+                    bind:value={submission.level.description}
+                />
+                <input
+                    placeholder="Video's ID (youtube.com/watch?v=<VIDEO's ID HERE>)"
+                    bind:value={submission.level.videoID}
+                />
             {/if}
             {#if type}
-                <div class="right">
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <div class="right" on:click={submit}>
                     <button id="whiteBtn">Submit</button>
                 </div>
             {/if}
