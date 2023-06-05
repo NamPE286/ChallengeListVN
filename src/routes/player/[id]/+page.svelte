@@ -188,6 +188,7 @@
             .avatar {
                 height: 120px;
                 width: 120px;
+                margin-right: 20px;
             }
         }
         .record {
