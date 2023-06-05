@@ -1,6 +1,7 @@
 <script>
     import Title from "../../components/Title.svelte";
     import Level from "../../components/List/Level.svelte";
+    import Loading from "../../Loading.svelte";
     import { onMount } from "svelte";
     var levelsData = [];
     const defaultOption = {
@@ -49,12 +50,12 @@
             })
         );
     }
-    function reset(){
-        option = defaultOption
+    function reset() {
+        option = defaultOption;
     }
     onMount(() => {
         fetchData();
-    })
+    });
 </script>
 
 <svelte:head>
@@ -62,6 +63,7 @@
 </svelte:head>
 
 <Title value="Main List" />
+<Loading bind:disabled={levelsData.length} />
 {#if levelsData.length}
     <main>
         <div class="levels">
@@ -98,7 +100,7 @@
                     bind:value={option.range.rating.end}
                     type="number"
                 />
-            </div>  
+            </div>
             <div class="filterOptCheck">
                 <input
                     type="checkbox"
