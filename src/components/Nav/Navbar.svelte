@@ -22,6 +22,7 @@
     $: $page.url.pathname && getFirstPath();
     onMount(() => {
         supabase.auth.onAuthStateChange((_, session) => {
+            console.log(session)
             if (!session) {
                 $user = null;
                 return;
@@ -79,7 +80,7 @@
                 >
                 <a href={`/player/${$user.uid}`}>
                     <img
-                        src={`https://lh3.googleusercontent.com/a/${$user.googleAvatarID}w=s96-c`}
+                        src={`https://lh3.googleusercontent.com/a/${$user.googleAvatarID}=s96-c`}
                         alt=""
                     />
                 </a>

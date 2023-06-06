@@ -25,7 +25,7 @@
     <div class="header">
         <img
             class="avatar"
-            src={`https://lh3.googleusercontent.com/a/${player.data.googleAvatarID}w=s240-c`}
+            src={`https://lh3.googleusercontent.com/a/${player.data.googleAvatarID}=s240-c`}
             alt=""
         />
         <div class="playerInfo">

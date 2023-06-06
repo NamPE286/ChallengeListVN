@@ -57,7 +57,7 @@
                         <a href={`/player/${item.uid}`}>
                             <section>
                                 <img
-                                    src={`https://lh3.googleusercontent.com/a/${item.googleAvatarID}w=s32-c`}
+                                    src={`https://lh3.googleusercontent.com/a/${item.googleAvatarID}=s32-c`}
                                     alt=""
                                 />
                                 {item.name}
