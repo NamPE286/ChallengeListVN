@@ -52,7 +52,7 @@
     });
 </script>
 
-<Title value="Submit checker: Levels" />
+<Title value="Submit checker: Level" />
 <main>
     {#each data as item, index}
         <Level data={item} />

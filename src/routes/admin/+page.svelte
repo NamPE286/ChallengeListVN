@@ -22,8 +22,8 @@
     <a href="#!">Record editor</a><br />
     <a href="#!">Notification sender</a><br />
     <span>Submit checker:</span>
-    <a href="/admin/submitChecker/levels">Levels</a>
-    <a href="/admin/submitChecker/records">Records</a>
+    <a href="/admin/submitChecker/level">Level</a>
+    <a href="/admin/submitChecker/record">Record</a>
 </main>
 
 <style lang="scss">

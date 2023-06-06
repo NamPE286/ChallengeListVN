@@ -52,7 +52,7 @@
     });
 </script>
 
-<Title value="Submit checker: Records" />
+<Title value="Submit checker: Record" />
 <main>
     {#each data as item, index}
         <Level data={item} />
