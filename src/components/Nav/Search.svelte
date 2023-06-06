@@ -10,7 +10,6 @@
         fetch(`${import.meta.env.VITE_API_URL}/search/${value}`).then((res) =>
             res.json().then((data) => {
                 result = data;
-                console.log(data)
             })
         );
     }

@@ -22,7 +22,6 @@
     $: $page.url.pathname && getFirstPath();
     onMount(() => {
         supabase.auth.onAuthStateChange((_, session) => {
-            console.log(session)
             if (!session) {
                 $user = null;
                 return;
