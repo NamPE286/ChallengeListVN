@@ -8,25 +8,23 @@
                 authorization: `Bearer ${$user.session.access_token}`,
             },
         }).then((res) => {
-            if(res.ok){
-                alert('Refreshed')
+            if (res.ok) {
+                alert("Refreshed");
             }
         });
     }
 </script>
 
-{#if $user && $user.isAdmin}
-    <Title value="Admin" />
-    <main>
-        <button on:click={refresh}>Refresh list</button><br />
-        <a href="#!">Level editor</a><br />
-        <a href="#!">Record editor</a><br />
-        <a href="#!">Notification sender</a><br />
-        <span>Submit checker:</span>
-        <a href="#!">Levels</a>
-        <a href="#!">Records</a>
-    </main>
-{/if}
+<Title value="Admin" />
+<main>
+    <button on:click={refresh}>Refresh list</button><br />
+    <a href="#!">Level editor</a><br />
+    <a href="#!">Record editor</a><br />
+    <a href="#!">Notification sender</a><br />
+    <span>Submit checker:</span>
+    <a href="/admin/submitChecker/levels">Levels</a>
+    <a href="#!">Records</a>
+</main>
 
 <style lang="scss">
     a {
