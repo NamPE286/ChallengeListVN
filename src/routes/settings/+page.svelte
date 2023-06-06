@@ -4,9 +4,6 @@
     import { supabase } from "../../db";
     async function signOut() {
         await supabase.auth.signOut()
-        setTimeout(() => {
-            console.log('ok')
-        }, 3000)
     }
 </script>
 

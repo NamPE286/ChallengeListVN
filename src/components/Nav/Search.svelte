@@ -11,7 +11,6 @@
         fetch(`${import.meta.env.VITE_API_URL}/search/${value}`).then((res) =>
             res.json().then((data) => {
                 result = data;
-                console.log(result);
             })
         );
     }
@@ -46,7 +45,7 @@
                     {#each result.levels as item, index}
                         <a href={`/level/${item.id}`}>
                             <section>
-                                {item.name} by {item.creator} - {item.id}
+                                {item.name} by {item.players.name} - {item.id}
                             </section>
                         </a>
                     {/each}

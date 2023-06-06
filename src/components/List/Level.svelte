@@ -1,6 +1,5 @@
 <script>
     export var data;
-    console.log(data);
 </script>
 
 <div class="wrapper">
