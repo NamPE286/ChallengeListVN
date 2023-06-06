@@ -79,7 +79,7 @@
                 >
                 <a href={`/player/${$user.uid}`}>
                     <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJuQvezWz6Unw4bgn7B5Y1TDwGnjsa09e-Hg&usqp=CAU"
+                        src={`https://lh3.googleusercontent.com/a/${$user.googleAvatarID}w=s96-c`}
                         alt=""
                     />
                 </a>

@@ -25,7 +25,7 @@
     <div class="header">
         <img
             class="avatar"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJuQvezWz6Unw4bgn7B5Y1TDwGnjsa09e-Hg&usqp=CAU"
+            src={`https://lh3.googleusercontent.com/a/${player.data.googleAvatarID}w=s240-c`}
             alt=""
         />
         <div class="playerInfo">
