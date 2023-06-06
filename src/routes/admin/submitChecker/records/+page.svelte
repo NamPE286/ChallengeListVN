@@ -5,7 +5,7 @@
     import { onMount } from "svelte";
     var data = [];
     function fetchData() {
-        fetch(`${import.meta.env.VITE_API_URL}/admin/submissions/level`, {
+        fetch(`${import.meta.env.VITE_API_URL}/admin/submissions/levels`, {
             method: "POST",
             headers: {
                 authorization: `Bearer ${$user.session.access_token}`,
@@ -52,7 +52,7 @@
     });
 </script>
 
-<Title value="Submit checker: Levels" />
+<Title value="Submit checker: Records" />
 <main>
     {#each data as item, index}
         <Level data={item} />

@@ -23,7 +23,7 @@
     <a href="#!">Notification sender</a><br />
     <span>Submit checker:</span>
     <a href="/admin/submitChecker/levels">Levels</a>
-    <a href="#!">Records</a>
+    <a href="/admin/submitChecker/records">Records</a>
 </main>
 
 <style lang="scss">
