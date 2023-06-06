@@ -2,7 +2,6 @@
     export var enabled = false;
     import { fly } from "svelte/transition";
     import Loading from "../../Loading.svelte";
-    import { page } from "$app/stores";
     var value = "";
     var result = null;
     var pending = null;
@@ -11,6 +10,7 @@
         fetch(`${import.meta.env.VITE_API_URL}/search/${value}`).then((res) =>
             res.json().then((data) => {
                 result = data;
+                console.log(data)
             })
         );
     }
@@ -57,7 +57,7 @@
                         <a href={`/player/${item.uid}`}>
                             <section>
                                 <img
-                                    src="https://avatars.githubusercontent.com/u/42766704?v=4"
+                                    src={`https://lh3.googleusercontent.com/a/${item.googleAvatarID}w=s32-c`}
                                     alt=""
                                 />
                                 {item.name}
