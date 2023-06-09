@@ -20,7 +20,7 @@
     <button on:click={refresh}>Refresh list</button><br />
     <a href="#!">Level editor</a><br />
     <a href="#!">Record editor</a><br />
-    <a href="#!">Notification sender</a><br />
+    <a href="/admin/notification">Notification sender</a><br />
     <span>Submit checker:</span>
     <a href="/admin/submitChecker/level">Level</a>
     <a href="/admin/submitChecker/record">Record</a>

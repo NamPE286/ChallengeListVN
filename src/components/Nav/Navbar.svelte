@@ -58,6 +58,7 @@
                             }
                         )
                         .subscribe();
+                    console.log($user)
                 });
         });
     });
