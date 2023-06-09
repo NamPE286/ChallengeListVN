@@ -71,7 +71,7 @@
                         <div class="recordDetail">Mobile</div>
                     {/if}
                     <section>
-                        <a href={item.videoLink}>
+                        <a href={item.videoLink} target="_blank">
                             <svg
                                 data-testid="geist-icon"
                                 fill="none"
