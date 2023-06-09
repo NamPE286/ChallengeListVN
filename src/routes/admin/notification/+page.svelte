@@ -7,7 +7,6 @@
         type: null,
     };
     function send(){
-        console.log(sendData)
         fetch(`${import.meta.env.VITE_API_URL}/admin/notification`, {
             method: "POST",
             headers: {

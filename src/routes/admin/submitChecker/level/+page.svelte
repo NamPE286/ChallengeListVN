@@ -16,7 +16,23 @@
                 data = dat;
             });
     }
+    function sendNotification(uid, content, type){
+        fetch(`${import.meta.env.VITE_API_URL}/admin/notification`, {
+            method: "POST",
+            headers: {
+                authorization: `Bearer ${$user.session.access_token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                userUID: uid,
+                content: content,
+                type: type
+            }),
+        }).then((res) => res.json())
+        .then((dat) => console.log(dat))
+    }
     function accept(item, index) {
+        sendNotification(item.players.uid, `Your level "${item.name}" has been accepted!`, 1)
         item.accepted = true;
         delete item.players
         fetch(`${import.meta.env.VITE_API_URL}/level/${item.id}`, {
@@ -34,6 +50,7 @@
         });
     }
     function reject(item, index) {
+        sendNotification(item.players.uid, `Your level "${item.name}" has been rejected.`, 2)
         fetch(`${import.meta.env.VITE_API_URL}/level/${item.id}`, {
             method: "DELETE",
             headers: {
