@@ -1,7 +1,7 @@
 <script>
     import { page } from "$app/stores";
     import Title from "../../../components/Title.svelte";
-    import PlayerLink from "../../../components/Player/PlayerLink.svelte";
+    import Badge from "../../../components/Player/Badge.svelte";
     import { onMount } from "svelte";
     import Loading from "../../../Loading.svelte";
     var level = null;
@@ -29,8 +29,7 @@
 </svelte:head>
 <Loading bind:disabled={level} />
 {#if level}
-    <Title value={`${level.data.name} by ${level.data.players.name}`} />
-
+    <Title value={`${level.data.name}`} />
     <main class="infoWrapper">
         <div class="info">
             <iframe
@@ -55,8 +54,8 @@
     <main class="records">
         {#each level.records as item, index}
             <div class="record">
-                <PlayerLink player={item.players}
-                    >{item.players.name}</PlayerLink
+                <Badge player={item.players}
+                    ><a href={`/player/${item.players.uid}`}>{item.players.name}</a></Badge
                 >
                 <div class="recordDetail">{item.refreshRate}hz</div>
                 {#if item.isMobile}

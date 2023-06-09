@@ -3,6 +3,7 @@
     import { onMount } from "svelte";
     import Loading from "../../../Loading.svelte";
     import Level from "../../../components/List/Level.svelte";
+    import Badge from "../../../components/Player/Badge.svelte";
 
     var player = null;
     function fetchData() {
@@ -30,7 +31,9 @@
             alt=""
         />
         <div class="playerInfo">
-            <h1>{player.data.name}</h1>
+            <Badge player={player} size={16}>
+                <h1>{player.data.name}</h1>
+            </Badge>
             <span id="rating"
                 >Rating: {player.data.rating} (#{player.data.rank})</span
             >

@@ -11,9 +11,7 @@
     <div class="badge" title='Grandmaster' style={`${setTextSize()}; background-color: red;`}>
         GM
     </div>
-    <a href={`/player/${player.uid}`}>
-        <slot />
-    </a>
+    <slot />
 </div>
 
 <style lang="scss">
