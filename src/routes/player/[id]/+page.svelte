@@ -184,7 +184,7 @@
     .record {
         background-color: black;
         height: 50px;
-        width: 700px;
+        width: 800px;
         border: 1px solid var(--line);
         border-radius: 10px;
         display: flex;
