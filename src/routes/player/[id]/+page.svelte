@@ -169,11 +169,10 @@
         }
     }
     section {
-        overflow: auto;
-        white-space: nowrap;
+        overflow: visible;
         display: flex;
         align-items: center;
-        text-overflow: ellipsis;
+        z-index: 2;
         a {
             color: gray;
         }
