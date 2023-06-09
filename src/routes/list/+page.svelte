@@ -17,7 +17,6 @@
         },
         filter: {
             ascending: false,
-            userUID: "abcxyz",
             sortBy: "rating",
         },
     };
@@ -34,11 +33,11 @@
         },
         filter: {
             ascending: false,
-            userUID: "abcxyz",
             sortBy: "rating",
         },
     };
     function fetchData() {
+        console.log(option)
         fetch(
             `${import.meta.env.VITE_API_URL}/list/${encodeURIComponent(
                 JSON.stringify(option)
@@ -73,20 +72,6 @@
         <div class="filter">
             <h3>Filter</h3>
             <div class="filterOpt">
-                <span>Top range: </span>
-                <input
-                    placeholder="0"
-                    bind:value={option.range.index.start}
-                    type="number"
-                />
-                -
-                <input
-                    placeholder="10000"
-                    bind:value={option.range.index.end}
-                    type="number"
-                />
-            </div>
-            <div class="filterOpt">
                 <span>Rating range: </span>
                 <input
                     placeholder="0"
@@ -100,12 +85,19 @@
                     type="number"
                 />
             </div>
+            <div class="filterOpt">
+                <span>Sort by: </span>
+                <select name="sortBy" bind:value={option.filter.sortBy}>
+                    <option value="rating">Rating</option>
+                    <option value="timestamp">Date submitted</option>
+                </select>
+            </div>
             <div class="filterOptCheck">
                 <input
                     type="checkbox"
-                    bind:checked={option.filter.showBeatenLevels}
+                    bind:checked={option.filter.ascending}
                 />
-                <span>Show beaten levels</span>
+                <span>Sort ascending</span>
             </div>
             <div class="left">
                 <button id="blackBtn" on:click={reset}>Reset</button>
@@ -144,6 +136,13 @@
             background-color: black;
             border: 1px solid var(--line);
             width: 50px;
+            height: 20px;
+            border-radius: 5px;
+            color: white;
+        }
+        select {
+            background-color: black;
+            border: 1px solid var(--line);
             height: 20px;
             border-radius: 5px;
             color: white;

@@ -1,6 +1,6 @@
 <script>
     export var data;
-    export var mode;
+    export var mode = null;
 </script>
 
 <div class="wrapper" id={mode}>
