@@ -21,6 +21,6 @@
     <h2>Record</h2>
     <ul>
         <li>Only 100% completions are accepted.</li>
-        <li>Tools, hacks, bugs, and secret ways are banned.</li>
+        <li>Tools, hacks, fatal bugs, and secret ways are banned.</li>
     </ul>
 </main>
