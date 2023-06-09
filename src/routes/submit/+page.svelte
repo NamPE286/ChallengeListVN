@@ -20,6 +20,7 @@
             creatorUID: "",
             videoID: "",
             description: "",
+            length: null,
         },
     };
     function submit() {
@@ -57,6 +58,7 @@
                 />
                 <input
                     placeholder="FPS"
+                    type="number"
                     bind:value={submission.record.refreshRate}
                 />
                 <select name="platform" bind:value={submission.record.isMobile}>
@@ -84,6 +86,14 @@
                     bind:value={submission.level.name}
                 />
                 <input value={`by ${$user.name}`} readonly />
+                <select name="Length" bind:value={submission.level.length}>
+                    <option value={null} disabled selected>Length</option>
+                    <option value={1}>Tiny</option>
+                    <option value={2}>Small</option>
+                    <option value={3}>Medium</option>
+                    <option value={4}>Long</option>
+                    <option value={5}>XL</option>
+                </select>
                 <input
                     placeholder="Desciption"
                     bind:value={submission.level.description}
@@ -103,10 +113,40 @@
                         </div>
                     {/if}
                     {#if state == 2}
-                        <svg id='icon' class="with-icon_icon__aLCKg" data-testid="geist-icon" fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" style="color:var(--geist-foreground);width:24px;height:24px"><path d="M20 6L9 17l-5-5"/></svg>
+                        <svg
+                            id="icon"
+                            class="with-icon_icon__aLCKg"
+                            data-testid="geist-icon"
+                            fill="none"
+                            height="24"
+                            shape-rendering="geometricPrecision"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="1.5"
+                            viewBox="0 0 24 24"
+                            width="24"
+                            style="color:var(--geist-foreground);width:24px;height:24px"
+                            ><path d="M20 6L9 17l-5-5" /></svg
+                        >
                     {/if}
                     {#if state == 3}
-                        <svg id='icon' class="with-icon_icon__aLCKg" data-testid="geist-icon" fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" style="color:var(--geist-foreground);width:24px;height:24px"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+                        <svg
+                            id="icon"
+                            class="with-icon_icon__aLCKg"
+                            data-testid="geist-icon"
+                            fill="none"
+                            height="24"
+                            shape-rendering="geometricPrecision"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="1.5"
+                            viewBox="0 0 24 24"
+                            width="24"
+                            style="color:var(--geist-foreground);width:24px;height:24px"
+                            ><path d="M18 6L6 18" /><path d="M6 6l12 12" /></svg
+                        >
                     {/if}
                 </div>
             {/if}
@@ -122,7 +162,7 @@
         max-height: 35px;
         scale: 0.9;
     }
-    #icon{
+    #icon {
         margin-left: 5px;
     }
     main {
