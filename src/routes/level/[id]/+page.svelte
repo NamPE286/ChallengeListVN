@@ -46,6 +46,7 @@
                     </h2>
                 </section>
                 <p><b>Created by:</b><Badge data={level.data.players}><a href={`/player/${level.data.players.uid}`}>{level.data.players.name}</a></Badge></p>
+                <p><b>Uploaded on: </b>{(new Date(level.data.timestamp)).toLocaleString('vi-VN')}</p>
                 <p><b>ID:</b> {level.data.id}</p>
                 <p><b>Description</b></p>
                 <p>{level.data.description}</p>
