@@ -1,6 +1,6 @@
 <script>
     import Title from "../../components/Title.svelte";
-    import PlayerLink from "../../components/Player/PlayerLink.svelte";
+    import Badge from "../../components/Player/Badge.svelte";
     import { onMount } from "svelte";
     import Loading from "../../Loading.svelte";
     var playersData = [];
@@ -24,8 +24,8 @@
     {#each playersData as item, index}
         <div class="player">
             <h3 id="top">#{item.rank}</h3>
-            <PlayerLink size={10} player={item}
-                >{item.name}</PlayerLink
+            <Badge size={10} player={item}
+                >{item.name}</Badge
             >
             <h3 id="rating">{item.rating}rt</h3>
         </div>
