@@ -2,10 +2,11 @@
     import { page } from "$app/stores";
     import { onMount } from "svelte";
     import Loading from "../../../Loading.svelte";
+    import Level from "../../../components/List/Level.svelte";
 
     var player = null;
     function fetchData() {
-        player = null
+        player = null;
         fetch(`${import.meta.env.VITE_API_URL}/player/${$page.params.id}`).then(
             (res) =>
                 res.json().then((data) => {
@@ -13,7 +14,7 @@
                 })
         );
     }
-    $: $page.params.id && fetchData()
+    $: $page.params.id && fetchData();
     onMount(() => {
         fetchData();
     });
@@ -30,7 +31,9 @@
         />
         <div class="playerInfo">
             <h1>{player.data.name}</h1>
-            <span id='rating'>Rating: {player.data.rating} (#{player.data.rank})</span>
+            <span id="rating"
+                >Rating: {player.data.rating} (#{player.data.rank})</span
+            >
             <section>
                 {#if player.data.youtube}
                     <a href={player.data.youtube}>
@@ -51,51 +54,87 @@
         </div>
     </div>
     <main>
-        {#each player.records as item, index}
-            <div class="record">
-                <div class="pt">{item.levels.rating}pt</div>
-                <a href={`/level/${item.levels.id}`}><b>{item.levels.name} </b><br />by {item.levels.players.name}</a>
-                <div class="recordDetail">{item.refreshRate}hz</div>
-                {#if item.isMobile}
-                    <div class="recordDetail">Mobile</div>
-                {/if}
-                <section>
-                    <a href={item.videoLink}>
-                        <svg
-                            data-testid="geist-icon"
-                            fill="none"
-                            height="24"
-                            shape-rendering="geometricPrecision"
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="1.5"
-                            viewBox="0 0 24 24"
-                            width="24"
-                            style="color:var(--geist-foreground)"
-                            ><path
-                                d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"
-                            /><path d="M15 3h6v6" /><path
-                                d="M10 14L21 3"
-                            /></svg
-                        >
-                    </a>
-                </section>
+        <div class="records">
+            <h3>Records</h3>
+            {#each player.records as item, index}
+                <div class="record">
+                    <div class="pt">{item.levels.rating}pt</div>
+                    <a href={`/level/${item.levels.id}`}
+                        ><b>{item.levels.name} </b><br />by {item.levels.players
+                            .name}</a
+                    >
+                    <div class="recordDetail">{item.refreshRate}hz</div>
+                    {#if item.isMobile}
+                        <div class="recordDetail">Mobile</div>
+                    {/if}
+                    <section>
+                        <a href={item.videoLink}>
+                            <svg
+                                data-testid="geist-icon"
+                                fill="none"
+                                height="24"
+                                shape-rendering="geometricPrecision"
+                                stroke="currentColor"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="1.5"
+                                viewBox="0 0 24 24"
+                                width="24"
+                                style="color:var(--geist-foreground)"
+                                ><path
+                                    d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"
+                                /><path d="M15 3h6v6" /><path
+                                    d="M10 14L21 3"
+                                /></svg
+                            >
+                        </a>
+                    </section>
+                </div>
+            {/each}
+        </div>
+        <div class="levelsWrapper">
+            <div class="levels">
+                <h3>Levels</h3>
+                {#each player.levels as item, index}
+                    <Level data={item} />
+                {/each}
             </div>
-        {/each}
+        </div>
     </main>
 {/if}
 
 <style lang="scss">
-    #rating{
+    #rating {
         margin-bottom: 21px;
         margin-top: -12px;
     }
-    main {
+    h3 {
+        border-bottom: rgb(172, 172, 172) 2px solid;
+        line-height: 25px;
+        margin-right: auto;
+    }
+    main{
+        padding: 0;
+    }
+    .records {
         display: flex;
         flex-direction: column;
         gap: 10px;
         align-items: center;
+        box-sizing: border-box;
+        padding-inline: 100px;
+    }
+    .levels {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        background-color: black;
+        border-top: var(--line) 1px solid;
+        padding-inline: 100px;
+        min-height: 700px;
+        margin-top: 50px;
+        padding-top: 10px;
     }
     .header {
         width: 100%;
@@ -107,7 +146,7 @@
         display: flex;
         align-items: center;
         padding-inline: 100px;
-        margin-bottom: 30px;
+        margin-bottom: 10px;
         .avatar {
             height: 200px;
             width: 200px;
