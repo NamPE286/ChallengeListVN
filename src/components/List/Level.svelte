@@ -1,8 +1,9 @@
 <script>
     export var data;
+    export var mode;
 </script>
 
-<div class="wrapper">
+<div class="wrapper" id={mode}>
     <div class="imgWrapper">
         <a href={`/level/${data.id}`}>
             <img
@@ -24,6 +25,15 @@
 </div>
 
 <style lang="scss">
+    #compact{
+        height: 120px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        img{
+            height: 100%;
+            width: 15vh;
+        }
+    }
     .wrapper {
         position: relative;
         display: flex;

@@ -96,7 +96,7 @@
             <div class="levels">
                 <h3>Levels</h3>
                 {#each player.levels as item, index}
-                    <Level data={item} />
+                    <Level data={item} mode='compact'/>
                 {/each}
             </div>
         </div>
