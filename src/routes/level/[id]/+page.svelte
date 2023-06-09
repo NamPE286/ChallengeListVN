@@ -5,6 +5,7 @@
     import { onMount } from "svelte";
     import Loading from "../../../Loading.svelte";
     var level = null;
+    const lengthConv = ['', 'Tiny', 'Small', 'Medium', 'Long', 'XL']
     function fetchData() {
         level = null;
         fetch(`${import.meta.env.VITE_API_URL}/level/${$page.params.id}`).then(
@@ -47,7 +48,8 @@
                 </section>
                 <p><b>Created by:</b><Badge data={level.data.players}><a href={`/player/${level.data.players.uid}`}>{level.data.players.name}</a></Badge></p>
                 <p><b>Uploaded on: </b>{(new Date(level.data.timestamp)).toLocaleString('vi-VN')}</p>
-                <p><b>ID:</b> {level.data.id}</p>
+                <p><b>Length:</b> {level.data.length}</p>
+                <p><b>ID:</b> {lengthConv[level.data.length]}</p>
                 <p><b>Description</b></p>
                 <p>{level.data.description}</p>
             </div>
@@ -108,6 +110,10 @@
         padding: 10px;
         display: flex;
         gap: 20px;
+        p{
+            margin-top: 7px;
+            margin-bottom: 7px;
+        }
         iframe {
             border-radius: 10px;
             min-width: 560px;
