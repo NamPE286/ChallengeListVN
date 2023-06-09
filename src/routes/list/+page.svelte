@@ -16,7 +16,7 @@
             },
         },
         filter: {
-            showBeatenLevels: true,
+            ascending: false,
             userUID: "abcxyz",
             sortBy: "rating",
         },
@@ -33,7 +33,7 @@
             },
         },
         filter: {
-            showBeatenLevels: true,
+            ascending: false,
             userUID: "abcxyz",
             sortBy: "rating",
         },

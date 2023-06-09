@@ -41,9 +41,11 @@
             />
             <div class="detail">
                 <section class="top">
-                    <h2>#{level.data.rank}</h2>
-                    <section class="pt">{level.data.rating}pt</section>
+                    <h2>
+                        {level.data.rating}pt
+                    </h2>
                 </section>
+                <p><b>Created by:</b><Badge data={level.data.players}><a href={`/player/${level.data.players.uid}`}>{level.data.players.name}</a></Badge></p>
                 <p><b>ID:</b> {level.data.id}</p>
                 <p><b>Description</b></p>
                 <p>{level.data.description}</p>
@@ -55,7 +57,9 @@
         {#each level.records as item, index}
             <div class="record">
                 <Badge player={item.players}
-                    ><a href={`/player/${item.players.uid}`}>{item.players.name}</a></Badge
+                    ><a href={`/player/${item.players.uid}`}
+                        >{item.players.name}</a
+                    ></Badge
                 >
                 <div class="recordDetail">{item.refreshRate}hz</div>
                 {#if item.isMobile}
@@ -118,14 +122,6 @@
             align-items: center;
             border-radius: 10px;
             border: 1px solid var(--line);
-        }
-        .pt {
-            margin-left: 10px;
-            padding: 5px;
-            border-radius: 10px;
-            background-color: white;
-            color: black;
-            font-weight: bold;
         }
     }
     .records {

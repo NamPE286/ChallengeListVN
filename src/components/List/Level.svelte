@@ -11,7 +11,6 @@
                 alt=""
                 loading="lazy"
             />
-            <div class="top">#{data.rank}</div>
             <div class="top pt">{data.rating}pt</div>
         </a>
     </div>
@@ -85,7 +84,6 @@
             margin-bottom: 8px;
         }
         .pt {
-            margin-left: 40px;
             width: fit-content;
             padding-inline: 10px;
             font-weight: bold;

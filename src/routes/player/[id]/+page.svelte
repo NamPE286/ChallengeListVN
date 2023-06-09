@@ -112,7 +112,6 @@
         margin-top: -12px;
     }
     h3 {
-        border-bottom: rgb(172, 172, 172) 2px solid;
         line-height: 25px;
         margin-right: auto;
     }
