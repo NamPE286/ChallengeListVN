@@ -5,9 +5,7 @@
     import Loading from "../../Loading.svelte";
     var playersData = [];
     function fetchData() {
-        fetch(
-            `${import.meta.env.VITE_API_URL}/leaderboard`
-        ).then((res) =>
+        fetch(`${import.meta.env.VITE_API_URL}/leaderboard`).then((res) =>
             res.json().then((data) => {
                 playersData = data;
             })
@@ -15,7 +13,7 @@
     }
     onMount(() => {
         fetchData();
-    })
+    });
 </script>
 
 <Title value="Leaderboard" />
@@ -25,7 +23,7 @@
         <div class="player">
             <h3 id="top">#{item.rank}</h3>
             <Badge size={10} player={item}
-                >{item.name}</Badge
+                ><a href={`/player/${item.uid}`}>{item.name}</a></Badge
             >
             <h3 id="rating">{item.rating}rt</h3>
         </div>
@@ -56,7 +54,7 @@
         margin-right: 7px;
     }
     @media screen and (max-width: 1000px) {
-        .player{
+        .player {
             width: 100%;
         }
     }
