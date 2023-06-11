@@ -70,6 +70,7 @@
         </select><br />
         <span>Video's ID: </span> <input bind:value={level.videoID} /><br />
         <span>Rating: </span> <input bind:value={level.rating} type="number" /><br/>
+        <span>Daily level period start time: </span> <input bind:value={level.dailyStart} type="date" /><br/>
         <button on:click={updateLevel}>Update</button>
     {/if}
 </main>
