@@ -13,7 +13,7 @@
             });
     }
     function updateLevel() {
-        fetch(`${import.meta.env.VITE_API_URL}/level/${levelID}`, {
+        fetch(`${import.meta.env.VITE_API_URL}/level`, {
             method: "PUT",
             headers: {
                 authorization: `Bearer ${$user.session.access_token}`,
