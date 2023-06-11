@@ -18,8 +18,8 @@
 <Title value="Admin" />
 <main>
     <button on:click={refresh}>Refresh list</button><br />
-    <a href="#!">Level editor</a><br />
-    <a href="#!">Record editor</a><br />
+    <a href="/admin/levelEditor">Level editor</a><br />
+    <a href="/admin/recordEditor">Record editor</a><br />
     <a href="/admin/notification">Notification sender</a><br />
     <span>Submit checker:</span>
     <a href="/admin/submitChecker/level">Level</a>
