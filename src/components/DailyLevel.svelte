@@ -19,7 +19,7 @@
 </script>
 
 <div class="wrapper">
-    <h3>Daily level</h3>
+    <h3>Daily challenge</h3>
     {#if level}
         <Level data={level} mode='compact-fit' />
     {/if}
