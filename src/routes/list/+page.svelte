@@ -55,10 +55,6 @@
     });
 </script>
 
-<svelte:head>
-    <title>Main List - Challenge List VN</title>
-</svelte:head>
-
 <Title value="Level listing" />
 <Loading bind:disabled={levelsData.length} />
 {#if levelsData.length}

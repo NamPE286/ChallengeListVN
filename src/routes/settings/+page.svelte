@@ -10,12 +10,19 @@
 <Title value="Settings" />
 <main>
     {#if $user}
-        <h2>Profile</h2>
+        <div class='sectionWrapper'>
+            <h2>Basic info</h2>
+
+        </div>
         <button class="redBtn clickable" on:click={signOut}>Sign Out</button>
     {/if}
 </main>
 
 <style lang="scss">
+    .sectionWrapper{
+        border: 1px var(--line) solid;
+        border-radius: 10px;
+    }
     .redBtn {
         border: none;
         background-color: #5b0000;

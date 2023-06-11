@@ -2,6 +2,10 @@
     export var value
 </script>
 
+<svelte:head>
+    <title>{value} - Challenge List VN</title>
+</svelte:head>
+
 <div>
     <h1>{value}</h1>
 </div>
