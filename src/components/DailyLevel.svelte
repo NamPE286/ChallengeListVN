@@ -8,7 +8,11 @@
             return;
         }
         fetch(`${import.meta.env.VITE_API_URL}/level/daily`)
-            .then((res) => res.json())
+            .then((res) => {
+                if(res.ok) {
+                    return res.json()
+                }
+            })
             .then((dat) => {
                 level = dat
             });
