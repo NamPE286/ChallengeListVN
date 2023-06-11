@@ -3,28 +3,28 @@
     import { user } from "../../stores";
     import { supabase } from "../../db";
 
-    var basicInfo = null
-    $: $user && updateInfo()
-    function updateInfo(){
+    var basicInfo = null;
+    $: $user && updateInfo();
+    function updateInfo() {
         basicInfo = {
             uid: $user.uid,
             name: $user.name,
             youtube: $user.youtube,
             facebook: $user.facebook,
-            discord: $user.discord
-        }
+            discord: $user.discord,
+        };
     }
-    function basicInfoSave(){
+    function basicInfoSave() {
         fetch(`${import.meta.env.VITE_API_URL}/player`, {
             method: "PUT",
             headers: {
                 authorization: `Bearer ${$user.session.access_token}`,
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(basicInfo)
+            body: JSON.stringify(basicInfo),
         }).then((res) => {
             if (res.ok) {
-                alert('Basic info updated!')
+                alert("Basic info updated!");
             }
         });
     }
@@ -48,7 +48,9 @@
             <div class="settingSection">
                 <h2>Basic info</h2>
                 <section>
-                    <span>Username </span><input bind:value={basicInfo.name} /><br />
+                    <span>Username </span><input
+                        bind:value={basicInfo.name}
+                    /><br />
                 </section>
                 <section>
                     <span>YouTube </span><input
@@ -74,6 +76,17 @@
             </div>
         </div>
     {/if}
+    <div class="sectionWrapper">
+        <div class="settingSection">
+            <h2>Theme</h2>
+            <select name='theme'>
+                <option>Dark</option>
+            </select>
+        </div>
+        <div class="sectionFooter">
+            <button id="whiteBtn">Save</button>
+        </div>
+    </div>
 </main>
 
 <style lang="scss">
@@ -153,15 +166,27 @@
     .redBtn:hover {
         background-color: rgb(128, 0, 0);
     }
+    select{
+        width: 300px;
+        height: 40px;
+        border-radius: 10px;
+        color: white;
+        background-color: black;
+        padding-inline: 10px;
+        border: 1px var(--line) solid;
+    }
     @media screen and (min-width: 1001px) {
-        main{
+        main {
             width: 800px;
             margin-inline: auto;
         }
     }
     @media screen and (max-width: 1001px) {
-        input{
+        input {
             width: 150px;
+        }
+        select{
+            width: 100%;
         }
     }
 </style>
