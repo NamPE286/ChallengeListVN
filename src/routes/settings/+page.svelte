@@ -1,27 +1,145 @@
 <script>
     import Title from "../../components/Title.svelte";
-    import { user } from '../../stores'
+    import { user } from "../../stores";
     import { supabase } from "../../db";
+
+    var basicInfo = null
+    $: $user && updateInfo()
+    function updateInfo(){
+        basicInfo = {
+            uid: $user.uid,
+            name: $user.name,
+            youtube: $user.youtube,
+            facebook: $user.facebook,
+            discord: $user.discord
+        }
+    }
+    function basicInfoSave(){
+        fetch(`${import.meta.env.VITE_API_URL}/player`, {
+            method: "PUT",
+            headers: {
+                authorization: `Bearer ${$user.session.access_token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(basicInfo)
+        }).then((res) => {
+            if (res.ok) {
+                alert('Basic info updated!')
+            }
+        });
+    }
     async function signOut() {
-        await supabase.auth.signOut()
+        await supabase.auth.signOut();
     }
 </script>
 
 <Title value="Settings" />
 <main>
     {#if $user}
-        <div class='sectionWrapper'>
-            <h2>Basic info</h2>
-
+        <div class="sectionWrapper">
+            <div class="settingSection" id="signOut">
+                <h2>Sign Out</h2>
+                <button class="redBtn clickable" on:click={signOut}
+                    >Sign Out</button
+                >
+            </div>
         </div>
-        <button class="redBtn clickable" on:click={signOut}>Sign Out</button>
+        <div class="sectionWrapper">
+            <div class="settingSection">
+                <h2>Basic info</h2>
+                <section>
+                    <span>Username </span><input bind:value={basicInfo.name} /><br />
+                </section>
+                <section>
+                    <span>YouTube </span><input
+                        placeholder="YouTube channel's link"
+                        bind:value={basicInfo.youtube}
+                    /><br />
+                </section>
+                <section>
+                    <span>Facebook </span><input
+                        placeholder="Facebook profile's link"
+                        bind:value={basicInfo.facebook}
+                    /><br />
+                </section>
+                <section>
+                    <span>Discord </span><input
+                        placeholder="Discord tag"
+                        bind:value={basicInfo.discord}
+                    /><br />
+                </section>
+            </div>
+            <div class="sectionFooter">
+                <button id="whiteBtn" on:click={basicInfoSave}>Save</button>
+            </div>
+        </div>
     {/if}
 </main>
 
 <style lang="scss">
-    .sectionWrapper{
+    .sectionFooter {
+        background-color: #111111;
+        padding: 12px;
+        padding-inline: 20px;
+        border-radius: 0 0 10px 10px;
+        border-top: 1px var(--line) solid;
+        display: flex;
+        flex-direction: row-reverse;
+    }
+    #whiteBtn {
+        background-color: white;
+        border: 1px solid white;
+        height: 30px;
+        padding-inline: 10px;
+        border-radius: 4px;
+        transition: all 0.3s;
+        cursor: pointer;
+    }
+    #whiteBtn:hover {
+        background-color: black;
+        color: white;
+    }
+    #signOut {
+        display: flex;
+        align-items: center;
+        h2 {
+            margin: 0;
+        }
+        button {
+            margin-left: auto;
+        }
+    }
+    .sectionWrapper {
+        box-sizing: border-box;
         border: 1px var(--line) solid;
         border-radius: 10px;
+        background-color: black;
+        margin-bottom: 30px;
+    }
+    .settingSection {
+        padding-inline: 30px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+    input {
+        border: none;
+        border-left: 1px var(--line) solid;
+        background-color: black;
+        color: white;
+        height: 40px;
+        width: 200px;
+        padding-inline: 12px;
+        border-radius: 0 10px 10px 0;
+        margin-left: 20px;
+    }
+    section {
+        margin-bottom: 10px;
+        border: 1px var(--line) solid;
+        width: fit-content;
+        border-radius: 10px;
+        padding-left: 20px;
+        background-color: #111111;
+        color: rgb(170, 170, 170);
     }
     .redBtn {
         border: none;
@@ -34,5 +152,16 @@
     }
     .redBtn:hover {
         background-color: rgb(128, 0, 0);
+    }
+    @media screen and (min-width: 1001px) {
+        main{
+            width: 800px;
+            margin-inline: auto;
+        }
+    }
+    @media screen and (max-width: 1001px) {
+        input{
+            width: 150px;
+        }
     }
 </style>
