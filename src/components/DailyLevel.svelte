@@ -23,7 +23,8 @@
     {#if level}
         <Level data={level} mode='compact-fit' />
     {/if}
-    <div class='text'>Reset every 07:00 UTC+7</div>
+    <div class='text'><i>No level available</i></div>
+    <div class='text'>Reset every 00:00 UTC+7</div>
 </div>
 
 <style lang="scss">
