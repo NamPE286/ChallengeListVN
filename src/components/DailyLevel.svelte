@@ -1,24 +1,16 @@
 <script>
     import { user } from "../stores";
     import { onMount } from "svelte";
-    var data = {
-        levels: [],
-        records: [],
-    };
-    $: $user && fetchData();
+    import Level from "./List/Level.svelte";
+    var level;
     function fetchData() {
         if (!$user) {
             return;
         }
-        fetch(`${import.meta.env.VITE_API_URL}/auth/pendingSubmission`, {
-            method: "POST",
-            headers: {
-                authorization: `Bearer ${$user.session.access_token}`,
-            },
-        })
+        fetch(`${import.meta.env.VITE_API_URL}/level/daily`)
             .then((res) => res.json())
             .then((dat) => {
-                data = dat;
+                level = dat
             });
     }
     onMount(() => {
@@ -27,21 +19,14 @@
 </script>
 
 <div class="wrapper">
-    <h3>Pending Submission</h3>
-    <h4>Levels</h4>
-    {#each data.levels as item, index}
-        <a href="#!">{item.name} by {item.players.name}</a><br />
-    {/each}
-    <h4>Records</h4>
-    {#each data.records as item, index}
-        <a href="#!">{item.levels.name} by {item.levels.players.name}</a><br />
-    {/each}
+    <h3>Daily level</h3>
+    {#if level}
+        <Level data={level} mode='compact-fit' />
+    {/if}
+    <div class='text'>Reset every 07:00 UTC+7</div>
 </div>
 
 <style lang="scss">
-    h4{
-        margin-bottom: 10px;
-    }
     .wrapper {
         float: left;
         height: fit-content;
@@ -55,9 +40,9 @@
         margin-right: 30px;
         margin-bottom: 30px;
     }
-    a {
-        line-height: 20px;
-        color: rgb(192, 192, 192);
+    .text{
+        margin-top: 20px;
+        color: rgb(167, 167, 167);
     }
     @media screen and (max-width: 1000px) {
         .wrapper {

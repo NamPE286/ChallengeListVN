@@ -33,6 +33,19 @@
             width: 15vh;
         }
     }
+    #fit{
+        width: 100%;
+    }
+    #compact-fit{
+        height: 120px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        width: 100%;
+        img{
+            height: 100%;
+            width: 15vh;
+        }
+    }
     .wrapper {
         position: relative;
         display: flex;
