@@ -8,9 +8,9 @@
 </script>
 
 <div class="wrapper">
-    <div class="badge" title='Grandmaster' style={`${setTextSize()}; background-color: red;`}>
+    <!-- <div class="badge" title='Grandmaster' style={`${setTextSize()}; background-color: red;`}>
         GM
-    </div>
+    </div> -->
     <slot />
 </div>
 
