@@ -46,7 +46,7 @@
                         {level.data.rating}pt
                     </h2>
                 </section>
-                <p><b>Created by:</b><Badge data={level.data.players}><a href={`/player/${level.data.players.uid}`}>{level.data.players.name}</a></Badge></p>
+                <p><b>Created by:</b><Badge player={level.data.players}><a href={`/player/${level.data.players.uid}`}>{level.data.players.name}</a></Badge></p>
                 <p><b>Submitted on: </b>{(new Date(level.data.timestamp)).toLocaleString('vi-VN')}</p>
                 <p><b>Length:</b> {lengthConv[level.data.length]}</p>
                 <p><b>ID:</b> {level.data.id}</p>
