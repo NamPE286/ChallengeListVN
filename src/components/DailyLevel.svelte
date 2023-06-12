@@ -1,12 +1,8 @@
 <script>
-    import { user } from "../stores";
     import { onMount } from "svelte";
     import Level from "./List/Level.svelte";
     var level;
     function fetchData() {
-        if (!$user) {
-            return;
-        }
         fetch(`${import.meta.env.VITE_API_URL}/level/daily`)
             .then((res) => {
                 if(res.ok) {
