@@ -49,9 +49,12 @@
                     </a>
                 {/if}
                 {#if player.data.discord}
-                    <a href={player.data.discord}>
+                    <!-- svelte-ignore a11y-click-events-have-key-events -->
+                    <span class="clickable" on:click={() => {
+                        navigator.clipboard.writeText(player.data.discord)
+                    }}>
                         <img id="social" src="/discord.svg" alt="" />
-                    </a>
+                    </span>
                 {/if}
             </section>
         </div>
