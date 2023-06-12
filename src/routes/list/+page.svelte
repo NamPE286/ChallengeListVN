@@ -34,7 +34,7 @@
         },
         filter: {
             ascending: false,
-            sortBy: "rating",
+            sortBy: "timestamp",
         },
     };
     function fetchData() {
