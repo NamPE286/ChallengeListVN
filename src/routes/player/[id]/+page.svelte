@@ -32,7 +32,7 @@
             alt=""
         />
         <div class="playerInfo">
-            <Badge player={player} size={16}>
+            <Badge player={player.data} size={16}>
                 <h1>{player.data.name}</h1>
             </Badge>
             <span id="rating"

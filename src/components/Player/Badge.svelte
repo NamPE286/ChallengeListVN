@@ -1,6 +1,7 @@
 <script>
     export var size = 0;
     export var player;
+    console.log(player)
     function setTextSize() {
         if (size == 0) return "";
         return `font-size: ${size}px`;
@@ -8,9 +9,15 @@
 </script>
 
 <div class="wrapper">
-    <!-- <div class="badge" title='Grandmaster' style={`${setTextSize()}; background-color: red;`}>
-        GM
-    </div> -->
+    {#if player.uid == "c396bf2f-6cc5-4629-baf2-ca1ad744bbfa"}
+        <div
+            class="badge"
+            title="Developer"
+            style={`${setTextSize()}; background-image: linear-gradient( 173.1deg,  rgba(226,66,249,0.94) 10.2%, rgba(79,147,249,1) 77.3% );`}
+        >
+            DEV
+        </div>
+    {/if}
     <slot />
 </div>
 
