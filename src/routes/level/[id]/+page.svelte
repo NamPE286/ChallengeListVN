@@ -5,7 +5,7 @@
     import { onMount } from "svelte";
     import Loading from "../../../Loading.svelte";
     var level = null;
-    const lengthConv = ['', 'Tiny', 'Small', 'Medium', 'Long', 'XL']
+    const lengthConv = ['', 'Tiny', 'Short', 'Medium', 'Long', 'XL']
     function fetchData() {
         level = null;
         fetch(`${import.meta.env.VITE_API_URL}/level/${$page.params.id}`).then(

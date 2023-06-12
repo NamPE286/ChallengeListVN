@@ -63,7 +63,7 @@
         <select name="Length" bind:value={level.length}>
             <option value={null} disabled selected>Length</option>
             <option value={1}>Tiny</option>
-            <option value={2}>Small</option>
+            <option value={2}>Short</option>
             <option value={3}>Medium</option>
             <option value={4}>Long</option>
             <option value={5}>XL</option>
