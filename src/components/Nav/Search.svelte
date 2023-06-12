@@ -18,8 +18,12 @@
         clearTimeout(pending);
         pending = setTimeout(fetchData, 800);
     }
+    function onKeyDown(e) {
+        if(e.key == 'Escape') enabled = false
+    }
 </script>
 
+<svelte:window on:keydown={onKeyDown} />
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
     class="backdrop"
@@ -28,7 +32,13 @@
     }}
 />
 <div class="wrapper" transition:fly={{ y: -20, duration: 300 }}>
-    <input placeholder="Type to search" bind:value on:input={typingAction} />
+    <!-- svelte-ignore a11y-autofocus -->
+    <input
+        placeholder="Type to search"
+        bind:value
+        on:input={typingAction}
+        autofocus
+    />
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div
         on:click={() => {
