@@ -24,6 +24,10 @@
 
 <Loading bind:disabled={player} />
 
+<svelte:head>
+    <title>{player ? player.data.name : 'Player'}'s profile - Challenge List VN</title>
+</svelte:head>
+
 {#if player}
     <div class="header">
         <img
@@ -40,21 +44,24 @@
             >
             <section>
                 {#if player.data.youtube}
-                    <a href={player.data.youtube} target='_blank'>
+                    <a href={player.data.youtube} target="_blank">
                         <img id="social" src="/youtube.svg" alt="" />
                     </a>
                 {/if}
                 {#if player.data.facebook}
-                    <a href={player.data.facebook} target='_blank'>
+                    <a href={player.data.facebook} target="_blank">
                         <img id="social" src="/facebook.svg" alt="" />
                     </a>
                 {/if}
                 {#if player.data.discord}
                     <!-- svelte-ignore a11y-click-events-have-key-events -->
-                    <span class="clickable" on:click={() => {
-                        navigator.clipboard.writeText(player.data.discord)
-                        toast('Copied Discord tag to clipboard!')
-                    }}>
+                    <span
+                        class="clickable"
+                        on:click={() => {
+                            navigator.clipboard.writeText(player.data.discord);
+                            toast("Copied Discord tag to clipboard!");
+                        }}
+                    >
                         <img id="social" src="/discord.svg" alt="" />
                     </span>
                 {/if}
@@ -104,7 +111,7 @@
             <div class="levels">
                 <h3>Levels</h3>
                 {#each player.levels as item, index}
-                    <Level data={item} mode='compact'/>
+                    <Level data={item} mode="compact" />
                 {/each}
             </div>
         </div>
@@ -120,7 +127,7 @@
         line-height: 25px;
         margin-right: auto;
     }
-    main{
+    main {
         padding: 0;
     }
     .records {
