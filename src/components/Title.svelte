@@ -1,9 +1,10 @@
 <script>
     export var value
+    export var alt = ''
 </script>
 
 <svelte:head>
-    <title>{value} - Challenge List VN</title>
+    <title>{alt ? alt : value} - Challenge List VN</title>
 </svelte:head>
 
 <div>
