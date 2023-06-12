@@ -85,7 +85,7 @@
         </div>
         <div class="sectionFooter">
             <button id="whiteBtn" on:click={() => {
-                toast('hello')
+                toast('Theme configuration saved!')
             }}>Save</button>
         </div>
     </div>
