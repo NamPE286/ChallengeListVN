@@ -60,8 +60,13 @@
                 </p>
                 <p><b>Length:</b> {lengthConv[level.data.length]}</p>
                 <p><b>ID:</b> {level.data.id}</p>
-                <p><b>Description</b></p>
-                <p>{level.data.description}</p>
+                <p><b>Description: </b></p>
+                {#if !level.data.description}
+                    <p><i>(No description provided)</i></p>
+                {/if}
+                {#if level.data.description}
+                    <p>{level.data.description}</p>
+                {/if}
             </div>
         </div>
     </main>
