@@ -5,12 +5,12 @@
     function fetchData() {
         fetch(`${import.meta.env.VITE_API_URL}/level/daily`)
             .then((res) => {
-                if(res.ok) {
-                    return res.json()
+                if (res.ok) {
+                    return res.json();
                 }
             })
             .then((dat) => {
-                level = dat
+                level = dat;
             });
     }
     onMount(() => {
@@ -21,10 +21,12 @@
 <div class="wrapper">
     <h3>Daily challenge</h3>
     {#if level}
-        <Level data={level} mode='compact-fit' />
+        <Level data={level} mode="compact-fit" />
     {/if}
-    <div class='text'><i>No level available</i></div>
-    <div class='text'>Reset every 07:00 UTC+7</div>
+    {#if !level}
+        <div class="text"><i>No level available</i></div>
+    {/if}
+    <div class="text">Reset every 07:00 UTC+7</div>
 </div>
 
 <style lang="scss">
@@ -41,7 +43,7 @@
         margin-right: 30px;
         margin-bottom: 30px;
     }
-    .text{
+    .text {
         margin-top: 20px;
         color: rgb(167, 167, 167);
     }
