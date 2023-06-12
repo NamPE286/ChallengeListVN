@@ -121,7 +121,7 @@
                 >
             {/if}
             {#if showAllRecords}
-                {#each player.records.slice(6, player.records.length) as item, index}
+                {#each player.records.slice(5, player.records.length) as item, index}
                     <div class="record">
                         <div class="pt">{item.levels.rating}pt</div>
                         <a href={`/level/${item.levels.id}`}
