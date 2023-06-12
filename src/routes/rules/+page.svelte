@@ -33,9 +33,9 @@
             <li><Badge player={{uid: null, rating: 2000}}>Candidate Master >= 2000 rating</Badge></li>
             <li><Badge player={{uid: null, rating: 1500}}>Expert >= 1500 rating</Badge></li>
             <li><Badge player={{uid: null, rating: 1000}}>S >= 1000 rating</Badge></li>
-            <li><Badge player={{uid: null, rating: 800}}>Grandmaster >= 800 rating</Badge></li>
-            <li><Badge player={{uid: null, rating: 600}}>Grandmaster >= 600 rating</Badge></li>
-            <li><Badge player={{uid: null, rating: 400}}>Grandmaster >= 400 rating</Badge></li>
+            <li><Badge player={{uid: null, rating: 800}}>A >= 800 rating</Badge></li>
+            <li><Badge player={{uid: null, rating: 600}}>B >= 600 rating</Badge></li>
+            <li><Badge player={{uid: null, rating: 400}}>C >= 400 rating</Badge></li>
         </ul>
     </ul>
 </main>
