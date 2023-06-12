@@ -39,12 +39,12 @@
             >
             <section>
                 {#if player.data.youtube}
-                    <a href={player.data.youtube}>
+                    <a href={player.data.youtube} target='_blank'>
                         <img id="social" src="/youtube.svg" alt="" />
                     </a>
                 {/if}
                 {#if player.data.facebook}
-                    <a href={player.data.facebook}>
+                    <a href={player.data.facebook} target='_blank'>
                         <img id="social" src="/facebook.svg" alt="" />
                     </a>
                 {/if}
