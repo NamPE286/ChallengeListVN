@@ -5,7 +5,7 @@
     import { onMount } from "svelte";
     import Loading from "../../../Loading.svelte";
     var level = null;
-    const lengthConv = ['', 'Tiny', 'Short', 'Medium', 'Long', 'XL']
+    const lengthConv = ["", "Tiny", "Short", "Medium", "Long", "XL"];
     function fetchData() {
         level = null;
         fetch(`${import.meta.env.VITE_API_URL}/level/${$page.params.id}`).then(
@@ -46,8 +46,18 @@
                         {level.data.rating}pt
                     </h2>
                 </section>
-                <p><b>Created by:</b><Badge player={level.data.players}><a href={`/player/${level.data.players.uid}`}>{level.data.players.name}</a></Badge></p>
-                <p><b>Submitted on: </b>{(new Date(level.data.timestamp)).toLocaleString('vi-VN')}</p>
+                <p>
+                    <b>Created by:</b><Badge player={level.data.players}
+                        ><a href={`/player/${level.data.players.uid}`}
+                            >{level.data.players.name}</a
+                        ></Badge
+                    >
+                </p>
+                <p>
+                    <b>Submitted on: </b>{new Date(
+                        level.data.timestamp
+                    ).toLocaleString("vi-VN")}
+                </p>
                 <p><b>Length:</b> {lengthConv[level.data.length]}</p>
                 <p><b>ID:</b> {level.data.id}</p>
                 <p><b>Description</b></p>
@@ -57,6 +67,9 @@
     </main>
 
     <main class="records">
+        {#if !level.records.length}
+            <p>No one has beaten this level</p>
+        {/if}
         {#each level.records as item, index}
             <div class="record">
                 <Badge player={item.players}
@@ -110,7 +123,7 @@
         padding: 10px;
         display: flex;
         gap: 20px;
-        p{
+        p {
             margin-top: 7px;
             margin-bottom: 7px;
         }

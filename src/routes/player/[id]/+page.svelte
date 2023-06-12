@@ -25,7 +25,9 @@
 <Loading bind:disabled={player} />
 
 <svelte:head>
-    <title>{player ? player.data.name : 'Player'}'s profile - Challenge List VN</title>
+    <title
+        >{player ? player.data.name : "Player"}'s profile - Challenge List VN</title
+    >
 </svelte:head>
 
 {#if player}
@@ -71,6 +73,9 @@
     <main>
         <div class="records">
             <h3>Records</h3>
+            {#if !player.records.length}
+                <p>This player hasn't beaten any level</p>
+            {/if}
             {#each player.records as item, index}
                 <div class="record">
                     <div class="pt">{item.levels.rating}pt</div>
@@ -110,6 +115,9 @@
         <div class="levelsWrapper">
             <div class="levels">
                 <h3>Levels</h3>
+                {#if !player.levels.length}
+                    <p>This player hasn't created any level</p>
+                {/if}
                 {#each player.levels as item, index}
                     <Level data={item} mode="compact" />
                 {/each}
