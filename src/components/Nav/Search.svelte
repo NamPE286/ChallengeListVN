@@ -2,6 +2,7 @@
     export var enabled = false;
     import { fly } from "svelte/transition";
     import Loading from "../../Loading.svelte";
+    import Badge from "../Player/Badge.svelte";
     var value = "";
     var result = null;
     var pending = null;
@@ -29,9 +30,11 @@
 <div class="wrapper" transition:fly={{ y: -20, duration: 300 }}>
     <input placeholder="Type to search" bind:value on:input={typingAction} />
     <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div on:click={() => {
-        enabled = false
-    }}>
+    <div
+        on:click={() => {
+            enabled = false;
+        }}
+    >
         {#if value}
             {#if !result}
                 <div class="result">
@@ -59,7 +62,9 @@
                                     src={`https://lh3.googleusercontent.com/a/${item.googleAvatarID}=s32-c`}
                                     alt=""
                                 />
-                                {item.name}
+                                <Badge player={item}>
+                                    {item.name}
+                                </Badge>
                             </section>
                         </a>
                     {/each}
