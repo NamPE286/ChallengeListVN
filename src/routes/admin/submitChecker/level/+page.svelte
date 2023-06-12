@@ -28,8 +28,7 @@
                 content: content,
                 type: type
             }),
-        }).then((res) => res.json())
-        .then((dat) => console.log(dat))
+        })
     }
     function accept(item, index) {
         sendNotification(item.players.uid, `Your level "${item.name}" has been accepted!`, 1)

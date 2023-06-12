@@ -115,5 +115,8 @@
         #compact-fit{
             flex-direction: row;
         }
+        #compact{
+            flex-direction: row;
+        }
     }
 </style>

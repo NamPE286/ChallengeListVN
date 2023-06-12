@@ -58,7 +58,6 @@
                             }
                         )
                         .subscribe();
-                    console.log($user)
                 });
         });
     });

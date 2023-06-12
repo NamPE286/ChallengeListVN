@@ -13,7 +13,6 @@
             .then((res) => res.json())
             .then((dat) => {
                 data = dat;
-                console.log(dat);
             });
     }
     function sendNotification(uid, content, type) {
@@ -29,8 +28,6 @@
                 type: type,
             }),
         })
-            .then((res) => res.json())
-            .then((dat) => console.log(dat));
     }
     function accept(item, index) {
         sendNotification(

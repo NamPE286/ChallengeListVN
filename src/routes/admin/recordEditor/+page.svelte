@@ -9,7 +9,6 @@
             .then((res) => res.json())
             .then((data) => {
                 record = data;
-                console.log(record);
             });
     }
     function updateLevel() {

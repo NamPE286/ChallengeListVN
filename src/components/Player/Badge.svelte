@@ -1,7 +1,6 @@
 <script>
     export var size = 0;
     export var player;
-    console.log(player)
     function setTextSize() {
         if (size == 0) return "";
         return `font-size: ${size}px`;
