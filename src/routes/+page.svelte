@@ -5,11 +5,10 @@
     import DailyLevel from "../components/DailyLevel.svelte";
 </script>
 
+<Title value={$user ? `Welcome, ${$user.name}`: `Welcome`}/>
 <svelte:head>
     <title>Challenge List VN</title>
 </svelte:head>
-
-<Title value={$user ? `Welcome, ${$user.name}`: `Welcome`}/>
 <main>
     <iframe src="https://e.widgetbot.io/channels/725734982638895104/807166886390792252" height="400" width="700" title=''></iframe>
     <DailyLevel/>
