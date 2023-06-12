@@ -112,5 +112,8 @@
                 height: 55vw;
             }
         }
+        #compact-fit{
+            flex-direction: row;
+        }
     }
 </style>
