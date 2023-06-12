@@ -3,12 +3,13 @@
     import Level from "../../components/List/Level.svelte";
     import Loading from "../../Loading.svelte";
     import { onMount } from "svelte";
+    var loaded = false;
     var levelsData = [];
     const defaultOption = {
         range: {
             index: {
                 start: 0,
-                end: 300,
+                end: 30,
             },
             rating: {
                 start: 0,
@@ -24,7 +25,7 @@
         range: {
             index: {
                 start: 0,
-                end: 300,
+                end: 30,
             },
             rating: {
                 start: 0,
@@ -37,6 +38,10 @@
         },
     };
     function fetchData() {
+        option.range.index = {
+            start: 0,
+            end: 30,
+        };
         fetch(
             `${import.meta.env.VITE_API_URL}/list/${encodeURIComponent(
                 JSON.stringify(option)
@@ -44,6 +49,22 @@
         ).then((res) =>
             res.json().then((data) => {
                 levelsData = data;
+                loaded = true;
+            })
+        );
+    }
+    function fetchDataLazy() {
+        loaded = false;
+        option.range.index.start += 31;
+        option.range.index.end += 30;
+        fetch(
+            `${import.meta.env.VITE_API_URL}/list/${encodeURIComponent(
+                JSON.stringify(option)
+            )}`
+        ).then((res) =>
+            res.json().then((data) => {
+                levelsData = levelsData.concat(data);
+                loaded = true;
             })
         );
     }
@@ -52,6 +73,15 @@
     }
     onMount(() => {
         fetchData();
+        window.onscroll = function (ev) {
+            if (
+                window.innerHeight + window.pageYOffset >=
+                    document.body.offsetHeight - 1200 &&
+                loaded
+            ) {
+                fetchDataLazy();
+            }
+        };
     });
 </script>
 
@@ -88,10 +118,7 @@
                 </select>
             </div>
             <div class="filterOptCheck">
-                <input
-                    type="checkbox"
-                    bind:checked={option.filter.ascending}
-                />
+                <input type="checkbox" bind:checked={option.filter.ascending} />
                 <span>Sort ascending</span>
             </div>
             <div class="left">
