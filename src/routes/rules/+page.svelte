@@ -8,7 +8,7 @@
     <h2>General</h2>
     <ul>
         <li>If any level or record violate any rule, it will be deleted or rejected.</li>
-        <li>If a player violate too many rules in a short time, that player will be banned permanently or until any decision by staffs.</li>    
+        <li>If a player violate too many rules in a short time, that player will be banned until any decision by staffs.</li>    
     </ul>
     <h2>Levels</h2>
     <ul>
@@ -18,7 +18,7 @@
         <li>Levels must have decently good gameplay. This is determine by staff's opinion.</li>
         <li>Levels must be longer than 10 seconds.</li>
     </ul>
-    <h2>Record</h2>
+    <h2>Records</h2>
     <ul>
         <li>Only 100% completions are accepted.</li>
         <li>Tools, hacks, fatal bugs, and secret ways are banned.</li>
