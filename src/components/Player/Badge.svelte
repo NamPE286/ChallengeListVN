@@ -17,6 +17,71 @@
             DEV
         </div>
     {/if}
+    {#if player.rating >= 3000}
+        <div
+            class="badge"
+            title="Grandmaster"
+            style={`${setTextSize()}; background-color: red;`}
+        >
+            GM
+        </div>
+    {:else if player.rating >= 2500}
+        <div
+            class="badge"
+            title="Master"
+            style={`${setTextSize()}; background-color: blue;`}
+        >
+            M
+        </div>
+    {:else if player.rating >= 2000}
+        <div
+            class="badge"
+            title="Candidate Master"
+            style={`${setTextSize()}; background-color: darkorange;`}
+        >
+            CM
+        </div>
+    {:else if player.rating >= 1500}
+        <div
+            class="badge"
+            title="Expert"
+            style={`${setTextSize()}; background-color: purple;`}
+        >
+            EX
+        </div>
+    {:else if player.rating >= 1000}
+        <div
+            class="badge"
+            title="S"
+            style={`${setTextSize()}; background-color: gold;`}
+        >
+            S
+        </div>
+    {:else if player.rating >= 800}
+        <div
+            class="badge"
+            title="A"
+            style={`${setTextSize()}; background-color: green;`}
+        >
+            A
+        </div>
+    {:else if player.rating >= 600}
+        <div
+            class="badge"
+            title="B"
+            style={`${setTextSize()}; background-color: darkblue;`}
+        >
+            B
+        </div>
+    {:else if player.rating >= 400}
+        <div
+            class="badge"
+            title="C"
+            style={`${setTextSize()}; background-color: gray;`}
+        >
+            C
+        </div>
+    {/if}
     <slot />
 </div>
 
