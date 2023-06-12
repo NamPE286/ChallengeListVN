@@ -2,7 +2,7 @@
     import Title from "../../components/Title.svelte";
     import { user } from "../../stores";
     import { supabase } from "../../db";
-
+    import { toast } from '../../toast'
     var basicInfo = null;
     $: $user && updateInfo();
     function updateInfo() {
@@ -24,7 +24,7 @@
             body: JSON.stringify(basicInfo),
         }).then((res) => {
             if (res.ok) {
-                alert("Basic info updated!");
+                toast('Basic info updated!');
             }
         });
     }
@@ -79,12 +79,14 @@
     <div class="sectionWrapper">
         <div class="settingSection">
             <h2>Theme</h2>
-            <select name='theme'>
+            <select name="theme">
                 <option>Dark</option>
             </select>
         </div>
         <div class="sectionFooter">
-            <button id="whiteBtn">Save</button>
+            <button id="whiteBtn" on:click={() => {
+                toast('hello')
+            }}>Save</button>
         </div>
     </div>
 </main>
@@ -166,7 +168,7 @@
     .redBtn:hover {
         background-color: rgb(128, 0, 0);
     }
-    select{
+    select {
         width: 300px;
         height: 40px;
         border-radius: 10px;
@@ -185,7 +187,7 @@
         input {
             width: 150px;
         }
-        select{
+        select {
             width: 100%;
         }
     }

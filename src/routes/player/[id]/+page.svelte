@@ -4,6 +4,7 @@
     import Loading from "../../../Loading.svelte";
     import Level from "../../../components/List/Level.svelte";
     import Badge from "../../../components/Player/Badge.svelte";
+    import { toast } from "../../../toast";
 
     var player = null;
     function fetchData() {
@@ -52,6 +53,7 @@
                     <!-- svelte-ignore a11y-click-events-have-key-events -->
                     <span class="clickable" on:click={() => {
                         navigator.clipboard.writeText(player.data.discord)
+                        toast('Copied Discord tag to clipboard!')
                     }}>
                         <img id="social" src="/discord.svg" alt="" />
                     </span>
