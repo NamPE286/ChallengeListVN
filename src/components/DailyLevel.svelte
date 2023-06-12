@@ -3,7 +3,7 @@
     import Level from "./List/Level.svelte";
     var level;
     function fetchData() {
-        fetch(`${import.meta.env.VITE_API_URL}/level/daily`)
+        fetch(`${import.meta.env.VITE_API_URL}/dailyLevel`)
             .then((res) => {
                 if (res.ok) {
                     return res.json();
