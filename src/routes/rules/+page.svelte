@@ -1,5 +1,6 @@
 <script>
     import Title from "../../components/Title.svelte";
+    import Badge from "../../components/Player/Badge.svelte";
 </script>
 
 <Title value='Rules' />
@@ -22,5 +23,19 @@
     <ul>
         <li>Only 100% completions are accepted.</li>
         <li>Tools, hacks, fatal bugs, and secret ways are banned.</li>
+    </ul>
+    <h2>Rating</h2>
+    <ul>
+        <li>Rating distribution:</li>
+        <ul>
+            <li><Badge player={{uid: null, rating: 3000}}>Grandmaster >= 3000 rating</Badge></li>
+            <li><Badge player={{uid: null, rating: 2500}}>Master >= 2500 rating</Badge></li>
+            <li><Badge player={{uid: null, rating: 2000}}>Candidate Master >= 2000 rating</Badge></li>
+            <li><Badge player={{uid: null, rating: 1500}}>Expert >= 1500 rating</Badge></li>
+            <li><Badge player={{uid: null, rating: 1000}}>S >= 1000 rating</Badge></li>
+            <li><Badge player={{uid: null, rating: 800}}>Grandmaster >= 800 rating</Badge></li>
+            <li><Badge player={{uid: null, rating: 600}}>Grandmaster >= 600 rating</Badge></li>
+            <li><Badge player={{uid: null, rating: 400}}>Grandmaster >= 400 rating</Badge></li>
+        </ul>
     </ul>
 </main>
