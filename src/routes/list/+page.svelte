@@ -56,7 +56,7 @@
     function fetchDataLazy() {
         loaded = false;
         option.range.index.start += 31;
-        option.range.index.end += 30;
+        option.range.index.end += 31;
         fetch(
             `${import.meta.env.VITE_API_URL}/list/${encodeURIComponent(
                 JSON.stringify(option)

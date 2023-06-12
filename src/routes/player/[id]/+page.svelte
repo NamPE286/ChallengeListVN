@@ -5,8 +5,8 @@
     import Level from "../../../components/List/Level.svelte";
     import Badge from "../../../components/Player/Badge.svelte";
     import { toast } from "../../../toast";
-
     var player = null;
+    var showAllRecords = false;
     function fetchData() {
         player = null;
         fetch(`${import.meta.env.VITE_API_URL}/player/${$page.params.id}`).then(
@@ -72,11 +72,11 @@
     </div>
     <main>
         <div class="records">
-            <h3>Records</h3>
+            <h3>Best play</h3>
             {#if !player.records.length}
                 <p>This player hasn't beaten any level</p>
             {/if}
-            {#each player.records as item, index}
+            {#each player.records.slice(0, 5) as item, index}
                 <div class="record">
                     <div class="pt">{item.levels.rating}pt</div>
                     <a href={`/level/${item.levels.id}`}
@@ -111,6 +111,52 @@
                     </section>
                 </div>
             {/each}
+            {#if !showAllRecords && player.records.length > 5}
+                <button
+                    class="record clickable"
+                    id="showMoreBtn"
+                    on:click={() => {
+                        showAllRecords = true;
+                    }}>Show more</button
+                >
+            {/if}
+            {#if showAllRecords}
+                {#each player.records.slice(6, player.records.length) as item, index}
+                    <div class="record">
+                        <div class="pt">{item.levels.rating}pt</div>
+                        <a href={`/level/${item.levels.id}`}
+                            ><b>{item.levels.name} </b><br />by {item.levels
+                                .players.name}</a
+                        >
+                        <div class="recordDetail">{item.refreshRate}hz</div>
+                        {#if item.isMobile}
+                            <div class="recordDetail">Mobile</div>
+                        {/if}
+                        <section>
+                            <a href={item.videoLink} target="_blank">
+                                <svg
+                                    data-testid="geist-icon"
+                                    fill="none"
+                                    height="24"
+                                    shape-rendering="geometricPrecision"
+                                    stroke="currentColor"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="1.5"
+                                    viewBox="0 0 24 24"
+                                    width="24"
+                                    style="color:var(--geist-foreground)"
+                                    ><path
+                                        d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"
+                                    /><path d="M15 3h6v6" /><path
+                                        d="M10 14L21 3"
+                                    /></svg
+                                >
+                            </a>
+                        </section>
+                    </div>
+                {/each}
+            {/if}
         </div>
         <div class="levelsWrapper">
             <div class="levels">
@@ -127,6 +173,11 @@
 {/if}
 
 <style lang="scss">
+    #showMoreBtn {
+        color: white;
+        display: flex;
+        justify-content: center;
+    }
     #rating {
         margin-bottom: 21px;
         margin-top: -12px;
@@ -251,10 +302,10 @@
                 margin-right: 20px;
             }
         }
-        .levels{
+        .levels {
             padding-inline: 30px;
         }
-        .records{
+        .records {
             padding-inline: 30px;
         }
         .record {
