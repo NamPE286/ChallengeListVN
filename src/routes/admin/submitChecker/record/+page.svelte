@@ -58,13 +58,12 @@
             `Your record of level "${item.levels.name}" by ${item.levels.players.name} has been rejected.`,
             2
         );
-        fetch(`${import.meta.env.VITE_API_URL}/record`, {
+        fetch(`${import.meta.env.VITE_API_URL}/record/${item.levels.id}/${item.players.uid}`, {
             method: "DELETE",
             headers: {
                 authorization: `Bearer ${$user.session.access_token}`,
                 "Content-Type": "application/json",
-            },
-            body: JSON.stringify(item),
+            }
         }).then((res) => {
             if (res.ok) {
                 data.splice(index, 1);
