@@ -251,6 +251,12 @@
                 margin-right: 20px;
             }
         }
+        .levels{
+            padding-inline: 30px;
+        }
+        .records{
+            padding-inline: 30px;
+        }
         .record {
             width: 100%;
         }
