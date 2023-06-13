@@ -42,7 +42,6 @@
                 return
             }
         }
-        console.log(submission[type])
         fetch(`${import.meta.env.VITE_API_URL}/submit/${type}`, {
             method: "POST",
             headers: {
@@ -51,7 +50,6 @@
             },
             body: JSON.stringify(submission[type]),
         }).then((res) => {
-            console.log(res)
             if (res.ok) state = 2;
             else if(res.status == 404){
                 state = 3
