@@ -61,6 +61,10 @@
                 state = 3
                 toast('This level doesn\'t accept new record.')
             }
+            else if(res.status == 409){
+                state = 3
+                toast('Record already exist.')
+            }
             else {
                 state = 3;
                 toast('An error occured.')
