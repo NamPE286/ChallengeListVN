@@ -23,7 +23,9 @@
     <a href="/admin/notification">Notification sender</a><br />
     <span>Submit checker:</span>
     <a href="/admin/submitChecker/level">Level</a>
-    <a href="/admin/submitChecker/record">Record</a>
+    <a href="/admin/submitChecker/record">Record</a><br>
+    <span>Access token: </span>
+    <input value={$user.session.access_token} readonly>
 </main>
 
 <style lang="scss">
