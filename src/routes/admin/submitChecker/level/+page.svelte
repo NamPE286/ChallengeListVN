@@ -34,7 +34,7 @@
         sendNotification(item.players.uid, `Your level "${item.name}" has been accepted!`, 1)
         item.accepted = true;
         delete item.players
-        fetch(`${import.meta.env.VITE_API_URL}/level/${item.id}`, {
+        fetch(`${import.meta.env.VITE_API_URL}/level`, {
             method: "PUT",
             headers: {
                 authorization: `Bearer ${$user.session.access_token}`,
