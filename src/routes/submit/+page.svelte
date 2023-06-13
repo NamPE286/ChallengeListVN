@@ -10,17 +10,17 @@
         record: {
             userUID: null,
             levelID: null,
-            videoLink: "",
+            videoLink: null,
             refreshRate: null,
-            comment: "",
+            comment: null,
             isMobile: null,
         },
         level: {
             id: null,
-            name: "",
-            creatorUID: "",
-            videoID: "",
-            description: "",
+            name: null,
+            creatorUID: null,
+            videoID: null,
+            description: null,
             length: null,
         },
     };
@@ -34,14 +34,15 @@
         state = 1;
         submission.record.userUID = $user.uid;
         submission.level.creatorUID = $user.uid;
-        submission.level.videoID = youtube_parser(submission.level.videoID)
+        if(type == 'level') submission.level.videoID = youtube_parser(submission.level.videoID)
         for(const i in submission[type]){
-            if(!submission[type][i]){
+            if(submission[type][i] === null){
                 state = 3
                 toast('Please fill in all the fields.')
                 return
             }
         }
+        console.log(submission[type])
         fetch(`${import.meta.env.VITE_API_URL}/submit/${type}`, {
             method: "POST",
             headers: {
@@ -50,7 +51,16 @@
             },
             body: JSON.stringify(submission[type]),
         }).then((res) => {
+            console.log(res)
             if (res.ok) state = 2;
+            else if(res.status == 404){
+                state = 3
+                toast("Level doesn't exist.")
+            }
+            else if (res.status == 406){
+                state = 3
+                toast('This level doesn\'t accept new record.')
+            }
             else {
                 state = 3;
                 toast('An error occured.')
