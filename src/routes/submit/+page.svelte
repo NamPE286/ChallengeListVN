@@ -2,6 +2,7 @@
     import Title from "../../components/Title.svelte";
     import PendingSubmission from "../../components/PendingSubmission.svelte";
     import { user } from "../../stores";
+    import { toast } from "../../toast";
     import Loading from "../../Loading.svelte";
     var state = 0;
     var type = "";
@@ -23,10 +24,24 @@
             length: null,
         },
     };
+    function youtube_parser(url) {
+        var regExp =
+            /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+        var match = url.match(regExp);
+        return match && match[7].length == 11 ? match[7] : false;
+    }
     function submit() {
         state = 1;
         submission.record.userUID = $user.uid;
         submission.level.creatorUID = $user.uid;
+        submission.level.videoID = youtube_parser(submission.level.videoID)
+        for(const i in submission[type]){
+            if(!submission[type][i]){
+                state = 3
+                toast('Please fill in all the fields.')
+                return
+            }
+        }
         fetch(`${import.meta.env.VITE_API_URL}/submit/${type}`, {
             method: "POST",
             headers: {
@@ -36,7 +51,10 @@
             body: JSON.stringify(submission[type]),
         }).then((res) => {
             if (res.ok) state = 2;
-            else state = 3;
+            else {
+                state = 3;
+                toast('An error occured.')
+            }
         });
     }
 </script>
@@ -95,11 +113,11 @@
                     <option value={5}>XL</option>
                 </select>
                 <input
-                    placeholder="Desciption"
+                    placeholder="Description"
                     bind:value={submission.level.description}
                 />
                 <input
-                    placeholder="Video's ID (youtube.com/watch?v=<VIDEO's ID HERE>)"
+                    placeholder="Video's link"
                     bind:value={submission.level.videoID}
                 />
             {/if}
