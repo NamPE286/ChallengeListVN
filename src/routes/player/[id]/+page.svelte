@@ -61,7 +61,7 @@
                         class="clickable"
                         on:click={() => {
                             navigator.clipboard.writeText(player.data.discord);
-                            toast("Copied Discord tag to clipboard!");
+                            toast("Copied Discord username to clipboard!");
                         }}
                     >
                         <img id="social" src="/discord.svg" alt="" />
