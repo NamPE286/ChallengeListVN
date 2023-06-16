@@ -6,6 +6,7 @@
 <Title value='Rules' />
 
 <main>
+    <p><i>Effective since 17/6/2023</i></p>
     <h2>General</h2>
     <ul>
         <li>If any level or record violate any rule, it will be deleted or rejected.</li>
@@ -16,8 +17,12 @@
         <li>Levels must be possible to beat and verified legitimately.</li>
         <li>Levels must not have any secret way or fatal bug.</li>
         <li>If any fatal bug is found, level must be updated in one week.</li>
-        <li>Levels must have decently good gameplay. This is determine by staff's opinion.</li>
+        <li>Any level with disgusting gameplay (wave spam, 10km straight fly, ...) is not accepted. This is determine by staff's opinion.</li>
         <li>Levels must be longer than 10 seconds.</li>
+        <li>Levels must have difficulty of "Insane" or higher.</li>
+        <li>If any accepted level is deleted from GD server, that level will be unrated.</li>
+        <li>If accepted level video is deleted, it will be replaced by player's record. If no replacement is avaliable, that level will be unrated.</li>
+        <li>Unrated level cannot accept new record.</li>
     </ul>
     <h2>Records</h2>
     <ul>
