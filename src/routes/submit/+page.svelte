@@ -34,13 +34,15 @@
         state = 1;
         submission.record.userUID = $user.uid;
         submission.level.creatorUID = $user.uid;
-        if(type == 'level') submission.level.videoID = youtube_parser(submission.level.videoID)
         for(const i in submission[type]){
             if(submission[type][i] === null){
                 state = 3
                 toast('Please fill in all the fields.')
                 return
             }
+        }
+        if(type == 'level') {
+            submission.level.videoID = youtube_parser(submission.level.videoID)
         }
         fetch(`${import.meta.env.VITE_API_URL}/submit/${type}`, {
             method: "POST",
