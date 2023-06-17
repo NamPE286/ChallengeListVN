@@ -28,6 +28,8 @@
     <ul>
         <li>Only 100% completions are accepted.</li>
         <li>Tools, hacks, fatal bugs, and secret ways are banned.</li>
+        <li>Video must have unlisted access or above. Video posted in GDVN or TGGD facebook group is acceptable.</li>
+        <li>Video must have decent quality. Recommended 360p and above.</li>
     </ul>
     <h2>Rating</h2>
     <ul>
