@@ -40,7 +40,7 @@
         autofocus
     />
     <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div
+    <div class="resultWrapper"
         on:click={() => {
             enabled = false;
         }}
@@ -85,6 +85,12 @@
 </div>
 
 <style lang="scss">
+    .resultWrapper{
+        max-height: 70vh;
+        width: calc(100% + 10px);
+        overflow-y: scroll;
+        border-radius: 10px;
+    }
     .backdrop {
         position: fixed;
         margin-top: -135px;
