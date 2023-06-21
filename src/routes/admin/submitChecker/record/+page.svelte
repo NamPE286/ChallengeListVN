@@ -88,7 +88,8 @@
                 </a>
                 <br />
                 Player: {item.players.name} ({item.players.uid}) <br />
-                Video link: <a href={item.videoLink}>{item.videoLink}</a>
+                Video link: <a href={item.videoLink}>{item.videoLink}</a><br>
+                Comment: {item.comment}
             </span><br />
             <button on:click={() => accept(item, index)}>Accept</button>
             <button on:click={() => reject(item, index)}>Reject</button>
