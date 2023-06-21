@@ -18,10 +18,10 @@
         <li>Levels must not have any secret way or fatal bug.</li>
         <li>If any fatal bug is found, level must be updated in one week.</li>
         <li>Any level with disgusting gameplay (wave spam, 10km straight fly, ...) is not accepted. This is determine by staff's opinion.</li>
-        <li>Levels must be longer than 10 seconds.</li>
-        <li>Levels must have difficulty of "Insane" or higher.</li>
+        <li>Levels must be longer than 5 seconds.</li>
+        <li>Levels must have difficulty of "Insane" or higher (levels don't have to be rated in-game).</li>
         <li>If any accepted level is deleted from GD server, that level will be unrated.</li>
-        <li>If accepted level video is deleted, it will be replaced by player's record. If no replacement is avaliable, that level will be unrated.</li>
+        <li>If accepted level's video is deleted, it will be replaced by player's record. If no replacement is avaliable, that level will be unrated.</li>
         <li>Unrated level cannot accept new record.</li>
     </ul>
     <h2>Records</h2>
@@ -30,6 +30,7 @@
         <li>Tools, hacks, fatal bugs, and secret ways are banned.</li>
         <li>Video must have unlisted access or above. Video posted in GDVN or TGGD facebook group is acceptable.</li>
         <li>Video must have decent quality. Recommended 360p and above.</li>
+        <li>You must specify video timestamp for each record if you use compilation video for submission.</li>
     </ul>
     <h2>Rating</h2>
     <ul>
