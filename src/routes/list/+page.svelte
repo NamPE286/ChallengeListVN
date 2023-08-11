@@ -18,7 +18,7 @@
         },
         filter: {
             ascending: false,
-            sortBy: "id",
+            sortBy: "timestamp",
         },
     };
     var option = {
@@ -34,7 +34,7 @@
         },
         filter: {
             ascending: false,
-            sortBy: "id",
+            sortBy: "timestamp",
         },
     };
     function fetchData() {
@@ -114,7 +114,7 @@
                 <span>Sort by: </span>
                 <select name="sortBy" bind:value={option.filter.sortBy}>
                     <option value="rating">Rating</option>
-                    <option value="id">Date submitted</option>
+                    <option value="timestamps">Date submitted</option>
                 </select>
             </div>
             <div class="filterOptCheck">
