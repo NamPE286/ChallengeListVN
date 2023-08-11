@@ -114,7 +114,7 @@
                 <span>Sort by: </span>
                 <select name="sortBy" bind:value={option.filter.sortBy}>
                     <option value="rating">Rating</option>
-                    <option value="timestamps">Date submitted</option>
+                    <option value="timestamp">Date submitted</option>
                 </select>
             </div>
             <div class="filterOptCheck">
