@@ -21,6 +21,7 @@
     <a href="/admin/levelEditor">Level editor</a><br />
     <a href="/admin/recordEditor">Record editor</a><br />
     <a href="/admin/notification">Notification sender</a><br />
+    <a href="/admin/merge">Account merger</a><br />
     <span>Submit checker:</span>
     <a href="/admin/submitChecker/level">Level</a>
     <a href="/admin/submitChecker/record">Record</a><br>
