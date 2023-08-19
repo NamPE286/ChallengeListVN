@@ -3,23 +3,38 @@
     import Search from "./Search.svelte";
     import { user } from "../../stores";
     import { supabase } from "../../db";
-    import { page } from "$app/stores";
     import { onMount } from "svelte";
+    import NavLink from "./NavLink.svelte";
     var isNotificationOn = false;
     var isSearchOn = false;
-    var firstPath = "";
-    function getFirstPath() {
-        var s = $page.url.pathname;
-        var a = s.split("/");
-        if (a.length > 0) firstPath = a[1];
-        else firstPath = "";
-    }
+    var link = [
+        {
+            title: "Dashboard",
+            link: "",
+        },
+        {
+            title: "List",
+            link: "list",
+        },
+        {
+            title: "Leaderboard",
+            link: "leaderboard",
+        },
+        {
+            title: "Rules",
+            link: "rules",
+        },
+        {
+            title: "Settings",
+            link: "settings",
+        },
+    ];
     async function signIn() {
         const { user, session, error } = await supabase.auth.signInWithOAuth({
             provider: "google",
         });
     }
-    $: $page.url.pathname && getFirstPath();
+
     onMount(() => {
         supabase.auth.onAuthStateChange((_, session) => {
             if (!session) {
@@ -110,36 +125,9 @@
         </div>
     </div>
     <div class="lower">
-        <a href="/" class="link">
-            <div class={firstPath == "" ? "selected" : ""}>
-                Dashboard
-                <section />
-            </div>
-        </a>
-        <a href="/list" class="link">
-            <div class={firstPath == "list" ? "selected" : ""}>
-                List
-                <section />
-            </div>
-        </a>
-        <a href="/leaderboard" class="link">
-            <div class={firstPath == "leaderboard" ? "selected" : ""}>
-                Leaderboard
-                <section />
-            </div>
-        </a>
-        <a href="/rules" class="link">
-            <div class={firstPath == "rules" ? "selected" : ""}>
-                Rules
-                <section />
-            </div>
-        </a>
-        <a href="/settings" class="link">
-            <div class={firstPath == "settings" ? "selected" : ""}>
-                Settings
-                <section />
-            </div>
-        </a>
+        {#each link as { title, link }}
+            <NavLink {title} {link} />
+        {/each}
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div
             class="searchIcon clickable"
@@ -239,19 +227,6 @@
     .link:hover {
         background-color: #333333;
         color: white;
-    }
-    .selected {
-        position: relative;
-        color: white;
-        section {
-            position: absolute;
-            height: 3px;
-            background-color: white;
-            border-radius: 10px;
-            width: 100%;
-            margin-top: 11px;
-            pointer-events: none;
-        }
     }
     .searchIcon {
         svg {
