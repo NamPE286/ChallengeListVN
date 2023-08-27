@@ -20,9 +20,8 @@
         <li>Any level with disgusting gameplay (wave spam, 10km straight fly, ...) is not accepted. This is determine by staff's opinion.</li>
         <li>Levels must be longer than 5 seconds.</li>
         <li>Levels must have difficulty of "Insane" or higher (levels don't have to be rated in-game).</li>
-        <li>If any accepted level is deleted from GD server, that level will be unrated.</li>
-        <li>If accepted level's video is deleted, it will be replaced by player's record. If no replacement is avaliable, that level will be unrated.</li>
-        <li>Unrated level cannot accept new record.</li>
+        <li>If any accepted level is deleted from GD server, that level will be removed.</li>
+        <li>If accepted level's video is deleted, it will be replaced by player's record. If no replacement is avaliable, that level will be removed.</li>
     </ul>
     <h2>Records</h2>
     <ul>
