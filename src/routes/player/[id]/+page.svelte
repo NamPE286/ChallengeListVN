@@ -137,9 +137,9 @@
                     <div class="record">
                         <div class="pt">
                             <div>{item.levels.rating}pt</div>
-                            {#if getWeight(index + 1) > 0}
+                            {#if getWeight(index + 6) > 0}
                                 <div id="weight">
-                                    Weighted {getWeight(index + 1)}%
+                                    Weighted {getWeight(index + 6)}%
                                 </div>
                             {/if}
                         </div>
