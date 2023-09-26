@@ -16,6 +16,11 @@
                 })
         );
     }
+
+    function getWeight(rank) {
+        return Math.ceil(((15 - rank + 1) * 100) / 15);
+    }
+
     $: $page.params.id && fetchData();
     onMount(() => {
         fetchData();
@@ -78,7 +83,14 @@
             {/if}
             {#each player.records.slice(0, 5) as item, index}
                 <div class="record">
-                    <div class="pt">{item.levels.rating}pt</div>
+                    <div class="pt">
+                        <div>{item.levels.rating}pt</div>
+                        {#if getWeight(index + 1) > 0}
+                            <div id="weight">
+                                Weighted {getWeight(index + 1)}%
+                            </div>
+                        {/if}
+                    </div>
                     <a href={`/level/${item.levels.id}`}
                         ><b>{item.levels.name} </b><br />by {item.levels.players
                             .name}</a
@@ -123,7 +135,14 @@
             {#if showAllRecords}
                 {#each player.records.slice(5, player.records.length) as item, index}
                     <div class="record">
-                        <div class="pt">{item.levels.rating}pt</div>
+                        <div class="pt">
+                            <div>{item.levels.rating}pt</div>
+                            {#if getWeight(index + 1) > 0}
+                                <div id="weight">
+                                    Weighted {getWeight(index + 1)}%
+                                </div>
+                            {/if}
+                        </div>
                         <a href={`/level/${item.levels.id}`}
                             ><b>{item.levels.name} </b><br />by {item.levels
                                 .players.name}</a
@@ -281,14 +300,21 @@
         margin-left: 6px;
     }
     .pt {
-        width: 80px;
+        width: fit-content;
+        padding-inline: 18px;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         margin-right: 20px;
         border-right: 1px solid var(--line);
         height: 100%;
         font-weight: bold;
+
+        #weight {
+            font-weight: 100;
+            font-size: 12px;
+        }
     }
     br {
         display: none;
