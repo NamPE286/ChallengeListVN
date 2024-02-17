@@ -4,6 +4,7 @@
     import Loading from "../../Loading.svelte";
     import { onMount } from "svelte";
     var loaded = false;
+    var isInit = false
     var levelsData = [];
     const defaultOption = {
         range: {
@@ -19,6 +20,7 @@
         filter: {
             ascending: false,
             sortBy: "timestamp",
+            length: 0
         },
     };
     var option = {
@@ -35,6 +37,7 @@
         filter: {
             ascending: false,
             sortBy: "timestamp",
+            length: 0
         },
     };
     function fetchData() {
@@ -50,6 +53,7 @@
             res.json().then((data) => {
                 levelsData = data;
                 loaded = true;
+                isInit = true;
             })
         );
     }
@@ -86,14 +90,21 @@
 </script>
 
 <Title value="Level listing" />
-<Loading bind:disabled={levelsData.length} />
-{#if levelsData.length}
+<Loading bind:disabled={isInit} />
+
+{#if isInit}
     <main>
         <div class="levels">
             {#each levelsData as item, index}
                 <Level data={item} />
             {/each}
         </div>
+
+        {#if !levelsData.length} 
+            <div class="levels noneText">
+                No level available
+            </div>
+        {/if}
         <div class="filter">
             <h3>Filter</h3>
             <div class="filterOpt">
@@ -121,6 +132,18 @@
                 <input type="checkbox" bind:checked={option.filter.ascending} />
                 <span>Sort ascending</span>
             </div>
+            <div class="filterOpt">
+                <span>Length: </span>
+                <select name="sortBy" bind:value={option.filter.length}>
+                    <option value={0}>All</option>
+                    <option value={1}>Tiny</option>
+                    <option value={2}>Short</option>
+                    <option value={3}>Medium</option>
+                    <option value={4}>Long</option>
+                    <option value={5}>XL</option>
+                    <option value={-1}>Platformer</option>
+                </select>
+            </div>
             <div class="left">
                 <button id="blackBtn" on:click={reset}>Reset</button>
                 <button id="whiteBtn" on:click={fetchData}>Apply</button>
@@ -130,6 +153,11 @@
 {/if}
 
 <style lang="scss">
+    .noneText {
+        width: 780px;
+        text-align: center;
+    }
+
     main {
         display: flex;
         gap: 20px;
