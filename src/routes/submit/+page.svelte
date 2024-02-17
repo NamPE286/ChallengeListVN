@@ -1,11 +1,13 @@
 <script>
     import Title from "../../components/Title.svelte";
+    import Level from "../../components/List/Level.svelte"
     import PendingSubmission from "../../components/PendingSubmission.svelte";
     import { user } from "../../stores";
     import { toast } from "../../toast";
     import Loading from "../../Loading.svelte";
     var state = 0;
     var type = "";
+    var submittingLevel = undefined
     var submission = {
         record: {
             userUID: null,
@@ -14,6 +16,7 @@
             refreshRate: null,
             comment: null,
             isMobile: null,
+            time: null
         },
         level: {
             id: null,
@@ -24,12 +27,52 @@
             length: null,
         },
     };
+    function fetchLevel(id) {
+        if(id == null) {
+            toast("Please enter a level ID")
+            return
+        }
+
+        console.log(id)
+        fetch(`${import.meta.env.VITE_API_URL}/level/${id}`).then(
+            (res) =>
+                res.json().then((data) => {
+                    console.log(data)
+                    if(data.data == null) {
+                        toast("Invalid level ID")
+                        return
+                    }
+
+                    submittingLevel = data.data;
+                })
+        );
+    }
     function youtube_parser(url) {
         var regExp =
             /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
         var match = url.match(regExp);
         return match && match[7].length == 11 ? match[7] : false;
     }
+
+    function parseTime(s) {
+        var a = s.split(':').reverse()
+        var res = 0
+
+        for(let i = 0; i < a.length; i++) {
+            if(i == 0) {
+                res += a[i] * 1000
+                continue
+            }
+
+            let sec = a[i] * 60 * i
+            res += sec * 1000
+        }
+
+        console.log(res)
+
+        return res
+    }
+
     function submit() {
         state = 1;
         submission.record.userUID = $user.uid;
@@ -44,6 +87,12 @@
         if(type == 'level') {
             submission.level.videoID = youtube_parser(submission.level.videoID)
         }
+
+        if(type == 'record' && submittingLevel.length == -1) {
+            submission.record.time = parseTime(submission.record.time)
+            console.log(submission.record.time)
+        }
+
         fetch(`${import.meta.env.VITE_API_URL}/submit/${type}`, {
             method: "POST",
             headers: {
@@ -63,7 +112,7 @@
             }
             else if(res.status == 409){
                 state = 3
-                toast('Record already exist.')
+                toast('Record already exist or better record is accepted.')
             }
             else {
                 state = 3;
@@ -87,25 +136,37 @@
                     placeholder="Level's ID"
                     type="number"
                     bind:value={submission.record.levelID}
+                    on:blur={() => {fetchLevel(submission.record.levelID)}}
                 />
-                <input
-                    placeholder="FPS"
-                    type="number"
-                    bind:value={submission.record.refreshRate}
-                />
-                <select name="platform" bind:value={submission.record.isMobile}>
-                    <option value={null} disabled selected>Platform</option>
-                    <option value={false}>Desktop</option>
-                    <option value={true}>Mobile</option>
-                </select>
-                <input
-                    placeholder="Video's link"
-                    bind:value={submission.record.videoLink}
-                />
-                <input
-                    placeholder="Comment (optional)"
-                    bind:value={submission.record.comment}
-                />
+
+                {#if typeof submittingLevel != "undefined"}
+                    <Level data={submittingLevel} mode="compact-fit"/>
+                    {#if submittingLevel.length == -1}
+                        <input
+                            placeholder="Time (m:s.ms) (e.g: 1:20.117)"
+                            type="input"
+                            bind:value={submission.record.time}
+                        />
+                    {/if}
+                    <input
+                        placeholder="FPS"
+                        type="number"
+                        bind:value={submission.record.refreshRate}
+                    />
+                    <select name="platform" bind:value={submission.record.isMobile}>
+                        <option value={null} disabled selected>Platform</option>
+                        <option value={false}>Desktop</option>
+                        <option value={true}>Mobile</option>
+                    </select>
+                    <input
+                        placeholder="Video's link"
+                        bind:value={submission.record.videoLink}
+                    />
+                    <input
+                        placeholder="Comment (optional)"
+                        bind:value={submission.record.comment}
+                    />
+                {/if}
             {/if}
             {#if type == "level"}
                 <input
@@ -125,6 +186,7 @@
                     <option value={3}>Medium</option>
                     <option value={4}>Long</option>
                     <option value={5}>XL</option>
+                    <option value={-1}>Platformer</option>
                 </select>
                 <input
                     placeholder="Description"

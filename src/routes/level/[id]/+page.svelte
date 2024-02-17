@@ -15,6 +15,21 @@
                 })
         );
     }
+    function parseTime(s) {
+        var ms = s % 1000;
+        s = (s - ms) / 1000;
+        var secs = s % 60;
+        s = (s - secs) / 60;
+        var mins = s % 60;
+        var hrs = (s - mins) / 60;
+
+        if(hrs == 0) {
+            return mins + ':' + secs + '.' + ms;
+        }
+
+        return hrs + ':' + mins + ':' + secs + '.' + ms;
+    }
+
     $: $page.params.id && fetchData();
     onMount(() => {
         fetchData();
@@ -58,7 +73,7 @@
                         level.data.timestamp
                     ).toLocaleString("vi-VN")}
                 </p>
-                <p><b>Length:</b> {lengthConv[level.data.length]}</p>
+                <p><b>Length:</b> {level.data.length == -1 ? "Platformer" : lengthConv[level.data.length]}</p>
                 <p><b>ID:</b> {level.data.id}</p>
                 <p><b>Description: </b></p>
                 {#if !level.data.description}
@@ -77,6 +92,9 @@
         {/if}
         {#each level.records as item, index}
             <div class="record">
+                {#if level.data.length == -1}
+                    <div class='recordTime'>{parseTime(item.time)}</div>
+                {/if}
                 <Badge player={item.players}
                     ><a href={`/player/${item.players.uid}`}
                         >{item.players.name}</a
@@ -114,6 +132,10 @@
 {/if}
 
 <style lang="scss">
+    .recordTime {
+        padding-right: 15px;
+        font-weight: bold;
+    }
     .infoWrapper {
         display: flex;
         justify-content: center;

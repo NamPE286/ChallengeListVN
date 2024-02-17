@@ -71,6 +71,20 @@
             }
         });
     }
+    function parseTime(s) {
+        var ms = s % 1000;
+        s = (s - ms) / 1000;
+        var secs = s % 60;
+        s = (s - secs) / 60;
+        var mins = s % 60;
+        var hrs = (s - mins) / 60;
+
+        if(hrs == 0) {
+            return mins + ':' + secs + '.' + ms;
+        }
+
+        return hrs + ':' + mins + ':' + secs + '.' + ms;
+    }
     onMount(() => {
         fetchData();
     });
@@ -85,8 +99,12 @@
                     <h3>
                         {item.levels.name} by {item.levels.players.name} ({item.levelID})
                     </h3>
-                </a>
-                <br />
+                </a><br />
+
+                {#if item.levels.length == -1}
+                    <h3>{parseTime(item.time)}</h3><br/>
+                {/if}
+
                 Player: {item.players.name} ({item.players.uid}) <br />
                 Video link: <a href={item.videoLink}>{item.videoLink}</a><br>
                 Comment: {item.comment}
