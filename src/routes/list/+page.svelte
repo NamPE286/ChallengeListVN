@@ -244,5 +244,8 @@
         .filter {
             width: 100%;
         }
+        .noneText {
+            width: 100%;
+        }
     }
 </style>
