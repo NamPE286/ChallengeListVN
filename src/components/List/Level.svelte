@@ -1,6 +1,16 @@
 <script>
     export var data;
     export var mode = null;
+
+    var len = ["", "Tiny", "Short", "Medium", "Long", "XL"]
+
+    function getLen(x) {
+        if(x == -1) {
+            return "Plat."
+        }
+
+        return len[x]
+    }
 </script>
 
 <div class="wrapper" id={mode}>
@@ -11,7 +21,13 @@
                 alt=""
                 loading="lazy"
             />
-            <div class="top pt">{data.rating}pt</div>
+            <div class="infoWrapper">
+                <div class="top pt">{data.rating}pt</div>
+                <div class="top pt">
+                    <svg class="with-icon_icon__MHUeb" data-testid="geist-icon" fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" style="color:var(--geist-foreground);width:24px;height:24px"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    {getLen(data.length)}
+                </div>
+            </div>
         </a>
     </div>
     <div class="info">
@@ -79,10 +95,19 @@
             color: rgb(184, 184, 184);
         }
     }
+
+    .infoWrapper {
+        display: flex;
+        position: absolute;
+        height: 30px;
+        width: 30px;
+        bottom: 0;
+        margin-bottom: 8px;
+    }
+
     .imgWrapper {
         position: relative;
         .top {
-            position: absolute;
             background-color: black;
             height: 30px;
             width: 30px;
@@ -93,13 +118,17 @@
             border: 1px solid var(--line);
             margin-left: 5px;
             font-weight: bold;
-            bottom: 0;
-            margin-bottom: 8px;
         }
         .pt {
             width: fit-content;
             padding-inline: 10px;
             font-weight: bold;
+
+            svg {
+                margin-left: -5px;
+                margin-right: 5px;
+                scale: 0.9;
+            }
         }
     }
     @media screen and (max-width: 1000px) {
