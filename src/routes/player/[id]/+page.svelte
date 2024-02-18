@@ -18,7 +18,7 @@
     }
 
     function getWeight(rank) {
-        return Math.ceil(((50 - rank + 1) * 100) / 50);
+        return Math.max(0, Math.ceil(-Math.pow((rank - 42.21) / 10, 3) + 30));
     }
 
     $: $page.params.id && fetchData();

@@ -35,7 +35,8 @@
     <ul>
         <li>Rating distribution:</li>
         <ul>
-            <li><Badge player={{uid: null, rating: 3000}}>Grandmaster >= 3000 rating</Badge></li>
+            <li><Badge player={{uid: null, rating: 5000}}>Legendary Grandmaster >= 5000 rating</Badge></li>
+            <li><Badge player={{uid: null, rating: 3500}}>Grandmaster >= 3500 rating</Badge></li>
             <li><Badge player={{uid: null, rating: 2500}}>Master >= 2500 rating</Badge></li>
             <li><Badge player={{uid: null, rating: 2000}}>Candidate Master >= 2000 rating</Badge></li>
             <li><Badge player={{uid: null, rating: 1500}}>Expert >= 1500 rating</Badge></li>
