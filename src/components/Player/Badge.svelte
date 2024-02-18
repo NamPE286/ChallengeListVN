@@ -17,7 +17,15 @@
             DEV
         </div>
     {/if}
-    {#if player.rating >= 3000}
+    {#if player.rating >= 5000}
+        <div
+            class="badge"
+            title="Legendary Grandmaster"
+            style={`${setTextSize()}; background-color: darkred;`}
+        >
+            LGM
+        </div>
+    {:else if player.rating >= 3500}
         <div
             class="badge"
             title="Grandmaster"
