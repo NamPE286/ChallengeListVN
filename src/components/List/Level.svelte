@@ -47,6 +47,7 @@
         img{
             height: 100%;
             width: 15vh;
+            min-width: 163px;
         }
     }
     #fit{
@@ -60,6 +61,7 @@
         img{
             height: 100%;
             width: 15vh;
+            min-width: 163px;
         }
     }
     .wrapper {

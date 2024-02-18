@@ -79,6 +79,10 @@
         submission.level.creatorUID = $user.uid;
         for(const i in submission[type]){
             if(submission[type][i] === null){
+                if(i == 'time' && submittingLevel.length != -1) {
+                    continue
+                }
+                
                 state = 3
                 toast('Please fill in all the fields.')
                 return
