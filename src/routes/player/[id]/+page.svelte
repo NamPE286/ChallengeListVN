@@ -424,6 +424,9 @@
                 margin-right: 20px;
             }
         }
+        .recentActivities {
+            padding-inline: 30px;
+        }
         .levels {
             padding-inline: 30px;
         }
