@@ -92,7 +92,7 @@
                                 <div>{item.data.levels.rating}pt</div>
                                 {#if getWeight(index + 1) > 0}
                                     <div id="weight">
-                                        Weighted {getWeight(index + 1)}%
+                                        Weighted {getWeight(item.data.no + 1)}%
                                     </div>
                                 {/if}
                             </div>
