@@ -22,6 +22,11 @@
     {#each playersData as item, index}
         <div class="player">
             <h3 id="top">#{item.rank}</h3>
+            <img
+                class="avatar"
+                src={`https://lh3.googleusercontent.com/a/${item.googleAvatarID}=s240-c`}
+                alt=""
+            />
             <Badge size={10} player={item}
                 ><a href={`/player/${item.uid}`}>{item.name}</a></Badge
             >
@@ -46,13 +51,18 @@
         border-radius: 7px;
         padding-inline: 15px;
         box-sizing: border-box;
+
+        img {
+            height: 30px;
+            margin-inline: 8px;
+            border-radius: 50%;
+        }
     }
+
     #rating {
         margin-left: auto;
     }
-    #top {
-        margin-right: 7px;
-    }
+
     @media screen and (max-width: 1000px) {
         .player {
             width: 100%;
