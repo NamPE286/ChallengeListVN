@@ -37,7 +37,7 @@
         <div
             class="badge"
             title="Master"
-            style={`${setTextSize()}; background-color: blue;`}
+            style={`${setTextSize()}; background-color: darkorange;`}
         >
             M
         </div>
@@ -45,7 +45,7 @@
         <div
             class="badge"
             title="Candidate Master"
-            style={`${setTextSize()}; background-color: darkorange;`}
+            style={`${setTextSize()}; background-color: purple;`}
         >
             CM
         </div>
