@@ -37,42 +37,48 @@
 
 {#if player}
     <div class="header">
-        <img
-            class="avatar"
-            src={`https://lh3.googleusercontent.com/a/${player.data.googleAvatarID}=s240-c`}
-            alt=""
-        />
-        <div class="playerInfo">
-            <Badge player={player.data} size={16}>
-                <h1>{player.data.name}</h1>
-            </Badge>
-            <span id="rating"
-                >Rating: {player.data.rating} (#{player.data.rank})</span
-            >
-            <section>
-                {#if player.data.youtube}
-                    <a href={player.data.youtube} target="_blank">
-                        <img id="social" src="/youtube.svg" alt="" />
-                    </a>
-                {/if}
-                {#if player.data.facebook}
-                    <a href={player.data.facebook} target="_blank">
-                        <img id="social" src="/facebook.svg" alt="" />
-                    </a>
-                {/if}
-                {#if player.data.discord}
-                    <!-- svelte-ignore a11y-click-events-have-key-events -->
-                    <span
-                        class="clickable"
-                        on:click={() => {
-                            navigator.clipboard.writeText(player.data.discord);
-                            toast("Copied Discord username to clipboard!");
-                        }}
-                    >
-                        <img id="social" src="/discord.svg" alt="" />
-                    </span>
-                {/if}
-            </section>
+        {#if player.data.bannerImage}
+            <img class='banner' src={player.data.bannerImage} alt=''>
+        {/if}
+        <div class='infoWrapper'>
+            <img
+                class="avatar"
+                src={`https://lh3.googleusercontent.com/a/${player.data.googleAvatarID}=s240-c`}
+                alt=""
+            />
+            <div class="playerInfo">
+                <Badge player={player.data} size={16}>
+                    <h1>{player.data.name}</h1>
+                </Badge>
+                <span id="rating"
+                    >Rating: {player.data.rating} (#{player.data.rank})</span
+                >
+                <section>
+                    {#if player.data.youtube}
+                        <a href={player.data.youtube} target="_blank">
+                            <img id="social" src="/youtube.svg" alt="" />
+                        </a>
+                    {/if}
+                    {#if player.data.facebook}
+                        <a href={player.data.facebook} target="_blank">
+                            <img id="social" src="/facebook.svg" alt="" />
+                        </a>
+                    {/if}
+                    {#if player.data.discord}
+                        <!-- svelte-ignore a11y-click-events-have-key-events -->
+                        <span
+                            class="clickable"
+                            on:click={() => {
+                                navigator.clipboard.writeText(player.data.discord);
+                                toast("Copied Discord username to clipboard!");
+                            }}
+                        >
+                            <img id="social" src="/discord.svg" alt="" />
+                        </span>
+                    {/if}
+                </section>
+            </div>
+
         </div>
     </div>
     <main>
@@ -249,6 +255,21 @@
 {/if}
 
 <style lang="scss">
+    .banner {
+        position: absolute;
+        width: 100%;
+        margin: 0 auto;
+        opacity: 50%;
+    }
+
+    .infoWrapper {
+        display: flex;
+        align-items: center;
+        padding-left: 100px;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        z-index: 3;
+    }
     #showMoreBtn {
         color: white;
         display: flex;
@@ -303,15 +324,15 @@
         padding-bottom: 50px;
     }
     .header {
+        position: relative;
         width: 100%;
         box-sizing: border-box;
-        padding: 30px;
         height: fit-content;
         background-color: black;
         border-bottom: 1px solid var(--line);
         display: flex;
         align-items: center;
-        padding-inline: 100px;
+        overflow: hidden;
         .avatar {
             height: 200px;
             width: 200px;
@@ -393,8 +414,10 @@
         display: none;
     }
     @media screen and (max-width: 1000px) {
+        .infoWrapper {
+            padding-left: 30px;
+        }
         .header {
-            padding-inline: 30px;
             .avatar {
                 height: 120px;
                 width: 120px;
