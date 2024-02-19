@@ -76,6 +76,63 @@
         </div>
     </div>
     <main>
+        <div class='recentActivities'>
+            <h3>Recent activities</h3>
+
+            {#if !player.recentActivities}
+                <p>No activity</p>
+            {:else}
+                {#each player.recentActivities as item, index}
+                    {#if item.type == 'level'}
+                        <Level data={item.data} mode="compact" />
+                    {/if}
+                    {#if item.type == 'record'}
+                        <div class="record">
+                            <div class="pt">
+                                <div>{item.data.levels.rating}pt</div>
+                                {#if getWeight(index + 1) > 0}
+                                    <div id="weight">
+                                        Weighted {getWeight(index + 1)}%
+                                    </div>
+                                {/if}
+                            </div>
+                            <a href={`/level/${item.data.levels.id}`}
+                                ><b>{item.data.levels.name} </b><br />by {item.data.levels.players
+                                    .name}</a
+                            >
+                            <div class="recordDetail">{item.data.refreshRate}hz</div>
+                            {#if item.data.isMobile}
+                                <div class="recordDetail">Mobile</div>
+                            {/if}
+                            <section>
+                                <a href={item.data.videoLink} target="_blank">
+                                    <svg
+                                        data-testid="geist-icon"
+                                        fill="none"
+                                        height="24"
+                                        shape-rendering="geometricPrecision"
+                                        stroke="currentColor"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="1.5"
+                                        viewBox="0 0 24 24"
+                                        width="24"
+                                        style="color:var(--geist-foreground)"
+                                        ><path
+                                            d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"
+                                        /><path d="M15 3h6v6" /><path
+                                            d="M10 14L21 3"
+                                        /></svg
+                                    >
+                                </a>
+                            </section>
+                        </div>
+                    {/if}
+                {/each}
+            {/if}
+
+
+        </div>
         <div class="records">
             <h3>Best play</h3>
             {#if !player.records.length}
@@ -208,6 +265,19 @@
     main {
         padding: 0;
     }
+
+    .recentActivities {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        box-sizing: border-box;
+        padding-inline: 100px;
+        background-color: black;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 50px;
+    }
+
     .records {
         display: flex;
         flex-direction: column;
@@ -215,7 +285,9 @@
         align-items: center;
         box-sizing: border-box;
         padding-inline: 100px;
+        margin-top: 10px;
     }
+
     .levels {
         display: flex;
         flex-direction: column;
@@ -227,6 +299,7 @@
         min-height: 700px;
         margin-top: 50px;
         padding-top: 10px;
+        padding-bottom: 50px;
     }
     .header {
         width: 100%;
@@ -238,7 +311,6 @@
         display: flex;
         align-items: center;
         padding-inline: 100px;
-        margin-bottom: 10px;
         .avatar {
             height: 200px;
             width: 200px;
