@@ -296,8 +296,8 @@
         padding-inline: 100px;
         background-color: black;
         border-bottom: 1px solid var(--line);
+        padding-top: 10px;
         padding-bottom: 50px;
-        margin-top: 10px;
     }
 
     .records {
