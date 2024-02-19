@@ -53,7 +53,7 @@
         <div
             class="badge"
             title="Expert"
-            style={`${setTextSize()}; background-color: darkblue;`}
+            style={`${setTextSize()}; background-color: blue;`}
         >
             EX
         </div>
