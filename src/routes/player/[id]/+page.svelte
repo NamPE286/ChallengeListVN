@@ -79,7 +79,7 @@
         <div class='recentActivities'>
             <h3>Recent activities</h3>
 
-            {#if !player.recentActivities}
+            {#if !player.recentActivities.length}
                 <p>No activity</p>
             {:else}
                 {#each player.recentActivities as item, index}
@@ -136,7 +136,7 @@
         <div class="records">
             <h3>Best play</h3>
             {#if !player.records.length}
-                <p>This player hasn't beaten any level</p>
+                <p>No record</p>
             {/if}
             {#each player.records.slice(0, 5) as item, index}
                 <div class="record">
@@ -238,7 +238,7 @@
             <div class="levels">
                 <h3>Levels</h3>
                 {#if !player.levels.length}
-                    <p>This player hasn't created any level</p>
+                    <p>No level</p>
                 {/if}
                 {#each player.levels as item, index}
                     <Level data={item} mode="compact" />
