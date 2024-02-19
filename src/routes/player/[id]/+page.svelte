@@ -276,6 +276,7 @@
         background-color: black;
         border-bottom: 1px solid var(--line);
         padding-bottom: 50px;
+        margin-top: 10px;
     }
 
     .records {
