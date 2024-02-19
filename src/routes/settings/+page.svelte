@@ -49,29 +49,29 @@
             <div class="settingSection">
                 <h2>Basic info</h2>
                 <section>
-                    <span>Username </span><input
+                    <div class='textWrapper'>Username </div><input
                         bind:value={basicInfo.name}
                     /><br />
                 </section>
                 <section>
-                    <span>Banner image URL </span><input
+                    <div class='textWrapper'>Banner image URL </div><input
                         bind:value={basicInfo.bannerImage}
                     /><br />
                 </section>
                 <section>
-                    <span>YouTube </span><input
+                    <div class='textWrapper'>YouTube </div><input
                         placeholder="YouTube channel's link"
                         bind:value={basicInfo.youtube}
                     /><br />
                 </section>
                 <section>
-                    <span>Facebook </span><input
+                    <div class='textWrapper'>Facebook </div><input
                         placeholder="Facebook profile's link"
                         bind:value={basicInfo.facebook}
                     /><br />
                 </section>
                 <section>
-                    <span>Discord </span><input
+                    <div class='textWrapper'>Discord </div><input
                         placeholder="Discord tag"
                         bind:value={basicInfo.discord}
                     /><br />
@@ -98,6 +98,16 @@
 </main>
 
 <style lang="scss">
+    .textWrapper {
+        background-color: #111111;
+        height: 41px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-inline: 20px;
+        border-radius: 8px 0 0 8px;
+        white-space: nowrap;
+    }
     .sectionFooter {
         background-color: #111111;
         padding: 12px;
@@ -151,16 +161,18 @@
         width: 200px;
         padding-inline: 12px;
         border-radius: 0 10px 10px 0;
-        margin-left: 20px;
+        width: 100%;
     }
     section {
         margin-bottom: 10px;
         border: 1px var(--line) solid;
         width: fit-content;
         border-radius: 10px;
-        padding-left: 20px;
-        background-color: #111111;
+        background-color: black;
         color: rgb(170, 170, 170);
+        width: 100%;
+        display: flex;
+        align-items: center;
     }
     .redBtn {
         border: none;
@@ -190,9 +202,6 @@
         }
     }
     @media screen and (max-width: 1001px) {
-        input {
-            width: 150px;
-        }
         select {
             width: 100%;
         }
