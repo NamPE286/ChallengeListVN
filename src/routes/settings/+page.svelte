@@ -12,6 +12,7 @@
             youtube: $user.youtube,
             facebook: $user.facebook,
             discord: $user.discord,
+            bannerImage: $user.bannerImage
         };
     }
     function basicInfoSave() {
@@ -50,6 +51,11 @@
                 <section>
                     <span>Username </span><input
                         bind:value={basicInfo.name}
+                    /><br />
+                </section>
+                <section>
+                    <span>Banner image URL </span><input
+                        bind:value={basicInfo.bannerImage}
                     /><br />
                 </section>
                 <section>
