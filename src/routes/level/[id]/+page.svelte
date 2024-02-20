@@ -6,15 +6,49 @@
     import Loading from "../../../Loading.svelte";
     var level = null;
     const lengthConv = ["", "Tiny", "Short", "Medium", "Long", "XL"];
-    function fetchData() {
-        level = null;
-        fetch(`${import.meta.env.VITE_API_URL}/level/${$page.params.id}`).then(
-            (res) =>
-                res.json().then((data) => {
-                    level = data;
-                })
-        );
+    var showMore = true;
+    var loading = false
+
+    var option = {
+        range: {
+            index: {
+                start: 0,
+                end: 9
+            }
+        }
     }
+
+    async function fetchData() {
+        const [dataRes, recordsRes] = await Promise.all([
+            fetch(`${import.meta.env.VITE_API_URL}/level/${$page.params.id}`),
+            fetch(`${import.meta.env.VITE_API_URL}/level/${$page.params.id}/records/${encodeURIComponent(JSON.stringify(option))}`),
+        ])
+
+        level = {
+            data: await dataRes.json(),
+            records: await recordsRes.json()
+        }
+
+        if(level.records.length < 10) {
+            showMore = false;
+        }
+    }
+
+    async function showMoreRecord() {
+        loading = true
+        option.range.index.start += 10
+        option.range.index.end += 10
+
+        const data = await (await fetch(`${import.meta.env.VITE_API_URL}/level/${$page.params.id}/records/${encodeURIComponent(JSON.stringify(option))}`)).json()
+
+        if(data.length < 10) {
+            showMore = false;
+        }
+
+        level.records = level.records.concat(data)
+        loading = false
+    }
+
     function parseTime(s) {
         var ms = s % 1000;
         s = (s - ms) / 1000;
@@ -128,10 +162,29 @@
                 </section>
             </div>
         {/each}
+        {#if showMore}
+            {#if loading}
+                <Loading />
+            {:else}
+                <button
+                    class="record clickable"
+                    id="showMoreBtn"
+                    on:click={() => {
+                        showMoreRecord()
+                    }}>Show more</button
+                >
+            {/if}
+        {/if}
     </main>
 {/if}
 
 <style lang="scss">
+    #showMoreBtn {
+        color: white;
+        display: flex;
+        justify-content: center;
+        background-color: black;
+    }
     .recordTime {
         padding-right: 15px;
         font-weight: bold;
