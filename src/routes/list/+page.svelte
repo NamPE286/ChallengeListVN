@@ -10,7 +10,7 @@
         range: {
             index: {
                 start: 0,
-                end: 30,
+                end: 4,
             },
             rating: {
                 start: 0,
@@ -27,7 +27,7 @@
         range: {
             index: {
                 start: 0,
-                end: 30,
+                end: 4,
             },
             rating: {
                 start: 0,
@@ -38,19 +38,16 @@
             ascending: false,
             sortBy: "timestamp",
             length: 0
-        },
+        }
     };
     function fetchData() {
-        option.range.index = {
-            start: 0,
-            end: 30,
-        };
         fetch(
             `${import.meta.env.VITE_API_URL}/list/${encodeURIComponent(
                 JSON.stringify(option)
             )}`
         ).then((res) =>
             res.json().then((data) => {
+                console.log(data, option)
                 levelsData = data;
                 loaded = true;
                 isInit = true;
@@ -59,8 +56,8 @@
     }
     function fetchDataLazy() {
         loaded = false;
-        option.range.index.start += 31;
-        option.range.index.end += 31;
+        option.range.index.start += 5;
+        option.range.index.end += 5;
         fetch(
             `${import.meta.env.VITE_API_URL}/list/${encodeURIComponent(
                 JSON.stringify(option)
