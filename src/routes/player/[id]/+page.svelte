@@ -250,7 +250,7 @@
                     </section>
                 </div>
             {/each}
-            {#if showMore.records}
+            {#if showMore.records && player.records.length >= 5}
                 <button
                     class="record clickable"
                     id="showMoreBtn"
@@ -269,7 +269,7 @@
                 {#each player.levels as item, index}
                     <Level data={item} mode="compact" />
                 {/each}
-                {#if showMore.levels}
+                {#if showMore.levels && player.levels.length >= 5}
                     <button
                         class="record clickable"
                         id="showMoreBtn"
