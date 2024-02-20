@@ -34,18 +34,18 @@
         }
 
         console.log(id)
-        fetch(`${import.meta.env.VITE_API_URL}/level/${id}`).then(
-            (res) =>
-                res.json().then((data) => {
-                    console.log(data)
-                    if(data.data == null) {
-                        toast("Invalid level ID")
-                        return
-                    }
+        fetch(`${import.meta.env.VITE_API_URL}/level/${id}`)
+            .then((res) => {
+                if(res.status == 500) {
+                    toast("Invalid level's ID")
+                    return
+                }
 
-                    submittingLevel = data.data;
-                })
-        );
+                return res.json()
+            })
+            .then((data) => {
+                submittingLevel = data;
+            })
     }
     function youtube_parser(url) {
         var regExp =
@@ -203,8 +203,8 @@
             {/if}
             {#if type}
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
-                <div class="right" on:click={submit}>
-                    <button id="whiteBtn">Submit</button>
+                <div class="right">
+                    <button id="whiteBtn" on:click={submit}>Submit</button>
                     {#if state == 1}
                         <div class="loading">
                             <Loading />
