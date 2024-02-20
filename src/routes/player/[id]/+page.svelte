@@ -6,7 +6,10 @@
     import Badge from "../../../components/Player/Badge.svelte";
     import { toast } from "../../../toast";
     var player = null;
-    var showAllRecords = false;
+    var loading = {
+        records: false,
+        levels: false
+    }
     var showMore = {
         levels: true,
         records: true
@@ -43,29 +46,34 @@
     }
 
     async function showMoreRecords() {
-        option.records.range.index.start += 5;
-        option.records.range.index.end += 5;
-
-        console.log(option.records)
+        loading.records = true
+        option.records.range.index.start = option.records.range.index.end + 1;
+        option.records.range.index.end += 10;
 
         const data = await (await fetch(`${import.meta.env.VITE_API_URL}/player/${$page.params.id}/records/${encodeURIComponent(JSON.stringify(option.records))}`)).json()
         player.records = player.records.concat(data)
 
-        if(data.length < 5) {
+        if(data.length < 10) {
             showMore.records = false;
         }
+
+        loading.records = false
     }
 
     async function showMoreLevels() {
-        option.levels.range.index.start += 5;
-        option.levels.range.index.end += 5;
+        loading.levels = true
+
+        option.levels.range.index.start = option.levels.range.index.end + 1;
+        option.levels.range.index.end += 10;
 
         const data = await (await fetch(`${import.meta.env.VITE_API_URL}/player/${$page.params.id}/levels/${encodeURIComponent(JSON.stringify(option.levels))}`)).json()
         player.levels = player.levels.concat(data)
 
-        if(data.length < 5) {
+        if(data.length < 10) {
             showMore.levels = false;
         }
+
+        loading.records = false
     }
 
     async function fetchData() {
@@ -251,13 +259,17 @@
                 </div>
             {/each}
             {#if showMore.records && player.records.length >= 5}
-                <button
-                    class="record clickable"
-                    id="showMoreBtn"
-                    on:click={() => {
-                        showMoreRecords()
-                    }}>Show more</button
-                >
+                {#if loading.records}
+                    <Loading />
+                {:else}
+                    <button
+                        class="record clickable"
+                        id="showMoreBtn"
+                        on:click={() => {
+                            showMoreRecords()
+                        }}>Show more</button
+                    >
+                {/if}
             {/if}
         </div>
         <div class="levelsWrapper">
@@ -270,13 +282,17 @@
                     <Level data={item} mode="compact" />
                 {/each}
                 {#if showMore.levels && player.levels.length >= 5}
-                    <button
-                        class="record clickable"
-                        id="showMoreBtn"
-                        on:click={() => {
-                            showMoreLevels()
-                        }}>Show more</button
-                    >
+                {#if loading.levels}
+                    <Loading />
+                    {:else}
+                        <button
+                            class="record clickable"
+                            id="showMoreBtn"
+                            on:click={() => {
+                                showMoreLevels()
+                            }}>Show more</button
+                        >
+                    {/if}
                 {/if}
             </div>
         </div>
