@@ -170,7 +170,7 @@
                                 <div>{item.data.levels.rating}pt</div>
                                 {#if getWeight(index + 1) > 0}
                                     <div id="weight">
-                                        {item.data.rating * getWeight(item.data.no) / 100}pt ({getWeight(item.data.no)}%)
+                                        {Math.round((item.data.rating * getWeight(item.data.no)) / 12) / 100}pt ({getWeight(item.data.no)}%)
                                     </div>
                                 {/if}
                             </div>
@@ -222,7 +222,7 @@
                         <div>{item.levels.rating}pt</div>
                         {#if getWeight(index + 1) > 0}
                             <div id="weight">
-                                {item.rating * getWeight(item.no) / 100}pt ({getWeight(item.no)}%)
+                                {Math.round((item.rating * getWeight(item.no)) / 12) / 100}pt ({getWeight(item.no)}%)
                             </div>
                         {/if}
                     </div>
