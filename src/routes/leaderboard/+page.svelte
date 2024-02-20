@@ -4,15 +4,45 @@
     import { onMount } from "svelte";
     import Loading from "../../Loading.svelte";
     var playersData = [];
+    var loaded = false
+    var option = {
+        range: {
+            index: {
+                start: 0,
+                end: 19
+            },
+            rating: {
+                start: 0,
+                end: 100000
+            }
+        }
+    }
     function fetchData() {
-        fetch(`${import.meta.env.VITE_API_URL}/leaderboard`).then((res) =>
+        loaded = false;
+
+        fetch(`${import.meta.env.VITE_API_URL}/leaderboard/${encodeURIComponent(JSON.stringify(option))}`).then((res) =>
             res.json().then((data) => {
-                playersData = data;
+                playersData = playersData.concat(data)  ;
+                loaded = true
             })
         );
     }
+
     onMount(() => {
         fetchData();
+
+        window.onscroll = function (ev) {
+            if (
+                window.innerHeight + window.pageYOffset >=
+                    document.body.offsetHeight - 1200 &&
+                loaded
+            ) {
+                option.range.index.start += 20
+                option.range.index.end += 20
+                fetchData();
+                console.log(option.range)
+            }
+        };
     });
 </script>
 
