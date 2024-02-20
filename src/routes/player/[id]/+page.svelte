@@ -7,23 +7,87 @@
     import { toast } from "../../../toast";
     var player = null;
     var showAllRecords = false;
-    function fetchData() {
-        player = null;
-        fetch(`${import.meta.env.VITE_API_URL}/player/${$page.params.id}`).then(
-            (res) =>
-                res.json().then((data) => {
-                    player = data;
-                })
-        );
+    var showMore = {
+        levels: true,
+        records: true
+    }
+    var option = {
+        recent: {
+            range: {
+                index: {
+                    start: 0,
+                    end: 4
+                }
+            }
+        },
+        levels: {
+            range: {
+                index: {
+                    start: 0,
+                    end: 4
+                }
+            }
+        },
+        records: {
+            range: {
+                index: {
+                    start: 0,
+                    end: 4
+                }
+            }
+        },
     }
 
     function getWeight(rank) {
         return Math.max(0, Math.ceil(-Math.pow((rank - 42.21) / 10, 3) + 30));
     }
 
+    async function showMoreRecords() {
+        option.records.range.index.start += 5;
+        option.records.range.index.end += 5;
+
+        console.log(option.records)
+
+        const data = await (await fetch(`${import.meta.env.VITE_API_URL}/player/${$page.params.id}/records/${encodeURIComponent(JSON.stringify(option.records))}`)).json()
+        player.records = player.records.concat(data)
+
+        if(data.length < 5) {
+            showMore.records = false;
+        }
+    }
+
+    async function showMoreLevels() {
+        option.levels.range.index.start += 5;
+        option.levels.range.index.end += 5;
+
+        const data = await (await fetch(`${import.meta.env.VITE_API_URL}/player/${$page.params.id}/levels/${encodeURIComponent(JSON.stringify(option.levels))}`)).json()
+        player.levels = player.levels.concat(data)
+
+        if(data.length < 5) {
+            showMore.levels = false;
+        }
+    }
+
+    async function fetchData() {
+        const [dataRes, recentRes, recordsRes, levelsRes] = await Promise.all([
+            fetch(`${import.meta.env.VITE_API_URL}/player/${$page.params.id}`),
+            fetch(`${import.meta.env.VITE_API_URL}/player/${$page.params.id}/recentActivities/${encodeURIComponent(JSON.stringify(option.recent))}`),
+            fetch(`${import.meta.env.VITE_API_URL}/player/${$page.params.id}/records/${encodeURIComponent(JSON.stringify(option.records))}`),
+            fetch(`${import.meta.env.VITE_API_URL}/player/${$page.params.id}/levels/${encodeURIComponent(JSON.stringify(option.levels))}`)
+        ])
+
+        player = {
+            data: await dataRes.json(),
+            recentActivities: await recentRes.json(),
+            records: await recordsRes.json(),
+            levels: await levelsRes.json()
+        }
+    }
+
     $: $page.params.id && fetchData();
+
     onMount(() => {
-        fetchData();
+        fetchData()
     });
 </script>
 
@@ -144,7 +208,7 @@
             {#if !player.records.length}
                 <p>This player hasn't beaten any level</p>
             {/if}
-            {#each player.records.slice(0, 5) as item, index}
+            {#each player.records as item, index}
                 <div class="record">
                     <div class="pt">
                         <div>{item.levels.rating}pt</div>
@@ -186,58 +250,14 @@
                     </section>
                 </div>
             {/each}
-            {#if !showAllRecords && player.records.length > 5}
+            {#if showMore.records}
                 <button
                     class="record clickable"
                     id="showMoreBtn"
                     on:click={() => {
-                        showAllRecords = true;
+                        showMoreRecords()
                     }}>Show more</button
                 >
-            {/if}
-            {#if showAllRecords}
-                {#each player.records.slice(5, player.records.length) as item, index}
-                    <div class="record">
-                        <div class="pt">
-                            <div>{item.levels.rating}pt</div>
-                            {#if getWeight(index + 6) > 0}
-                                <div id="weight">
-                                    {item.rating * getWeight(item.no) / 100}pt ({getWeight(item.no)}%)
-                                </div>
-                            {/if}
-                        </div>
-                        <a href={`/level/${item.levels.id}`}
-                            ><b>{item.levels.name} </b><br />by {item.levels
-                                .players.name}</a
-                        >
-                        <div class="recordDetail">{item.refreshRate}hz</div>
-                        {#if item.isMobile}
-                            <div class="recordDetail">Mobile</div>
-                        {/if}
-                        <section>
-                            <a href={item.videoLink} target="_blank">
-                                <svg
-                                    data-testid="geist-icon"
-                                    fill="none"
-                                    height="24"
-                                    shape-rendering="geometricPrecision"
-                                    stroke="currentColor"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="1.5"
-                                    viewBox="0 0 24 24"
-                                    width="24"
-                                    style="color:var(--geist-foreground)"
-                                    ><path
-                                        d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"
-                                    /><path d="M15 3h6v6" /><path
-                                        d="M10 14L21 3"
-                                    /></svg
-                                >
-                            </a>
-                        </section>
-                    </div>
-                {/each}
             {/if}
         </div>
         <div class="levelsWrapper">
@@ -249,6 +269,15 @@
                 {#each player.levels as item, index}
                     <Level data={item} mode="compact" />
                 {/each}
+                {#if showMore.levels}
+                    <button
+                        class="record clickable"
+                        id="showMoreBtn"
+                        on:click={() => {
+                            showMoreLevels()
+                        }}>Show more</button
+                    >
+                {/if}
             </div>
         </div>
     </main>
