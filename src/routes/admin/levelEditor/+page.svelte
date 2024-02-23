@@ -8,8 +8,7 @@
         fetch(`${import.meta.env.VITE_API_URL}/level/${levelID}`)
             .then((res) => res.json())
             .then((data) => {
-                level = data.data;
-                delete level.players
+                level = data
             });
     }
     function updateLevel() {
