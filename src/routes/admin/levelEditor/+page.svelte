@@ -9,9 +9,11 @@
             .then((res) => res.json())
             .then((data) => {
                 level = data
+                delete level.players
             });
     }
     function updateLevel() {
+        console.log(level)
         fetch(`${import.meta.env.VITE_API_URL}/level`, {
             method: "PUT",
             headers: {
