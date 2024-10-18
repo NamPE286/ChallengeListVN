@@ -108,6 +108,11 @@
 </svelte:head>
 
 {#if player}
+    {#if player.data.isBanned}
+        <div class="alert">
+            This profile is banned. If this is your profile, please contact a moderator to appeal the decision.
+        </div>
+    {/if}
     <div class="header">
         {#if player.data.bannerImage}
             <img class='banner' src={player.data.bannerImage} alt=''>
@@ -300,6 +305,13 @@
 {/if}
 
 <style lang="scss">
+    .alert {
+        background-color: red;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     .banner {
         position: absolute;
         width: 100%;

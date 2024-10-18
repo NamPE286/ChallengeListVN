@@ -47,7 +47,13 @@
                     authorization: `Bearer ${session.access_token}`,
                 },
             })
-                .then((res) => res.json())
+                .then(async (res) => {
+                    if(res.status == 401) {
+                        alert("Your account is banned")
+                        await supabase.auth.signOut()
+                    }
+                    return res.json()
+                })
                 .then(async (dat) => {
                     dat["session"] = session;
                     dat["notifications"] = [];
