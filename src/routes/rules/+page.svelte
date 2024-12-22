@@ -11,6 +11,7 @@
     <ul>
         <li>If any level or record violate any rule, it will be deleted or rejected.</li>
         <li>If a player violate too many rules in a short time, that player will be banned until any decision by staffs.</li>    
+        <li>Only the players who have Vietnamese citizenship or Vietnamese bloodline can submit challenges & records.</li>
     </ul>
     <h2>Levels</h2>
     <ul>
